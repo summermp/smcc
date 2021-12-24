@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validar codigo</title>
+    <base href="/">
+    <link rel="stylesheet" type="text/css" href="../css/codigo.css">
+</head>
+<body>
+<header id="header-horizontal">
+    <nav id="nav-horizontal">
+        <ul id="nav-ul">
+            <li class="nav-li">
+                <a href="/public/menu.html">
+                    <img src="/img/pac.svg" alt="pac" />
+                </a>
+            </li>
+            <li class="nav-li">
+                <span class="espacio">miespacio</span>
+                <a class="nav-a" th:href="@{/inicio}"
+                ><span class="nav-title">INICIO</span>
+                    <i class="fas fa-home"></i>
+                </a>
+            </li>
+            <li class="nav-li">
+                <a class="nav-a" th:href="@{/acerca}">
+                    <span class="nav-title">QUIENES SOMOS</span>
+                    <i class="fas fa-users"></i>
+                </a>
+            </li>
+            <li class="nav-li">
+                <a class="nav-a" th:href="@{/contacto}">
+                    <span class="nav-title">CONTACTENOS</span>
+                    <i class="fas fa-phone-volume"></i>
+                </a>
+            </li>
+            <li class="nav-li">
+                <a class="nav-a" th:href="@{/login}">
+                    <span class="nav-title">INICIAR SESIÓN</span>
+                    <i class="fas fa-user"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+
+<div id="registrocodigo">
+        <span class="error" id="codigoerror" style="color: red" th:text="${error}">Error codigo</span>
+        <br/>
+        <form method="GET" th:action="@{/validarcodigo}" id="formcodigo">
+            <input
+                    type="text"
+                    name="codigoregistro"
+                    minlength="11"
+                    maxlength="11"
+                    placeholder="Ingrese codigo registro"
+                    autofocus
+                    required
+            />
+            <input type="submit" class="btnenviar" id="enviar" value="Enviar"/>
+        </form>
+</div>
+
+
+<script type="text/javascript" src="../js/fonawesome.js"></script>
+<footer th:replace="layout/plantilla2 :: footer"></footer>
+</body>
+</html>

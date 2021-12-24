@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Plantilla2</title>
+</head>
+<body>
+<header id="header-horizontal" th:fragment="header">
+    <nav id="nav-horizontal">
+        <ul id="nav-ul">
+            <li class="nav-li">
+                <a href="#">
+                    <img src="../img/pac.svg" alt="pac" />
+                </a>
+            </li>
+            <li class="nav-li">
+                <a class="nav-a" href="#"
+                ><span class="nav-title">INICIO</span>
+                    <i class="fas fa-chart-line"></i>
+                </a>
+            </li>
+            <li class="nav-li">
+                <a class="nav-a" th:href="@{/categoria}">
+                    <span class="nav-title">ACERCA DE NOSOTROS</span>
+                    <i class="fas fa-users"></i>
+                </a>
+            </li>
+            <li class="nav-li">
+                <a class="nav-a" href="#">
+                    <span class="nav-title">AYUDA</span>
+                    <i class="fas fa-user-headset"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<footer th:fragment="footer" id="footer-grupo">
+      <p id="footer-p">&copy;2021 Derechos Reservados | Desarrollado con 💖 por PAC 😊 2021</p>
+</footer>
+
+</body>
+</html>

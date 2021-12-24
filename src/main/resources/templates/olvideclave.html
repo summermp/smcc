@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueva contraseña</title>
+    <base href="/">
+    <link rel="stylesheet" type="text/css" href="../css/codigo.css">
+    <link rel="stylesheet" type="text/css" href="../css/olvideclave.css">
+</head>
+<body>
+<header id="header-horizontal">
+    <nav id="nav-horizontal">
+        <ul id="nav-ul">
+            <li class="nav-li">
+                <a href="/public/menu.html">
+                    <img src="/img/pac.svg" alt="pac" />
+                </a>
+            </li>
+            <li class="nav-li">
+                <span class="espacio">miespacio</span>
+                <a class="nav-a" th:href="@{/inicio}"
+                ><span class="nav-title">INICIO</span>
+                    <i class="fas fa-home"></i>
+                </a>
+            </li>
+            <li class="nav-li">
+                <a class="nav-a" th:href="@{/acerca}">
+                    <span class="nav-title">QUIENES SOMOS</span>
+                    <i class="fas fa-users"></i>
+                </a>
+            </li>
+            <li class="nav-li">
+                <a class="nav-a" th:href="@{/contacto}">
+                    <span class="nav-title">CONTACTENOS</span>
+                    <i class="fas fa-phone-volume"></i>
+                </a>
+            </li>
+            <li class="nav-li">
+                <a class="nav-a" th:href="@{/login}">
+                    <span class="nav-title">INICIAR SESIÓN</span>
+                    <i class="fas fa-user"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+        <br/>
+<form method="GET" th:if="${hideform !=null}" th:action="@{/verificarcorreo}" id="formcorreo">
+    <div id="row-form">
+        <div class="col-1">
+            <input
+                    type="email"
+                    name="correo"
+                    minlength="10"
+                    id="correo"
+                    placeholder="Ingrese correo electronico"
+                    autofocus
+                    required
+            />
+        </div>
+        <div class="col-3">
+                <button type="submit" class="btnenviar">Verificar <i class="fas fa-check"></i></button>
+        </div>
+    </div>
+</form>
+
+<form method="POST" th:if="${verificado !=null}" th:action="@{/recuperarcuenta}" id="formclave">
+    <input type="hidden" name="idusu" th:value="${idusuario}"/>
+    <div id="row-form" >
+        <div class="col-1">
+            <input
+                    type="password"
+                    name="clave"
+                    minlength="8"
+                    id="clave"
+                    placeholder="Ingrese nueva contraseña"
+                    autofocus
+                    required
+            />
+        </div>
+        <div class="col-2">
+            <input
+                    type="password"
+                    name="clave1"
+                    id="claveverificar"
+                    minlength="8"
+                    placeholder="Vuelva a escribir la contraseña"
+                    autofocus
+                    required
+            />
+        </div>
+        <div class="col-3">
+            <button type="submit" class="btnenviar">Actualizar <i class="fas fa-sync-alt"></i></button>
+        </div>
+    </div>
+
+</form>
+
+<script>
+    let formclave =document.querySelector("#formclave");
+    let clave =document.querySelector("#clave");
+    let claveverificar =document.querySelector("#claveverificar");
+    let correo =document.querySelector("#correo");
+
+    correo.addEventListener("keypress", function (event) {
+        correo.value = correo.value.replace(
+            /(\s{2,})|[^@.a-zA-Z']/g,
+            ""
+        );
+        correo.value = correo.value.replace(/^\s*/, "");
+        console.log(correo.value);
+    });
+
+    clave.addEventListener("input", function (event) {
+        console.log(clave.value);
+    });
+    claveverificar.addEventListener("change", function (event) {
+        if (clave.value === claveverificar.value) {
+            claveverificar.style.borderColor = 'green';
+            console.log("match");
+        } else {
+            console.log("doesn't match");
+            claveverificar.style.borderColor = 'red';
+            claveverificar.value="";
+        }
+        console.log(claveverificar.value);
+    });
+
+    formclave.addEventListener("keyup", function (event) {
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13) {
+            if (clave.value !== claveverificar.value) {
+                console.log("doesn't match");
+                claveverificar.style.borderColor = 'red';
+                claveverificar.value="";
+                mySubmit(this);
+            }
+        }
+    });
+
+    function mySubmit(e) {
+        e.preventDefault();
+        try {
+            console.log(e.value)
+        } catch (e) {
+            throw new Error(e.message);
+        }
+        return false;
+    }
+</script>
+
+<script type="text/javascript" src="../js/fonawesome.js"></script>
+<footer th:replace="layout/plantilla2 :: footer"></footer>
+</body>
+</html>

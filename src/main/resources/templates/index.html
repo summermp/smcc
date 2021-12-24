@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <base href="/">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" type="text/css" href="../css/headerandfooter.css">
+    <title>Usuario</title>
+</head>
+<body>
+<header th:replace="layout/plantilla2 :: header"></header>
+<a  sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/agregar}">Crear usuario</a>
+<div th:if="${usuarios !=null and !usuarios.empty}">
+<table id="mitabla">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Fecha nacimiento</th>
+        <th>Celular</th>
+        <th>Email</th>
+        <th>Dirección</th>
+        <th>Foto</th>
+        <th>Clave</th>
+        <th>Creacion</th>
+        <th>Ultima sesion</th>
+        <th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
+        <th sec:authorize="hasRole('ROLE_ADMIN')">Editar</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="usuario: ${usuarios}">
+        <td th:text="${usuario.id}">ID</td>
+        <td th:text="${usuario.nombre}">Nombre</td>
+        <td th:text="${usuario.apellido}">Apellido</td>
+        <td th:text="${usuario.fechanacimiento}">Fecha nacimiento</td>
+        <td th:text="${usuario.celular}">Celular</td>
+        <td th:text="${usuario.email}">Email</td>
+        <td th:text="${usuario.direccion}">Dirección</td>
+        <td><img th:src="@{/images/}+${usuario.foto}" width="50px" height="50px"/></td>
+        <td th:text="${usuario.clave}">Clave</td>
+        <td th:text="${usuario.creacion}">Creacion</td>
+        <td th:text="${usuario.ultimasesion}">Ultima sesion</td>
+        <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/eliminar/}+${usuario.id}">Eliminar</a></td>
+        <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/editar/}+${usuario.id}" >Editar</a></td>
+    </tr>
+    </tbody>
+</table>
+</div>
+<div th:if="${usuarios ==null and usuarios.empty}">La lista de usuarios esta vacia</div>
+    <footer th:replace="layout/plantilla2 :: footer"></footer>
+<script src="https://code.jquery.com/jquery-3.5.1.js" crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../js/fonawesome.js"></script>
+<script src="../js/tabla.js"></script>
+<script src="../js/aviso.js"></script>
+</body>
+</html>

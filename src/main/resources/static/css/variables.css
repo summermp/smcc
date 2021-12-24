@@ -1,0 +1,15 @@
+:root {
+    --color-fondo: #1ebd88;
+    --color-hover: #a7e0a5;
+    --color-boton: rgb(120, 162, 6);
+    --boton-verde:teal;
+    --blanco: white;
+    --gris:rgb(104, 104, 104);
+    /*--borde: 1.2px solid red;*/
+    --borde-redondo: 2px;
+    --borde-img: 20px;
+    --borde:8px;
+    --letra: Roboto;
+    --tamanio-letra: 20px;
+    --entrada-size: 2.5rem;
+}

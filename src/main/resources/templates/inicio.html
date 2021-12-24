@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/">
+    <title>Inicio</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.5.3/dist/css/splide.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/inicio.css">
+    <link rel="stylesheet" type="text/css" href="../css/team.css">
+</head>
+<body>
+<header id="header-horizontal">
+    <nav id="nav-horizontal">
+        <ul id="nav-ul">
+            <li class="nav-li">
+                <a href="/public/menu.html">
+                    <img src="/img/pac.svg" alt="pac" />
+                </a>
+            </li>
+            <li class="nav-li">
+                <span class="espacio">miespacio</span>
+                <a class="nav-a" th:href="@{/inicio}"
+                ><span class="nav-title">INICIO</span>
+                    <i class="fas fa-home"></i>
+                </a>
+            </li>
+            <li class="nav-li">
+                <a class="nav-a" th:href="@{/acerca}">
+                    <span class="nav-title">QUIENES SOMOS</span>
+                    <i class="fas fa-users"></i>
+                </a>
+            </li>
+            <li class="nav-li">
+                <a class="nav-a" th:href="@{/contacto}">
+                    <span class="nav-title">CONTACTENOS</span>
+                    <i class="fas fa-phone-volume"></i>
+                </a>
+            </li>
+            <li class="nav-li">
+                <a class="nav-a" th:href="@{/login}">
+                    <span class="nav-title">INICIAR SESIÓN</span>
+                    <i class="fas fa-user"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<!-- https://splidejs.com/guides/getting-started/ -->
+<div class="centrarslide">
+    <h4 id="titulo-acerca">
+        Publicidad
+    </h4>
+</div>
+<div class="centrarslide">
+    <div class="splide">
+        <div class="splide__track">
+            <ul class="splide__list">
+                <li class="splide__slide"><img class="slide-img" src="https://splidejs.com/images/slides/general/01.jpg" alt=""></li>
+                <li class="splide__slide"><img class="slide-img" src="https://splidejs.com/images/slides/general/05.jpg" alt=""></li>
+                <li class="splide__slide"><img class="slide-img" src="https://splidejs.com/images/slides/general/06.jpg" alt=""></li>
+                <li class="splide__slide"><img class="slide-img" src="https://splidejs.com/images/slides/general/07.jpg" alt=""></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="centrarslide">
+    <ul id="redesociales">
+        <li class="li-rsocial"><a href="#" target="_blank"><span class="icon-fb"><i class="fab fa-facebook"></i></span> Facebook</a></li>
+        <li class="li-rsocial"><a href="#" target="_blank"><span class="icon-you"><i class="fab fa-youtube"></i></span> Youtube</a></li>
+        <li class="li-rsocial"><a href="#" target="_blank"><span class="icon-inst"><i class="fab fa-instagram"></i></span> Instagram</a></li>
+    </ul>
+</div>
+<footer id="footer-grupo">
+    <p id="footer-p">Desarrollado con 💖 por PAC 😊 2021</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.5.3/dist/js/splide.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script> -->
+<script src="../js/slide.js"></script>
+<script src="../js/fonawesome.js"></script>
+</body>
+</html>

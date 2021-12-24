@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueva contraseña</title>
+    <base href="/">
+    <link rel="stylesheet" type="text/css" href="../css/codigo.css">
+    <link rel="stylesheet" type="text/css" href="../css/ayuda.css">
+</head>
+<body>
+<header id="header-horizontal">
+    <nav id="nav-horizontal">
+        <ul id="nav-ul">
+            <li class="nav-li">
+                <a href="/public/menu.html">
+                    <img src="/img/pac.svg" alt="pac" />
+                </a>
+            </li>
+            <li class="nav-li">
+                <span class="espacio">miespacio</span>
+                <a class="nav-a" th:href="@{/inicio}"
+                ><span class="nav-title">INICIO</span>
+                    <i class="fas fa-home"></i>
+                </a>
+            </li>
+            <li class="nav-li">
+                <a class="nav-a" th:href="@{/acerca}">
+                    <span class="nav-title">QUIENES SOMOS</span>
+                    <i class="fas fa-users"></i>
+                </a>
+            </li>
+            <li class="nav-li">
+                <a class="nav-a" th:href="@{/contacto}">
+                    <span class="nav-title">CONTACTENOS</span>
+                    <i class="fas fa-phone-volume"></i>
+                </a>
+            </li>
+            <li class="nav-li">
+                <a class="nav-a" th:href="@{/login}">
+                    <span class="nav-title">INICIAR SESIÓN</span>
+                    <i class="fas fa-user"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+        <br/>
+
+<main>
+    <h2 id="form-titulo">AYUDA</h2>
+    <div id="row-ayuda">
+        <!-- action="https://formspree.io/f/meqvpley" camibar a esto-->
+        <form  id="form"  action="https://formspree.io/f/meqvpley" method="POST" onsubmit="return mySubmit(this)" >
+            <input type="email" name="email" value="trati123456@gmail.com" hidden>
+            <textarea name="asunto" id="mensaje"
+                      cols="30" rows="3"
+                      minlength="20"
+                      class="recuperar-form asunto"
+                      placeholder="Escriba su problema..."
+                      maxlength="80"
+                      required autofocus>
+              </textarea>
+
+            <button
+                    type="submit"
+                    class="enviar-form"
+                    id="btnenviar"
+            >
+                ENVIAR <i class="far fa-paper-plane"></i>
+            </button>
+
+
+        </form>
+    </div>
+</main>
+
+
+<script>
+    const form = document.querySelector('#form');
+    const btnenviar = document.querySelector('#enviar');
+    const mensaje = document.querySelector('#mensaje');
+    //form.addEventListener("submit ", handleSubmit);
+
+    //Evita mas de un espacio
+    var ignoreChars = " \r\n" + String.fromCharCode(0);
+    var lastkey;
+    function ignoreSpaces(e) {
+        // SinRepetir(e);
+        e = e || window.event;
+        var char = String.fromCharCode(e.charCode);
+        if (ignoreChars.indexOf(char) >= 0 && ignoreChars.indexOf(lastkey) >= 0) {
+            lastkey = char;
+            return false;
+        } else {
+            lastkey = char;
+            return true;
+        }
+    }
+    // Execute a function when the user releases a key on the keyboard
+    form.addEventListener("keydown", function(event) {
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13 && !event.shiftKey) {
+            validarEntrada(mensaje,event);
+            evitar_caracteres_repetidos(event);
+            event.preventDefault();
+        }
+    });
+
+    mensaje.addEventListener("keyup", function (event) {
+        evitar_caracteres_repetidos();
+        ignoreSpaces(event);
+
+    });
+
+    function evitar_caracteres_repetidos() {
+        mensaje.value = mensaje.value.replace(/(.)(\1{2})\1+/g, '$1$2');
+        mensaje.value = mensaje.value.replace(/  +/g, ' ');
+    }
+
+    function mySubmit(event) {
+        event.preventDefault();
+        try {
+            console.log('Some bug...')
+        } catch (e) {
+            throw new Error(e.message);
+        }
+        return false;
+    }
+
+    function validarEntrada(mensaje,event) {
+        if (mensaje.value.length === 0) {
+            console.log('mensaje is empty');
+            mensaje.style.borderColor = 'red';
+        } else if (mensaje.value.length<20) {
+            mensaje.style.borderColor = 'red';
+            console.log("mensaje is coming...");
+            mensaje.focus();
+        } else {
+            console.log("mensaje is ok");
+            // handleSubmit(event);//HABILITAR PARA ENVIAR
+        }
+    }
+
+    function reiniciar() {
+        form.reset();
+        mensaje.value.replace(/ /g, "");
+        location.reload();
+    }
+
+    async function handleSubmit(event) {
+        event.preventDefault();
+        const formdata = new FormData(form);
+        const response = await fetch(form.action, {
+            method: "POST",
+            body: formdata,
+            headers: {
+                Accept: "application/json",
+            },
+        });
+        if (response.ok) {
+            Swal.fire(
+                "Ayuda con el sistema!",
+                "Gracias por contactarme, te escribiré pronto!",
+                "success"
+            );
+            reiniciar();
+        } else {
+            Swal.fire(
+                "Ayuda con el sistema!",
+                "Sucedio un error inesperado!",
+                "error"
+            );
+            reiniciar();
+        }
+    }
+</script>
+
+
+<script type="text/javascript" src="../js/fonawesome.js"></script>
+<footer th:replace="layout/plantilla2 :: footer"></footer>
+</body>
+</html>

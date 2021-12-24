@@ -1,0 +1,36 @@
+@import url('/css/variables.css');
+#row-ayuda {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    text-align: center;
+}
+#form-titulo{
+    text-align: center;
+    width: 100%;
+    display: block;
+}
+#mensaje{
+    width: 98%;
+    font-size: 1.5rem;
+}
+#btnenviar{
+    width: 100%;
+    justify-content: center;
+    background-color: var(--boton-verde);
+    color: var(--blanco);
+    border: var(--borde);
+    height: 40px;
+    cursor: pointer;
+}
+#btnenviar:hover{
+    background-color: var(--color-fondo);
+}
+
+@media only screen and (min-width: 550px) {
+    body{
+        /* background-color: red; */
+    }
+
+
+}

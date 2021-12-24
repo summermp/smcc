@@ -1,0 +1,163 @@
+Acelga
+Aji
+Ajo
+Albahaca
+Alberja
+Apio
+Arroz
+Betarraga
+Berenjena
+Celabaza
+Caigua
+Camote
+Cañihua
+Cebada
+Cebolla cabeza
+Cebolla china
+Coliflor
+Col
+Espinaca
+Garbanzo
+Frijol
+Kiwicha
+Lechuga
+Lenteja
+Maca
+Mashua
+Maní
+Maíz amarrillo
+Maíz choclo
+Maíz morado
+Nabo
+Oca
+Paprika
+Pepinillo
+Pepino
+Pallar
+Poro
+Quinua
+Rabanito
+Sandia
+Soya
+Tarwi
+Tomate
+Trigo
+Vainita
+Yuca
+Zanhoria
+Zapallo
+
+----- Relacion con producto
+        <select name="cultivo" id="cultivo" th:field="*{nombre}" required>
+                <option th:value="0" disabled>Seleccione cultivo</option>
+                <option th:value="1">Acelga</option>
+                <option th:value="2">Aji</option>
+                <option th:value="3">Ajo</option>
+                <option th:value="4">Albahaca</option>
+                <option th:value="5">Alberja</option>
+                <option th:value="6">Apio</option>
+                <option th:value="7">Arroz</option>
+                <option th:value="8">Betarraga</option>
+                <option th:value="9">Berenjena</option>
+                <option th:value="10">Celabaza</option>
+                <option th:value="11">Caigua</option>
+                <option th:value="12">Camote</option>
+                <option th:value="13">Cañihua</option>
+                <option th:value="14">Cebada</option>
+                <option th:value="15">Cebolla cabeza</option>
+                <option th:value="16">Cebolla china</option>
+                <option th:value="17">Coliflor</option>
+                <option th:value="18">Col</option>
+                <option th:value="19">Espinaca</option>
+                <option th:value="20">Garbanzo</option>
+                <option th:value="21">Frijol</option>
+                <option th:value="22">Kiwicha</option>
+                <option th:value="23">Lechuga</option>
+                <option th:value="24">Lenteja</option>
+                <option th:value="25">Maca</option>
+                <option th:value="26">Mashua</option>
+                <option th:value="27">Maní</option>
+                <option th:value="28">Maíz amarrillo</option>
+                <option th:value="29">Maíz choclo</option>
+                <option th:value="30">Maíz morado</option>
+                <option th:value="31">Nabo</option>
+                <option th:value="32">Oca</option>
+                <option th:value="32">Paprika</option>
+                <option th:value="33">Pepinillo</option>
+                <option th:value="34">Pepino</option>
+                <option th:value="35">Pallar</option>
+                <option th:value="36">Poro</option>
+                <option th:value="37">Quinua</option>
+                <option th:value="38">Rabanito</option>
+                <option th:value="39">Sandia</option>
+                <option th:value="40">Soya</option>
+                <option th:value="41">Tarwi</option>
+                <option th:value="42">Tomate</option>
+                <option th:value="43">Trigo</option>
+                <option th:value="44">Vainita</option>
+                <option th:value="45">Yuca</option>
+                <option th:value="46">Zanhoria</option>
+                <option th:value="47">Zapallo</option>
+</select>
+
+
+
+
+
+
+                ====================================
+
+
+insert into producto
+values
+(null,"Acelga",28),
+(null,"Ají",28),
+(null,"Ajo",28),
+(null,"Albahaca",28),
+(null,"Alberja",28),
+(null,"Apio",28),
+(null,"Arroz",30),
+(null,"Beterraga",28),
+(null,"Berenjena",28),
+(null,"Calabaza",31),
+(null,"Caigua",28),
+(null,"Camote",29),
+(null,"Cañihua",1),
+(null,"Cebada",1),
+(null,"Cebolla cabeza",28),
+(null,"Cebolla china",28),
+(null,"Coliflor",28),
+(null,"Col",28),
+(null,"Espinaca",28),
+(null,"Garbanzo",30),
+(null,"Frijol",30),
+(null,"Kiwicha",1),
+(null,"Lechuga",28),
+(null,"Lenteja",30),
+(null,"Maca",29),
+(null,"Mashua",29),
+(null,"Maní",30),
+(null,"Maíz amarrillo",22),
+(null,"Maíz morado",22),
+(null,"Manzana",22),
+(null,"Mango",3),
+(null,"Nabo",28),
+(null,"Oca",29),
+(null,"Paprika",28),
+(null,"Pepinillo",28),
+(null,"Pepino",3),
+(null,"Pallar",30),
+(null,"Poro",28),
+(null,"Quinua",1),
+(null,"Rabanito",28),
+(null,"Sandia",3),
+(null,"Soya",30),
+(null,"Tarwi",30),
+(null,"Tomate",29),
+(null,"Trigo",1),
+(null,"Vainita",28),
+(null,"Yuca",29),
+(null,"Zanahoria",28),
+(null,"Zapallo",28);
+
+

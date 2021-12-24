@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <base href="/">
+    <link rel="stylesheet" type="text/css" href="../css/headerandfooter.css">
+    <link rel="stylesheet" type="text/css" href="../css/registrocultivo.css">
+    <title>Registrar categoria</title>
+</head>
+<body>
+<header th:replace="layout/plantilla2 :: header"></header>
+
+<div class="col-1">
+    <h2 id="titulo"> REGISTRAR CATEGORIA</h2>
+</div>
+
+<a th:href="@{/categoria}" class="regresar"><i class="fas fa-chevron-left"></i> Regresar</a>
+<form th:action="@{/guardarcategoria}"  method="POST" th:object="${categoria}" id="form" onsubmit="return mySubmit(this)">
+    <div id="row-form">
+        <div class="col-1">
+            <input type="hidden" th:field="*{id}">
+            <input type="text" id="nombre" name="nombre"
+                   placeholder="Ingrese categoria" th:field="*{nombre}" autofocus/>
+            <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Error nombre</span>
+        </div>
+        <div class="col-1">
+            <button type="submit" id="btnenviar">Registrar
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+    </div>
+</form>
+<footer th:replace="layout/plantilla2 :: footer"></footer>
+<script type="text/javascript" src="../js/fonawesome.js"></script>
+</body>
+</html>

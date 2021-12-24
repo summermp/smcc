@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <base href="/">
+    <link rel="stylesheet" type="text/css" href="../css/headerandfooter.css">
+    <link rel="stylesheet" type="text/css" href="../css/registrousuario.css">
+    <title>Registrar usuario</title>
+</head>
+<body>
+<header th:replace="layout/plantilla2 :: header"></header>
+<h1>Datos del usuario</h1>
+<a th:href="@{/usuarios}"><i class="fas fa-chevron-left"></i> Regresar</a>
+<div class="contenedor">
+        <form id="form" th:action="@{/guardar}"  method="POST" th:object="${usuario}" enctype="multipart/form-data">
+          <div class="row-1">
+            <input type="hidden" th:field="*{id}">
+            <div class="col-1">
+                <div class="padding-bottom">
+                    <input
+                            type="text"
+                            id="nombre"
+                            class="registro-form"
+                            placeholder="NOMBRE"
+                            autofocus
+                            th:field="*{nombre}"
+                            required
+                    />
+                    <span th:text="${error}"></span>
+                </div>
+                <div class="padding-bottom">
+                    <input
+                            type="text"
+                            class="registro-form"
+                            id="apellido"
+                            th:field="*{apellido}"
+                            placeholder="APELLIDO"
+                            autofocus
+                            required
+                    />
+                </div>
+                <div class="padding-bottom">
+                    <input
+                            type="date"
+                            id="fechanac"
+                            th:field="*{fechanacimiento}"
+                            required
+                    />
+                </div>
+                <div class="padding-bottom">
+                    <input
+                            type="number"
+                            class="registro-form"
+                            id="celular"
+                            minlength="9"
+                            maxlength="9"
+                            th:field="*{celular}"
+                            placeholder="CELULAR"
+                            required
+                    />
+                </div>
+            </div>
+            <div class="col-2 padding-bottom">
+                <img src="../img/pac.svg" alt="foto" class="foto" id="fotousuario">
+                <input type="hidden" name="ajeno" th:field="*{foto}" id="ajeno"/>
+                <input type="file" name="fotoperfil" id="fotoperfil" onchange="cargarImagen(event)" accept="image/png, image/jpeg, image/jpg"/>
+            </div>
+        </div>
+
+        <div class="row-2 padding-bottom">
+            <div class="col-3">
+                <input
+                        type="text"
+                        placeholder="E-MAIL"
+                        maxlength="50"
+                        class="entrada-linea"
+                        id="correo"
+                        th:field="*{email}"
+                        required
+                />
+            </div>
+        </div>
+
+        <div class="row-2 padding-bottom">
+            <input
+                    type="text"
+                    class="registro-form"
+                    th:field="*{direccion}"
+                    id="direccion"
+                    placeholder="DIRECCIÓN"
+                    minlength="3"
+                    required
+            />
+        </div>
+
+        <div class="row-1 padding-bottom">
+            <div class="col-5 padding-bottom">
+                <input
+                        type="text"
+                        class="registro-form"
+                        th:field="*{clave}"
+                        id="clave"
+                        placeholder="CONTRASEÑA"
+                        minlength="3"
+                        required
+                />
+            </div>
+            <div class="col-6">
+                <input
+                        type="text"
+                        class="registro-form"
+                        th:field="*{clave}"
+                        id="claveverificar"
+                        placeholder="CONFIRME CONTRASEÑA"
+                        minlength="3"
+                        required
+                />
+            </div>
+        </div>
+        <div class="row-2">
+            <div class="col-3">
+                <input
+                        type="submit"
+                        class="enviar-form"
+                        id="enviar"
+                        value="INGRESAR"
+                />
+            </div>
+        </div>
+    </form>
+    </div>
+<!--</div>-->
+<footer th:replace="layout/plantilla2 :: footer"></footer>
+<script type="text/javascript" src="../js/geocode.js"></script>
+<script type="text/javascript" src="../js/registrousuario.js"></script>
+<script type="text/javascript" src="../js/fonawesome.js"></script>
+</body>
+</html>

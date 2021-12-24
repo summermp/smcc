@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <base href="/">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" type="text/css" href="../css/headerandfooter.css">
+    <title>Código</title>
+</head>
+<body>
+<header th:replace="layout/plantilla2 :: header"></header>
+<div>LISTADO DE CODIGOS</div>
+<a th:href="@{/agregarcodigo}">Crear codigo</a>
+<div th:if="${codigos !=null and !codigos.empty}">
+    <table border="1">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Codigo</th>
+            <th>Fecha</th>
+            <th>Eliminar</th>
+            <th>Editar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="codigo: ${codigos}">
+            <td th:text="${codigo.id}">ID</td>
+            <td th:text="${codigo.codigo}">Categoria</td>
+            <td th:text="${codigo.fecha}">Categoria</td>
+            <td><a th:href="@{/eliminarcodigo/}+${codigo.id}">Eliminar</a></td>
+            <td><a th:href="@{/editarcodigo/}+${codigo.id}">Editar</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div th:if="${codigos == null and codigos.empty}">La lista de codigos esta vacia</div>
+<footer th:replace="layout/plantilla2 :: footer"></footer>
+<script src="https://code.jquery.com/jquery-3.5.1.js" crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../js/fonawesome.js"></script>
+<script src="../js/tabla.js"></script>
+<script src="../js/aviso.js"></script>
+</body>
+</html>

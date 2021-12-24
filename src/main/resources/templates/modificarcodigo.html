@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <base href="/">
+    <link rel="stylesheet" type="text/css" href="../css/headerandfooter.css">
+    <link rel="stylesheet" type="text/css" href="../css/registrocultivo.css">
+    <title>Genearar código</title>
+</head>
+<body>
+<header th:replace="layout/plantilla2 :: header"></header>
+<h1>Datos del codigo</h1>
+<a th:href="@{/codigo}"><i class="fas fa-chevron-left"></i> Regresar</a>
+<form th:action="@{/guardarcodigo}"  method="POST" th:object="${codigo}">
+    <input type="hidden" th:field="*{id}">
+    <span class="error" th:text="${error}">Error codigo</span>
+    <br/>
+    <label>
+        <select name="codregion" id="codregion">
+            <option value="AMA">Amazonas</option>
+            <option value="ANC">Ancash</option>
+            <option value="ARE">Arequipa</option>
+            <option value="AYA">Ayacucho</option>
+            <option value="CAJ">Cajamarca</option>
+            <option value="CUS">Cusco</option>
+            <option value="HUC">Huánuco</option>
+            <option value="HUV">Huancavelica</option>
+            <option value="ICA">Ica</option>
+            <option value="JUN">Junín</option>
+            <option value="LAL">La Libertad</option>
+            <option value="LAM">Lambayeque</option>
+            <option value="LIM">Lima</option>
+            <option value="LOR">Loreto</option>
+            <option value="MDD">Madre de Dios</option>
+            <option value="MOQ">Moquegua</option>
+            <option value="PAS">Pasco</option>
+            <option value="PIU">Piura</option>
+            <option value="PUN">Puno</option>
+            <option value="SAM">San Martin</option>
+            <option value="TAC">Tacna</option>
+            <option value="TUM">Tumbes</option>
+            <option value="UCA">Ucayali</option>
+        </select>
+        <input type="number"  minlength="8"
+               maxlength="8" placeholder="DNI"
+               name="dni"
+               id="dni"
+               required/>
+    </label>
+    <br/>
+    <input type="submit" value="Generar codigo"/>
+</form>
+<footer th:replace="layout/plantilla2 :: footer"></footer>
+<script type="text/javascript" src="../js/fonawesome.js"></script>
+<script type="text/javascript" src="../js/codigo.js"></script>
+</body>
+</html>

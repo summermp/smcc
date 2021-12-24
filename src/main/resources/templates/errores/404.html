@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Acerca de nosotros</title>
+    <base href="/">
+    <link rel="stylesheet" type="text/css" href="../css/acerca.css">
+</head>
+<body>
+<style>
+    .row-error {
+        display: flex;
+        flex-flow: row nowrap;
+        align-content: center;
+        justify-content: center;
+    }
+    .error{
+        width: 100%;
+    }
+    #error-img{
+        background-image:url('/img/error.gif');
+        height: 350px;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    #descripcion-error,#titulo-error,#link_404{
+        margin-top: 0px;
+        text-align: center;
+    }
+    #link_404{
+        color: #fff;
+        height: 30px;
+        width: 20%;
+        margin: auto auto 20px auto;
+        background-color: teal;
+        text-decoration: none;
+        border-radius: 8px;
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #link_404:hover{
+        background: #39ac31;
+    }
+    @media (max-width:550px) {
+        #link_404{
+            margin: 0;
+            width: 100%;
+        }
+    }
+</style>
+<header id="header-horizontal">
+    <nav id="nav-horizontal">
+        <ul id="nav-ul">
+            <li class="nav-li">
+                <a href="/public/menu.html">
+                    <img src="/img/pac.svg" alt="pac" />
+                </a>
+            </li>
+            <li class="nav-li">
+                <span class="espacio">miespacio</span>
+                <a class="nav-a" th:href="@{/inicio}"
+                ><span class="nav-title">INICIO</span>
+                    <i class="fas fa-home"></i>
+                </a>
+            </li>
+            <li class="nav-li">
+                <a class="nav-a" th:href="@{/acerca}">
+                    <span class="nav-title">QUIENES SOMOS</span>
+                    <i class="fas fa-users"></i>
+                </a>
+            </li>
+            <li class="nav-li">
+                <a class="nav-a" th:href="@{/contacto}">
+                    <span class="nav-title">CONTACTENOS</span>
+                    <i class="fas fa-phone-volume"></i>
+                </a>
+            </li>
+            <li class="nav-li">
+                <a class="nav-a" th:href="@{/login}">
+                    <span class="nav-title">INICIAR SESIÓN</span>
+                    <i class="fas fa-user"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<div class="row-error">
+    <div class="error">
+        <div id="error-img">
+        </div>
+    </div>
+</div>
+<div class="row-error">
+    <div class="error">
+        <h3 id="titulo-error">Parece que te perdiste</h3>
+        <p id="descripcion-error">¡La página que estas buscando no esta disponible!</p>
+        <a th:href="@{/login}" id="link_404">
+            <span id="link_texto">Ir a inicio</span>
+        </a>
+    </div>
+</div>
+
+<footer th:replace="layout/plantilla2 :: footer"></footer>
+
+<script type="text/javascript" src="../js/fonawesome.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <base href="/">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+
+    <link rel="stylesheet" type="text/css" href="../css/headerandfooter.css">
+    <title>Productos</title>
+</head>
+<body>
+<header th:replace="layout/plantilla2 :: header"></header>
+<div>LISTADO DE PRODUCTOS</div>
+<a th:href="@{/agregarproducto}">Crear producto</a>
+<div th:if="${productos !=null and !productos.empty}">
+    <table id="mitabla">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Producto</th>
+            <th>Eliminar</th>
+            <th>Editar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="producto: ${productos}">
+            <td th:text="${producto.id}">ID</td>
+            <td th:text="${producto.nombre}">Producto</td>
+            <td><a style="color: red;" th:onclick="eliminar([[${producto.id}]])"> <i class="fas fa-backspace"></i> Eliminar</a></td>
+            <td><a th:href="@{/editarproducto/}+${producto.id}"><i class="fas fa-edit"></i> Editar</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div th:if="${productos == null and productos.empty}">La lista de productos esta vacia</div>
+<footer th:replace="layout/plantilla2 :: footer"></footer>
+<script src="https://code.jquery.com/jquery-3.5.1.js" crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript" src="../js/fonawesome.js"></script>
+<script src="../js/tabla.js"></script>
+<script src="../js/aviso.js"></script>
+</body>
+</html>

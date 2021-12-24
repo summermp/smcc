@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <base href="/">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+
+    <link rel="stylesheet" type="text/css" href="../css/headerandfooter.css">
+    <title>Categoria</title>
+</head>
+<body>
+<header th:replace="layout/plantilla2 :: header"></header>
+<div>LISTADO DE CATEGORIAS</div>
+<a th:href="@{/agregarcategoria}">Crear categoria</a>
+<div th:if="${categorias !=null and !categorias.empty}">
+    <table id="mitabla">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Categoria</th>
+            <th>Eliminar</th>
+            <th>Editar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="categoria: ${categorias}">
+            <td th:text="${categoria.id}">ID</td>
+            <td th:text="${categoria.nombre}">Categoria</td>
+            <td><a style="color: red;" th:onclick="eliminar([[${categoria.id}]])"><i class="fas fa-backspace"></i> Eliminar</a></td>
+            <td><a th:href="@{/editarcategoria/}+${categoria.id}"><i class="fas fa-edit"></i> Editar</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div th:if="${categorias == null and categorias.empty}">La lista de categorias esta vacia</div>
+<footer th:replace="layout/plantilla2 :: footer"></footer>
+<script src="https://code.jquery.com/jquery-3.5.1.js" crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript" src="../js/fonawesome.js"></script>
+<script src="../js/tabla.js"></script>
+<script src="../js/aviso.js"></script>
+</body>
+</html>

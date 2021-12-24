@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/">
+    <link rel="stylesheet" type="text/css" href="../css/headerandfooter.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Cultivo</title>
+</head>
+<body>
+<header th:replace="layout/plantilla2 :: header"></header>
+<div>LISTADO DE CULTIVOS</div>
+<a th:href="@{/agregarcultivo}"><i class="fas fa-plus-circle"></i> Registrar cultivo</a>
+<div th:if="${cultivos !=null and !cultivos.empty}">
+        <table id="mitabla" class="listadocultivo" style="width:80%">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Fecha siembra</th>
+            <th>Medida</th>
+            <th>Ubicacion</th>
+            <th>Eliminar</th>
+            <th>Editar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cultivo: ${cultivos}">
+            <td th:text="${cultivo.id}">ID</td>
+            <td th:text="${cultivo.producto.nombre}">Nombre</td>
+            <td th:text="${cultivo.fechasiembra}">Fecha siembra</td>
+            <td th:text="${cultivo.medida}">medida</td>
+            <td th:text="${cultivo.ubicacion}">ubicacion</td>
+            <td><a th:href="@{/eliminarcultivo/}+${cultivo.id}" id="eliminar" style="color: red;"
+            ><i class="fas fa-backspace"></i> Eliminar</a></td>
+            <td><a th:href="@{/editarcultivo/}+${cultivo.id}" id="editar"><i class="fas fa-edit"></i> Editar</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div th:if="${cultivos ==null and cultivos.empty}">La lista de cultivos esta vacia</div>
+<footer th:replace="layout/plantilla2 :: footer"></footer>
+<script src="https://code.jquery.com/jquery-3.5.1.js" crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../js/fonawesome.js"></script>
+<script src="../js/tabla.js"></script>
+<script src="../js/aviso.js"></script>
+</body>
+</html>

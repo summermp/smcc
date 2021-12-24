@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Acerca de nosotros</title>
+    <base href="/">
+    <link rel="stylesheet" type="text/css" href="../css/acerca.css">
+</head>
+<body>
+<header id="header-horizontal">
+    <nav id="nav-horizontal">
+        <ul id="nav-ul">
+            <li class="nav-li">
+                <a href="/public/menu.html">
+                    <img src="/img/pac.svg" alt="pac" />
+                </a>
+            </li>
+            <li class="nav-li">
+                <span class="espacio">miespacio</span>
+                <a class="nav-a" th:href="@{/inicio}"
+                ><span class="nav-title">INICIO</span>
+                    <i class="fas fa-home"></i>
+                </a>
+            </li>
+            <li class="nav-li">
+                <a class="nav-a" th:href="@{/acerca}">
+                    <span class="nav-title">QUIENES SOMOS</span>
+                    <i class="fas fa-users"></i>
+                </a>
+            </li>
+            <li class="nav-li">
+                <a class="nav-a" th:href="@{/contacto}">
+                    <span class="nav-title">CONTACTENOS</span>
+                    <i class="fas fa-phone-volume"></i>
+                </a>
+            </li>
+            <li class="nav-li">
+                <a class="nav-a" th:href="@{/login}">
+                    <span class="nav-title">INICIAR SESIÓN</span>
+                    <i class="fas fa-user"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<!-- https://splidejs.com/guides/getting-started/ -->
+<div class="centrarslide">
+    <h4 id="titulo-acerca">
+        ¿Quienes somos?
+    </h4>
+</div>
+<div class="centrarslide">
+    <p class="acerca">
+        Somos una empresa tecnológica al servicio del sector agrícola, formada por un grupo de Jóvenes profesionales,
+        comprometidos en hacer las cosas con un enfoque mucho más cercano a nuestros clientes. <br/>
+        Nos caracterizamos por nuestro espíritu innovador y
+        preocuparnos por la sostenibilidad del medio ambiente y  la agricultura, enfocados en un buen servicio a los agricultores
+        para reducir el uso de sustancias agroquímicas logrando que  cultiven productos de calidad.
+    </p>
+</div>
+<div class="centrarslide">
+    <p class="acerca">
+        <img src="../img/somos.jpg" id="imgacerca" alt="Somos">
+    </p>
+</div>
+<footer th:replace="layout/plantilla2 :: footer"></footer>
+
+<script type="text/javascript" src="../js/fonawesome.js"></script>
+</body>
+</html>

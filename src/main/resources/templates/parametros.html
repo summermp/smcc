@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <base href="/">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" type="text/css" href="../css/headerandfooter.css">
+    <title>Parametros</title>
+</head>
+<body>
+
+<header th:replace="layout/plantilla2 :: header"></header>
+
+<div>LISTADO DE PARAMETROS</div>
+
+<form th:action="@{/parametrosfecha}" method="get">
+    <label>Fecha desde:
+        <input type="date" name="fecha1" id="fechadesde" class="fecha"  min='2021-01-01' max='2021-12-13' required>
+    </label>
+    <label>Fecha hasta:
+        <input type="date" name="fecha2" id="fechahasta" class="fecha"  min='2021-01-01' max='2021-12-13' required.>
+    </label>
+    <label>
+        <select id="idcultivo" name="idcultivo">
+            <option value="0" selected="selected">Seleccione cultivo</option>
+            <option  th:each="cul : ${cultivos}" th:value="${cul.id}" th:text="${cul.nombre}"></option>
+        </select>
+    </label>
+    <input type="submit" onclick="ExportToExcel('xlsx')" id="btnreporte" value="Generar reporte">
+</form>
+
+<div th:if="${parametros!=null and !parametros.empty}">
+    <table id="mitabla">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>HS</th>
+            <th>HA</th>
+            <th>TA</th>
+            <th>TS</th>
+            <th>PH</th>
+            <th>UV</th>
+            <th>CO2</th>
+            <th>FECHA-HORA</th>
+            <th>ID CULTIVO</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="parametro: ${parametros}">
+            <td th:text="${parametro.id}">ID</td>
+            <td th:text="${parametro.hs}">HS</td>
+            <td th:text="${parametro.ts}">TS</td>
+            <td th:text="${parametro.ph}">PH</td>
+            <td th:text="${parametro.ha}">HA</td>
+            <td th:text="${parametro.ta}">TA</td>
+            <td th:text="${parametro.uv}">UV</td>
+            <td th:text="${parametro.co2}">CO2</td>
+            <td th:text="${parametro.fechahora}">FECHA - HORA</td>
+            <td th:text="${parametro.parametrocultivo.id}">ID</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div th:if="${parametros == null and parametros.empty}">La lista de parametros esta vacia</div>
+<footer th:replace="layout/plantilla2 :: footer"></footer>
+
+<script>
+    function FechaHora() {
+        var currentdate = new Date();
+        var datetime =
+            "Parametros Cultivo-" +
+            currentdate.getFullYear() +
+            +(currentdate.getMonth() + 1) +
+            +currentdate.getDate() +
+            "-" +
+            currentdate.getHours() +
+            +currentdate.getMinutes() +
+            +currentdate.getSeconds();
+        return datetime;
+    }
+    function ExportToExcel(type, fn, dl) {
+        var elt = document.getElementById('mitabla');
+        var wb = XLSX.utils.table_to_book(elt, { sheet: "listadocultivo" });
+        return dl
+            ? XLSX.write(wb, { bookType: type, bookSST: true, type: "base64" })
+            : XLSX.writeFile(wb, fn || FechaHora()+"." + (type || "xlsx"));
+    }
+
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js" crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+<script type="text/javascript" src="../js/fonawesome.js"></script>
+<script type="text/javascript" src="../js/fecha.js"></script>
+<script src="../js/tabla.js"></script>
+<script src="../js/aviso.js"></script>
+</body>
+</html>

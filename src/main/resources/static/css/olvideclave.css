@@ -1,0 +1,41 @@
+@import url('/css/variables.css');
+#row-form{
+    display: flex;
+    flex-flow: row wrap;
+    text-align: center;
+    justify-content: center;
+    padding:0;
+}
+.col-1, .col-2, .col-3{
+    width: 100%;
+    margin: 0 0 20px 0;
+    justify-content: center;
+}
+.col-1{
+    margin-top: 20px;
+}
+#clave,#claveverificar,#correo{
+    width: 25%;
+    height: 30px;
+}
+.btnenviar{
+    height: 30px;
+    width: 25.5%;
+    background-color: teal;
+    cursor: pointer;
+    border-radius: 8px;
+    color: white;
+}
+.btnenviar:hover{
+    background-color: var(--color-fondo);
+}
+
+@media (max-width: 550px) {
+    #clave, #claveverificar,#correo{
+        width: 98%;
+    }
+    .btnenviar{
+        width: 100%;
+    }
+
+}

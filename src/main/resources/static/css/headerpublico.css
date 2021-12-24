@@ -1,0 +1,122 @@
+@import url("../css/variables.css");
+img {
+    display: block;
+    margin: 0 auto;
+}
+a {
+    text-decoration: none;
+}
+ul {
+    list-style-type: none;
+}
+
+a:hover {
+    color: var(--color-boton);
+}
+#nav-horizontal {
+    background-color: var(--color-fondo);
+}
+/* ,#header-row */
+#header-row {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    margin-top: 2px;
+    border: 1px solid red;
+    justify-content: space-between;
+}
+/* NAV HORIZONTAL */
+#header-horizontal {
+    margin-top: 0%;
+    margin-right: 0%;
+    border: 1px solid black;
+    /* position: fixed; */
+    width: 100%;
+    height: auto;
+}
+#nav-ul {
+    display: flex;
+    flex-flow: row nowrap;
+    margin: 0%;
+    border: 1px solid blue;
+    align-items: center;
+    justify-content: space-between;
+}
+#nav-ul > .nav-li:nth-child(2){
+    margin-left: auto;
+}
+.nav-li:nth-child(1),
+.nav-li:nth-child(2),
+.nav-li:nth-child(3){
+    border: 2px solid red;
+}
+#nav-ul .nav-li .nav-a:hover {
+    background-color: var(--color-fondo);
+}
+.nav-li:first-child img {
+    width: 100%;
+}
+.nav-li {
+    display: inline-block;
+    display: flex;
+    flex-direction: row nowrap;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid red;
+}
+.nav-li {
+    width: 20%;
+    height: 8%;
+}
+.nav-a {
+    /* NO PONER>>> NOWRAP */
+    border: 1px solid blue;
+    display: flex;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    /* align-items: center; */
+    width: 100%;
+}
+.nav-a:hover {
+    background-color: var(--color-fondo);
+}
+.fa-chart-line,
+.fa-users,
+.fa-user-headset,
+.fa-file-download {
+    display: block;
+}
+.nav-title,
+#texto-download {
+    display: none;
+}
+#footer-grupo{
+    background-color: var(--color-fondo);
+}
+#footer-p{
+    text-align: center;
+}
+@media screen and (min-width: 800px) {
+    /* header and nav borders rearranged for desktop */
+    #menu-header {
+        border: none;
+        margin: 0;
+    }
+    /* desktop assumes a pointer display */
+    #main-menu #menu-a {
+        border-bottom: none;
+        display: inline;
+    }
+    .nav-title,
+    #texto-download {
+        display: block;
+    }
+    .fa-chart-line,
+    .fa-users,
+    .fa-user-headset,
+    .fa-file-download {
+        display: none;
+    }
+
+}

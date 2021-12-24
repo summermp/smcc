@@ -1,0 +1,80 @@
+@import url("../css/variables.css");
+img {
+    display: block;
+    margin: 0 auto;
+}
+a {
+    text-decoration: none;
+}
+ul {
+    list-style-type: none;
+}
+a:hover {
+    color: var(--color-boton);
+}
+#footer-grupo{
+    background-color: var(--color-fondo);
+}
+#footer-p,#footer-equipo{
+    text-align: center;
+}
+#footer-ul{
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0%;
+    text-align: center;
+    border: 1px solid red;
+}
+.footer-li{
+    border: 1px solid red;
+    width: 25%;
+    height: auto;
+}
+.footer-li figure{
+    width: 100%;
+    margin-left: 0%;
+}
+.footer-li figure figcaption{
+    border: 1px solid red;
+    width: 100%;
+    margin-left: 0;
+}
+@media screen and (min-width: 800px) {
+    #footer-ul{
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-around;
+        text-align: center;
+    }
+    .footer-li figure img{
+        height: 20vh;
+        margin-top:0;
+    }
+    .footer-li figure{
+        margin-top:0;
+    }
+    .footer-li{
+        border: 1px solid red;
+        height: auto;
+    }
+    .footer-li:hover{
+        background-color: white;
+    }
+    figure{
+        box-sizing: border-box;
+        margin-bottom:0%;
+    }
+    .grupo{
+        border-radius: 50%;
+        border:2px solid #fff;
+        background: url(img/duck.png) no-repeat;
+        -moz-box-shadow: 0px 6px 5px #ccc;
+        -webkit-box-shadow: 0px 6px 5px #ccc;
+        box-shadow: 0px 6px 5px #ccc;
+        -moz-border-radius:190px;
+        -webkit-border-radius:190px;
+        border-radius:190px;
+    }
+}

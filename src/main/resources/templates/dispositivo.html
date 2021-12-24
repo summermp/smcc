@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <base href="/">
+    <link rel="stylesheet" type="text/css" href="../css/headerandfooter.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Dispositivo</title>
+</head>
+<body>
+<header th:replace="layout/plantilla2 :: header"></header>
+<div>LISTADO DE DISPOSITIVOS</div>
+<a th:href="@{/agregardispositivo}">Crear dispositivos</a>
+<div th:if="${dispositivos !=null and !dispositivos.empty}">
+    <table id="mitabla">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Estado</th>
+            <th>IP</th>
+            <th>Eliminar</th>
+            <th>Editar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="dispositivo: ${dispositivos}">
+            <td th:text="${dispositivo.id}">ID</td>
+            <td th:text="${dispositivo.nombre}">Nombre</td>
+            <td th:switch="${dispositivo.estado}">
+                <span th:case="'0'">Inactivo</span>
+                <span th:case="'1'">Activo</span>
+                <span th:case="*">Por defecto...</span>
+            </td>
+            <td th:text="${dispositivo.ip}">IP</td>
+            <td><a th:href="@{/eliminardispositivo/}+${dispositivo.id}" style="color: red;">Eliminar</a></td>
+            <td><a th:href="@{/editardispositivo/}+${dispositivo.id}">Editar</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div th:if="${dispositivos == null and dispositivos.empty}">La lista de dispositivos esta vacia</div>
+<script src="https://code.jquery.com/jquery-3.5.1.js" crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../js/fonawesome.js"></script>
+<script src="../js/tabla.js"></script>
+<script src="../js/aviso.js"></script>
+
+
+</body>
+</html>

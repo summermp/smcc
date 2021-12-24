@@ -1,0 +1,56 @@
+@import url('../css/variables.css');
+#row-form{
+    display: flex;
+    flex-flow: row wrap;
+    text-align: center;
+    justify-content: center;
+    padding:0;
+}
+#form{
+    margin-top: 20px;
+}
+.col-1{
+    width: 100%;
+    margin: 0 0 20px 0;
+    justify-content: center;
+}
+#titulo{
+    text-align: center;
+}
+#cultivo{
+    width: 25.5%;
+}
+#fecha,#medida,#nombre,#ubicacion,#categoria,#estado,#ip{
+    width: 25%;
+}
+#btnenviar{
+    width: 25.5%;
+    background-color: teal;
+    cursor: pointer;
+    border-radius: 8px;
+    color: white;
+}
+#btnenviar:hover{
+    background-color: var(--color-fondo);
+}
+#cultivo,#fecha,#medida,#ubicacion,#categoria,#estado,#ip,#nombre{
+    height: 20px;
+}
+#btnenviar{
+    height: 30px;
+}
+.regresar{
+    left:37%;
+    position: relative;
+}
+@media (max-width: 550px) {
+    #cultivo,#btnenviar,#categoria,#estado{
+        width: 98%;
+    }
+    #fecha,#medida,#ubicacion,#nombre,#ip{
+        width: 96%;
+    }
+    .regresar{
+        left:0%;
+    }
+}

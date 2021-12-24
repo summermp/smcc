@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <base href="/">
+    <link rel="stylesheet" type="text/css" href="../css/contacto.css">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Contactenos</title>
+</head>
+<body>
+<header id="header-horizontal">
+    <nav id="nav-horizontal">
+        <ul id="nav-ul">
+            <li class="nav-li">
+                <a href="/public/menu.html">
+                    <img src="/img/pac.svg" alt="pac" />
+                </a>
+            </li>
+            <li class="nav-li">
+                <span class="espacio">miespacio</span>
+                <a class="nav-a" th:href="@{/inicio}"
+                ><span class="nav-title">INICIO</span>
+                    <i class="fas fa-home"></i>
+                </a>
+            </li>
+            <li class="nav-li">
+                <a class="nav-a" th:href="@{/acerca}">
+                    <span class="nav-title">QUIENES SOMOS</span>
+                    <i class="fas fa-users"></i>
+                </a>
+            </li>
+            <li class="nav-li">
+                <a class="nav-a" th:href="@{/contacto}">
+                    <span class="nav-title">CONTACTENOS</span>
+                    <i class="fas fa-phone-volume"></i>
+                </a>
+            </li>
+            <li class="nav-li">
+                <a class="nav-a" th:href="@{/login}">
+                    <span class="nav-title">INICIAR SESIÓN</span>
+                    <i class="fas fa-user"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<div id="contacto">
+    <form action="#" method="POST" onsubmit="return mySubmit(event)" id="enviarasunto">
+        <input type="email" name="email" placeholder="trati123456@gmail.com" value="naca123456@gmail.com" hidden>
+        <div class="rowcontacto">
+            <div class="contacto1">
+                <input type="email" class="cajaentrada" id="correo" name="correo" placeholder="Correo electrónico" autofocus required>
+            </div>
+        </div>
+        <div class="rowcontacto">
+            <div class="contacto1">
+                <textarea name="asunto" id="asunto" cols="39" rows="4" maxlength="80" placeholder="Escriba el asunto..." required></textarea>
+            </div>
+        </div>
+        <div class="rowcontacto">
+            <div class="contacto1">
+                <button type="submit" id="enviar" name="enviar">Enviar <i class="far fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<footer id="footer-grupo">
+    <p id="footer-p">Desarrollado con 💖 por PAC 😊 2021</p>
+</footer>
+<script>
+    const form = document.querySelector('#enviarasunto');
+    const btnenviar = document.querySelector('#enviar');
+    const correo = document.querySelector('#correo');
+    const mensaje = document.querySelector('#asunto');
+    //form.addEventListener("submit ", handleSubmit);
+    //Evita mas de un espacio
+    var ignoreChars = " \r\n" + String.fromCharCode(0);
+    var lastkey;
+    function ignoreSpaces(e) {
+        // SinRepetir(e);
+        e = e || window.event;
+        var char = String.fromCharCode(e.charCode);
+        if (ignoreChars.indexOf(char) >= 0 && ignoreChars.indexOf(lastkey) >= 0) {
+            lastkey = char;
+            return false;
+        } else {
+            lastkey = char;
+            return true;
+        }
+    }
+    // Execute a function when the user releases a key on the keyboard
+    form.addEventListener("keydown", function(event) {
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13 && !event.shiftKey) {
+            validarEntrada(mensaje);
+            ignoreSpaces(this);
+            // Cancel the default action, if needed
+            if (mensaje.value && mensaje.value > 8) {
+                console.log('listo');
+                // btnenviar.click();
+            }
+            event.preventDefault();
+        } else {
+            validarEntrada(mensaje);
+        }
+    });
+
+    function validarEntrada(e) {
+        // SinRepetir(e);
+        if (e.value.length === 0) {
+            console.log('mensaje is empty');
+            e.style.borderColor = 'red';
+        } else if (e.value.length<8) {
+            e.style.borderColor = 'red';
+            console.log("mensaje is coming...");
+            e.focus();
+        } else {
+            console.log("mensaje is ok");
+            // handleSubmit(e);
+        }
+    }
+
+    correo.addEventListener("keypress", function (event) {
+        correo.value = correo.value.replace(
+            /(\s{2,})|[^@.a-zA-Z']/g,
+            ""
+        );
+        correo.value = correo.value.replace(/^\s*/, "");
+        console.log(correo.value);
+    });
+
+    mensaje.addEventListener("keypress", function (event) {
+        mensaje.value = mensaje.value.replace(
+            /(\s{2,})|[^a-zA-Z']/g,
+            " "
+        );
+        mensaje.value = mensaje.value.replace(/^\s*/, "");
+        console.log(mensaje.value);
+    });
+
+    async function handleSubmit(event) {
+        mensaje.value.trim();
+        // event.preventDefault();
+        const formdata = new FormData(form);
+        const response = await fetch(form.action, {
+            method: "POST",
+            body: formdata,
+            headers: {
+                Accept: "application/json",
+            },
+        });
+        if (response.ok) {
+            form.reset();
+            Swal.fire(
+                "Ayuda con el sistema!",
+                "Gracias por contactarme, te escribiré pronto!",
+                "success"
+            );
+        } else {
+            form.reset();
+            Swal.fire(
+                "Ooops...!",
+                "Sucedio un error inesperado!",
+                "error"
+            );
+        }
+    }
+</script>
+<script src="../js/fonawesome.js"></script>
+</body>
+</html>

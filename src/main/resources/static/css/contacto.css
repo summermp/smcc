@@ -1,0 +1,229 @@
+@import url("../css/variables.css");
+#nav-horizontal{
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.centrarslide{
+    margin-top: 0;
+    margin-bottom: 0;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+}
+.acerca{
+    border: 1px solid green;
+    margin: auto 10% 5%;
+    text-align: justify;
+    font-size: 1.5rem;
+    border-radius:8px;
+}
+#titulo-acerca{
+    color: green;
+    font-size: 1.5rem;
+}
+.icon-fb{
+    color: blue;
+}
+.icon-you,.icon-inst{
+    color: red;
+}
+/* desktop assumes a pointer display */
+#main-menu #menu-a {
+    border-bottom: none;
+    display: inline;
+}
+.nav-title{
+    display: block;
+}
+.nav-li:last-child{/* border: 2px solid red; */
+    border-radius:8px;
+    background-color: var(--color-fondo);
+    width:12%;
+    margin-right: 5%;
+    padding: 0%;
+}
+.nav-li:last-child .nav-a:last-child{
+    color: white;
+}
+#menu-header {
+    border: none;
+    margin: 0;
+}
+/* desktop assumes a pointer display */
+#main-menu #menu-a {
+    border-bottom: none;
+    display: inline;
+}
+.nav-title,
+#texto-download {
+    display: block;
+}
+.nav-li:last-child{
+    /* border: 2px solid red; */
+    border-radius:8px;
+    background-color: var(--color-fondo);
+    width:12%;
+    margin-right: 5%;
+    padding: 0%;
+}
+.nav-li:last-child .nav-a:last-child{
+    color: white;
+}
+a {
+    text-decoration: none;
+}
+a:hover {
+    color: var(--color-boton);
+}
+#redesociales{
+    display: flex;
+    flex-flow: wrap;
+    justify-content:center;
+}
+#nav-ul,#redesociales{
+    list-style-type: none;
+}
+#nav-ul {
+    display: flex;
+    flex-flow: row nowrap;
+    margin: 0%;
+    align-items: center;
+    justify-content: space-between;
+}
+#nav-ul > .nav-li:nth-child(2){
+    margin-left: auto;
+}
+#nav-ul .nav-li .nav-a:hover {
+    color: black;
+}
+.nav-li:first-child img {
+    width: 100%;
+}
+.nav-li {
+    display: inline-block;
+    display: flex;
+    flex-direction: row nowrap;
+    align-items: center;
+    justify-content: center;
+}
+.nav-li {
+    width: 15%;
+    height: 8%;
+}
+.nav-li:last-child .nav-a:last-child{
+    padding: 2px;
+}
+.nav-a {
+    display: flex;
+    color: green;
+    justify-content: center;
+    padding: 0%;
+    width: 100%;
+}
+.fa-home,
+.fa-users,
+.fa-user,
+.fa-phone-volume{
+    display: block;
+}
+.nav-title,
+#texto-download {
+    display: none;
+}
+.li-rsocial{
+    margin: 5px;
+}
+.acerca #imgacerca{
+    width: 100%;
+    padding: 0%;
+    margin: 0%;
+}
+.espacio{
+    visibility: hidden;
+}
+.rowcontacto{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: center;
+}
+.contacto1{
+    margin-bottom: 2%;
+    width:50vh;
+}
+.cajaentrada{
+    width: 98%;
+    height: 30px;
+}
+.cajaentrada,#cajaenviar{
+    border-radius: 8px;
+}
+#enviar{
+    width: 100%;
+    height: 30px;
+    background-color: teal;
+    color: white;
+    padding: 4px;
+    border-radius: 8px;
+}
+#enviar:hover{
+    background-color: var(--color-fondo);
+}
+#asunto{
+    width: 98.2%;
+    border-radius: 8px;
+}
+#correo:invalid,#asunto:invalid {
+    border: solid red;
+}
+#correo:valid,#asunto:valid {
+    border: solid green;
+}
+#enviarasunto{
+    margin-top:5%;
+}
+#footer-grupo{
+    background-color: var(--color-fondo);
+    bottom: -220px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    height: 60px;
+
+}
+#footer-p{
+    text-align: center;
+}
+@media screen and (min-width: 800px) {
+    /* header and nav borders rearranged for desktop */
+    #menu-header {
+        border: none;
+        margin: 0;
+    }
+    /* desktop assumes a pointer display */
+    #main-menu #menu-a {
+        border-bottom: none;
+        display: inline;
+    }
+    .nav-title,
+    #texto-download {
+        display: block;
+    }
+    .fa-home,
+    .fa-users,
+    .fa-phone-volume,
+    .fa-user {
+        display: none;
+    }
+    .nav-li:last-child{
+        border-radius:8px;
+        background-color: var(--color-fondo);
+        width:12%;
+        /* margin-left: 5%; */
+        /* margin-right: 5%; */
+        padding: 0%;
+    }
+    .nav-li:last-child .nav-a:last-child{
+        text-align: center;
+        color: white;
+    }
+}

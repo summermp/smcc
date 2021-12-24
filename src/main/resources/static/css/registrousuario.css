@@ -1,0 +1,214 @@
+@import url('../css/variables.css');
+.form-titulo{
+    display: flex;
+    flex-flow: row;
+    font-size: 80%;
+    justify-content: center;
+    border: var(--borde);
+}
+.contenedor {
+    border: 1px solid red;
+    margin: 0 0;
+    padding-left: auto;
+    padding-right: auto;
+}
+.row {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    margin-top: 0%;
+}
+.row-1,
+.row-2 {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    border: 1px solid red;
+}
+.row-3 {
+    display: flex;
+    flex-flow: column wrap;
+    align-content: center;
+    border: 1px solid red;
+}
+.row-ubicacion {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    border: 1px solid red;
+}
+.col-ubicacion{
+    background-color: red;
+    width: 32.78vh;
+    padding-right: 5px;
+    height: 22.35vh;
+}
+.col-1 {
+    background-color: red;
+    width: 32.78vh;
+    padding-right: 5px;
+    height: 22.35vh;
+}
+.col-2 {
+    background-color: blue;
+    width: 32.61vh;
+    height: 22.35vh;
+}
+.col-3 {
+    background-color: brown;
+    width: 66.22vh;
+    height: 25px;
+}
+.col-4 {
+    background-color: green;
+    width: 66.22vh;
+    height: 25px;
+}
+.col-5 {
+    background-color: green;
+    width: 32.45vh;
+    height: 25px;
+    margin-right: 5px;
+
+}
+.col-6 {
+    background-color: blueviolet;
+    width: 32.78vh;
+    height: 25px;
+}
+#fechanac{
+    width: 98%;
+}
+.row-2 #autocomplete-container {
+    width: 34.2%;
+}
+#enviar {
+    background-color: teal;
+    color: white;
+}
+#enviar:hover {
+    background-color: var(--color-hover);
+}
+.registro-form {
+    width: 98%;
+    text-align: center;
+    font-size: 20px;
+    outline: none;
+    border: 1px solid #000;
+    border-left: none;
+    color: #000;
+}
+.entrada-linea{
+    width: 99.5%;
+    text-align: center;
+    font-size: 20px;
+    padding-left: 0px;
+    outline: none;
+    border: 1px solid #000;
+    border-left: none;
+    color: #000;
+}
+#fecha-nac{
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    padding-left: 0px;
+    outline: none;
+    border: 1px solid #000;
+    border-left: none;
+    color: #000;
+}
+#fotoperfil{
+    margin-right: 15px;
+    border-radius: var(--borde-redondo);
+    color: white;
+}
+.padding-bottom{
+    margin-bottom: 12px;
+}
+.padding-right{
+    margin-right: 5px;
+}
+.foto{
+    border: var(--borde);
+    width:  80%;
+    height: 80%;
+    margin-left: 15.5px;
+    margin-top: 4px;
+    border-radius: var(--borde-img);
+}
+.enviar-form {
+    width: 100%;
+    height: 2rem;
+    border: var(--borde-redondo);
+}
+::-webkit-input-placeholder {
+    font-size: .7em;
+    color: black;
+}
+@media (max-width: 550px) {
+    ::-webkit-input-placeholder {
+        font-size: .5em;
+        color: black;
+    }
+    .foto{
+        width: auto;
+        height:  100px;
+        margin-left: 25%;
+        margin-bottom: 5px;
+    }
+    .registro-form{
+        width: 98%;
+        margin-right: 0%;
+    }
+    #fecha-nac {
+        width: 100%;
+    }
+    .inputclave{
+        margin-right: 0;
+        margin-left: 0;
+        width: 100%;
+    }
+    .row-2 #autocomplete-container {
+        width: 56%;
+        margin-bottom: 0;
+    }
+    .padding-right {
+        margin-right: 0;
+    }
+    .enviar-form{
+        width: 100%;
+    }
+    .padding-right{
+        margin-right: 5px;
+    }
+    .espacio-clave {
+        margin-right: 0;
+    }
+    .enviar-form {
+        width: 100%;
+        height: 2rem;
+        border: var(--borde-redondo);
+    }
+    .col-1{
+        width: 200px;
+        height: 135px;
+        padding-right: 0%;
+    }
+    .col-2 {
+        background-color: blue;
+        width: 200px;
+        height: 135px;
+    }
+    .col-3, .col-4 {
+        background-color: green;
+        width: 200px;
+        height: 25px;
+    }
+    .col-5 {
+        background-color: green;
+        width: 200px;
+        height: 25px;
+        margin-right: 0%;
+    }
+}
