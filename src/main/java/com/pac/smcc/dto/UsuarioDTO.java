@@ -1,9 +1,8 @@
 package com.pac.smcc.dto;
 //PERSONALIZAR CONSULTAS DE CAMPOS DE LA TABLA BD
-public interface CultivoDTO {
+public interface UsuarioDTO {
     Integer getId();
     String getNombre();
-    String getFechasiembra();
-    String getMedida();
-    String getUbicacion();
+    String getFoto();
+    String getEmail();
 }

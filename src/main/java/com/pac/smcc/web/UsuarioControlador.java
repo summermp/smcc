@@ -24,6 +24,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Locale;
+
 @Controller
 @Slf4j
 public class UsuarioControlador {
@@ -39,89 +41,106 @@ public class UsuarioControlador {
     public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/images/";
 
     @GetMapping("/usuarios")
-    public String incio(Model model, @AuthenticationPrincipal User user){
+    public String incio(Model model, @AuthenticationPrincipal User user) throws IOException {
         Integer idusuario= (Integer) httpSession.getAttribute("idusuario");
         log.error("ID USUARIO: "+idusuario);
         var usuarios=usuarioService.listarUsuario();
+        Integer idus= (Integer) httpSession.getAttribute("idusuario");
+        var datos_usuario=usuarioService.obtenerUsuario(idus);
+        model.addAttribute("datos_usuario",datos_usuario);
         model.addAttribute( "usuarios",usuarios);
+        String path = new File(".").getCanonicalPath();
+        log.error(path);
         return "index";
     }
 
     @GetMapping("/agregar")
-    public String agregar(Usuario usuario){
+    public String agregar(Usuario usuario, Model model){
+        Integer idus= (Integer) httpSession.getAttribute("idusuario");
+        var datos_usuario=usuarioService.obtenerUsuario(idus);
+        model.addAttribute("datos_usuario", datos_usuario);
         return "modificarusuario";
     }
 
     @PostMapping("/guardar")
     public String guardar(@Valid Usuario usuario, @RequestParam("fotoperfil") MultipartFile file,
-                          @RequestParam("direccion") String direccion, Errors errores, Model model) throws IOException {
-        log.error("Nombre IMG INICIO: "+file.getOriginalFilename().length());
+                          Errors errores, Model model) throws IOException {
+        log.error("Name IMG Init: "+file.getOriginalFilename().length());
+        //GUARDA ID USUARIO AL INICIAR SESION
         if(httpSession.getAttribute("idusuario")!=null){
             Integer idusuario= (Integer) httpSession.getAttribute("idusuario");
             log.error("ID USUARIO: "+idusuario);
         }
-        if(usuarioService.existeUsuario(usuario.getNombre()) && (usuario.getId()==null)) {
-                log.error("Si existe");
-                log.error("usuario: "+usuario.getNombre());
-                model.addAttribute("error", "e-mail exists!");
-                return "modificarusuario";
+        //EVALUA SI EXISTE EL MISMO USUARIO
+        if(usuarioService.existeUsuario(usuario.getNombre()) && (usuario.getId()==null)){
+            log.error("Si existe");
+            model.addAttribute("error", "usuario existe!");
+            log.error("usuario: "+usuario.getNombre());
+            return "modificarusuario";
         }else if(errores.hasErrors()){
             return "modificarusuario";
-        }else {
-                usuario.setDireccion(direccion);
-                if(usuario.getClave().length()<=8){
-                    String codificado=bCryptPasswordEncoder.encode(usuario.getClave());
-                    System.out.println("CLAVE: "+usuario.getClave());
+        }else{
+            String str = usuario.getNombre();
+            String[] splited = str.split("\\s+");
+            log.error("username: "+splited[0]);
+            usuario.setNombreusuario(splited[0].toLowerCase());
+            //CLAVES ANTES DE CREAR USUARIO
+            if(usuario.getClave().length()<=10){
+                    String codificado=bCryptPasswordEncoder.encode(usuario.getClave().split(",")[1]);
+                    System.out.println("CLAVE CON: "+usuario.getClave());
+                    System.out.println("CLAVE SIN: "+usuario.getClave().split(",")[1]);
                     System.out.println("CODI: "+codificado);
                     usuario.setClave(codificado);
                     log.error("Se cambio la clave");
-                }else{
+            //CLAVES DESPUES DE CREAR USUARIO
+            }else{
+                    log.error("USUARIO CLAVE: "+usuario.getClave());
                     String mismaclave = usuario.getClave().substring(0, 60);
                     usuario.setClave(mismaclave);
                     log.error("Es la misma clave");
-                }
+            }
             if(file.getOriginalFilename().length()>0) {
-        	log.error("Nombre IMG INICIO: "+file.getOriginalFilename().length());
-                String content = new String(file.getBytes(), StandardCharsets.UTF_8);
-                String extension = file.getOriginalFilename().split("\\.")[1];
-        	log.error("IMG extension: "+extension);
-                log.error("Nombre IMG DEFAULT: "+file.getOriginalFilename());
-                String filename=usuario.getNombre()+"."+extension;
-                log.error("Nombre de la imagen: "+filename);
-                Path fileNameAndPath = Paths.get(uploadDirectory,filename);
-                try {
-                    Files.write(fileNameAndPath,file.getBytes());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                usuario.setFoto(filename);
-            }else {
-                if(usuario.getId()==null) {
-                    usuario.setFoto("lineth.jpg");
-                }else {
-                    Usuario us=new Usuario();
-                    us=usuarioService.buscarUsuario(usuario);
-
-                    String extension1 = us.getFoto().split("\\.")[1];
-                    String fotonombreantiguo = us.getFoto();
-                    String fotonombrenuevo=usuario.getNombre()+"."+extension1;
-
-                    if(!fotonombreantiguo.equalsIgnoreCase(fotonombrenuevo)) {
-                        File oldFile = new File(uploadDirectory+fotonombreantiguo);
-                        File newFile = new File(uploadDirectory+fotonombrenuevo);
-                        if(oldFile.renameTo(newFile)){
-                            usuario.setFoto(fotonombrenuevo);
-                            System.out.println("Renombrado");
-                        }else{
-                            System.out.println("Error al renombrar");
-                        }
+                log.error("Nombre IMG INICIO: "+file.getOriginalFilename().length());
+                    String content = new String(file.getBytes(), StandardCharsets.UTF_8);
+                    String extension = file.getOriginalFilename().split("\\.")[1];
+                log.error("IMG extension: "+extension);
+                    log.error("Nombre IMG DEFAULT: "+file.getOriginalFilename());
+                    String filename=usuario.getNombre()+"."+extension;
+                    log.error("Nombre de la imagen: "+filename);
+                    Path fileNameAndPath = Paths.get(uploadDirectory,filename);
+                    try {
+                        Files.write(fileNameAndPath,file.getBytes());
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
+                    usuario.setFoto(filename);
+            }else {
+                    if(usuario.getId()==null) {
+                        usuario.setFoto("lineth.jpg");
+                    }else {
+                        Usuario us=new Usuario();
+                        us=usuarioService.buscarUsuario(usuario);
+
+                        String extension1 = us.getFoto().split("\\.")[1];
+                        String fotonombreantiguo = us.getFoto();
+                        String fotonombrenuevo=usuario.getNombre()+"."+extension1;
+
+                        if(!fotonombreantiguo.equalsIgnoreCase(fotonombrenuevo)) {
+                            File oldFile = new File(uploadDirectory+fotonombreantiguo);
+                            File newFile = new File(uploadDirectory+fotonombrenuevo);
+                            if(oldFile.renameTo(newFile)){
+                                usuario.setFoto(fotonombrenuevo);
+                                System.out.println("Renombrado");
+                            }else{
+                                System.out.println("Error al renombrar");
+                            }
+                        }
 
 //                    Rol r1=new Rol();
 //                    r1.set
 
+                    }
                 }
-            }
             log.error(usuario.getFoto());
             usuarioService.guardar(usuario);
             return "redirect:/usuarios";
@@ -201,13 +220,11 @@ public class UsuarioControlador {
     }
 
     @GetMapping("/ayuda")
-    public String ayuda(){
+    public String ayuda(Model model){
+        Integer idus= (Integer) httpSession.getAttribute("idusuario");
+        var datos_usuario=usuarioService.obtenerUsuario(idus);
+        model.addAttribute("datos_usuario",datos_usuario);
         return "ayuda";
-    }
-
-    @GetMapping("/dashboard")
-    public String dashboard(){
-        return "dashboard";
     }
 
     @GetMapping("/validacion")
@@ -221,6 +238,5 @@ public class UsuarioControlador {
         model.addAttribute("hideform",hideform);
         return "olvideclave";
     }
-
 }
 

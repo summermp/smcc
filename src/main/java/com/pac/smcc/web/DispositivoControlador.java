@@ -1,26 +1,42 @@
 package com.pac.smcc.web;
 import com.pac.smcc.domain.Dispositivo;
 import com.pac.smcc.service.DispositivoService;
+import com.pac.smcc.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class DispositivoControlador {
 
     @Autowired
     private DispositivoService dispositivoService;
 
+    @Autowired
+    private UsuarioService usuarioService;
+
+    @Autowired
+    private HttpSession httpSession;
+
     @GetMapping("/dispositivo")
     public String listadispositivo(Model model){
+        Integer idus= (Integer) httpSession.getAttribute("idusuario");
         var dispositivos=dispositivoService.listarDispositivo();
+        var datos_usuario=usuarioService.obtenerUsuario(idus);
+        model.addAttribute("datos_usuario",datos_usuario);
         model.addAttribute("dispositivos", dispositivos);
         return "dispositivo";
     }
 
     @GetMapping("/agregardispositivo")
-    public String agregar(Dispositivo dispositivo){
+    public String agregar(Dispositivo dispositivo, Model model){
+        Integer idus= (Integer) httpSession.getAttribute("idusuario");
+        var datos_usuario=usuarioService.obtenerUsuario(idus);
+        model.addAttribute("datos_usuario",datos_usuario);
         return "modificardispositivo";
     }
 

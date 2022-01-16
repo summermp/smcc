@@ -2,18 +2,110 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <base href="/">
+    <link rel="icon" href="/img/ico.jpeg" type="image/x-icon"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" type="text/css" href="../css/headerandfooter.css">
+    <link rel="stylesheet" type="text/css" href="../css/dashboard.css">
     <title>Parametros</title>
 </head>
 <body>
-
-<header th:replace="layout/plantilla2 :: header"></header>
-
-<div>LISTADO DE PARAMETROS</div>
-
+<header id="header-horizontal">
+    <nav id="nav-horizontal">
+        <ul id="nav-ul">
+            <li class="nav-li">
+                <a th:href="@{/dashboard}">
+                    <img src="/img/pac.svg" alt="pac">
+                </a>
+            </li>
+            <li class="nav-li">
+                <a class="nav-a" href="#">
+                    <input type="search" placeholder="Buscar mediciones o reporte"
+                           id="buscarreporte" autofocus/>
+                    <i class="fas fa-search"></i>
+                </a>
+            </li>
+            <li class="nav-li">
+                <a class="nav-a" href="#"><i class="fas fa-comment-alt-dots"></i>
+                    <span class="quantity">1</span>
+                </a>
+                <a class="nav-a" href="#"><i class="fas fa-envelope"></i>
+                    <span class="quantity">2</span>
+                </a>
+                <a class="nav-a" href="#"><i class="fas fa-bell"></i>
+                    <span class="quantity">3</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<header id="menu-header">
+    <div id="header-row">
+        <a
+                href="#main-menu"
+                id="main-menu-toggle"
+                class="menu-toggle"
+                aria-label="Open main menu"
+        >
+            <span class="sr-only">Open main menu</span>
+            <span class="fa fa-bars" area-hidden="true"></span>
+        </a>
+    </div>
+    <nav id="main-menu" class="main-menu" aria-label="Main menu">
+        <a
+                href="#main-menu-toggle"
+                id="main-menu-close"
+                class="menu-close"
+                aria-label="Close main menu"
+        >
+            <span class="fa fa-times"></span>
+            <span class="sr-only">Close main menu</span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div id="contenedor-foto" th:each="usu: ${datos_usuario}">
+            <!--                    th:src="@{${'/img/' + players.id +'_'+ players.name + '.png'}}"-->
+            <!--                    src="../img/user.png"-->
+            <img
+                    id="user-photo"
+                    th:src="@{${'../images/' + usu.foto}}"
+                    alt="user photo"
+                    width="100px"
+                    height="100px"
+            />
+            <br />
+            <h4 id="user-data">
+                <span class="user-data" th:text="${usu.nombre}">Luis Vip Huge</span><br />
+                <span class="user-data" th:text="${usu.email}">luivph@gmail.com</span>
+            </h4>
+        </div>
+        <ul id="menu-ul">
+            <li class="menu-li">
+                <a class="menu-a" href="../public/registrar_cultivo.html"
+                ><i class="fas fa-plus"></i> Registrar cultivo</a
+                >
+            </li>
+            <li class="menu-li">
+                <a class="menu-a" th:href="@{/cultivo}"
+                ><i class="fas fa-list-ol"></i> Listado de cultivo</a>
+            </li>
+            <li class="menu-li">
+                <a class="menu-a" th:href="@{/parametros}"
+                ><i class="fas fa-file-chart-line"></i> Reportes</a
+                >
+            </li>
+            <li class="menu-li">
+                <a class="menu-a" th:href="@{/ayuda}"
+                ><i class="fas fa-life-ring"></i> Ayuda</a
+                >
+            </li>
+            <li class="menu-li">
+                <a class="menu-a" th:href="@{/logout}">Cerrar sesión</a>
+            </li>
+        </ul>
+    </nav>
+    <a href="#main-menu-toggle" class="backdrop" hidden tabindex="-1"></a>
+</header>
+<main id="contenidoprincipal">
+<div id="consultaparametro">
 <form th:action="@{/parametrosfecha}" method="get">
     <label>Fecha desde:
         <input type="date" name="fecha1" id="fechadesde" class="fecha"  min='2021-01-01' max='2021-12-13' required>
@@ -29,42 +121,48 @@
     </label>
     <input type="submit" onclick="ExportToExcel('xlsx')" id="btnreporte" value="Generar reporte">
 </form>
-
+</div>
 <div th:if="${parametros!=null and !parametros.empty}">
     <table id="mitabla">
         <thead>
         <tr>
             <th>ID</th>
-            <th>HS</th>
             <th>HA</th>
+            <th>HS</th>
             <th>TA</th>
             <th>TS</th>
             <th>PH</th>
+            <th>CE</th>
+            <th>N</th>
+            <th>P</th>
+            <th>F</th>
             <th>UV</th>
             <th>CO2</th>
             <th>FECHA-HORA</th>
-            <th>ID CULTIVO</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="parametro: ${parametros}">
-            <td th:text="${parametro.id}">ID</td>
+            <td th:text="${parametro.id}">#</td>
+            <td th:text="${parametro.ha}">HA</td>
             <td th:text="${parametro.hs}">HS</td>
+            <td th:text="${parametro.ta}">TA</td>
             <td th:text="${parametro.ts}">TS</td>
             <td th:text="${parametro.ph}">PH</td>
-            <td th:text="${parametro.ha}">HA</td>
-            <td th:text="${parametro.ta}">TA</td>
+            <td th:text="${parametro.ce}">EC</td>
+            <td th:text="${parametro.nitrogeno}">Nitrogeno</td>
+            <td th:text="${parametro.potasio}">Potasio</td>
+            <td th:text="${parametro.fosforo}">Fosforo</td>
             <td th:text="${parametro.uv}">UV</td>
             <td th:text="${parametro.co2}">CO2</td>
             <td th:text="${parametro.fechahora}">FECHA - HORA</td>
-            <td th:text="${parametro.parametrocultivo.id}">ID</td>
         </tr>
         </tbody>
     </table>
 </div>
 <div th:if="${parametros == null and parametros.empty}">La lista de parametros esta vacia</div>
+</main>
 <footer th:replace="layout/plantilla2 :: footer"></footer>
-
 <script>
     function FechaHora() {
         var currentdate = new Date();

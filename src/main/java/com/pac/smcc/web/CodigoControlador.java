@@ -1,6 +1,7 @@
 package com.pac.smcc.web;
 import com.pac.smcc.domain.Codigo;
 import com.pac.smcc.service.CodigoService;
+import com.pac.smcc.service.UsuarioService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -18,9 +21,18 @@ public class CodigoControlador {
     @Autowired
     private CodigoService codigoService;
 
+    @Autowired
+    private HttpSession httpSession;
+
+    @Autowired
+    private UsuarioService usuarioService;
+
     @GetMapping("/codigo")
     public String incioCodigos(Model model){
+        Integer idus= (Integer) httpSession.getAttribute("idusuario");
         var codigos=codigoService.listarCodigo();
+        var datos_usuario=usuarioService.obtenerUsuario(idus);
+        model.addAttribute("datos_usuario",datos_usuario);
         model.addAttribute( "codigos",codigos);
         return "codigo";
     }

@@ -1,24 +1,27 @@
 package com.pac.smcc.service;
 import com.pac.smcc.domain.Usuario;
+import com.pac.smcc.dto.UsuarioDTO;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
 public interface UsuarioService {
-    public List<Usuario> listarUsuario();
+    List<Usuario> listarUsuario();
 
-    public void guardar(Usuario usuario);
+    void guardar(Usuario usuario);
 
-    public void eliminar(Usuario usuario);
+    void eliminar(Usuario usuario);
 
-    public Usuario buscarUsuario(Usuario usuario);
+    Usuario buscarUsuario(Usuario usuario);
 
-    public boolean existeUsuario(String nombreusuario);
+    boolean existeUsuario(String nombreusuario);
 
-    public boolean existeEmail(String email);
+    boolean existeEmail(String email);
 
-    public Usuario obtenerUsuario(String email);
+    Usuario obtenerUsuario(String email);
 
-    public void actualizarclave(String clave, Integer idusuario);
+    void actualizarclave(String clave, Integer idusuario);
+
+    List<UsuarioDTO> obtenerUsuario(Integer idusuario);
 
 }

@@ -3,10 +3,43 @@
       xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="/img/ico.jpeg" type="image/x-icon"/>
     <title>Acceso denegado</title>
 </head>
 <body>
-<div>Acceso denegado no tienes permiso para ver esa pagina</div>
-<a th:href="@{/login}">Regresar</a>
+<style>
+    #denegado{
+        width: 100%;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        align-items: center;
+    }
+    #denegado_texto{
+        margin-top: 15%;
+        width: 100%;
+        text-align: center;
+        font-size: 24px;
+    }
+    #btnregresar{
+        background-color: teal;
+        color: white;
+        font-size: 20px;
+        border-radius: 8px;
+        padding: 4px;
+        text-decoration: none;
+        justify-content: center;
+    }
+    #btnregresar:hover{
+        background-color: #a7e0a5;
+    }
+</style>
+<div id="denegado">
+    <h4 id="denegado_texto">
+        Acceso denegado no tienes permiso para ver esa página
+        <br/>
+    </h4>
+        <a th:href="@{/login}" id="btnregresar">Regresar <span> <i class="fas fa-home"></i></span></a>
+</div>
 </body>
 </html>

@@ -56,10 +56,7 @@ public class Usuario implements Serializable {
     @NotEmpty
     private String clave;
 
-    @Basic(optional = false)
-    @Column(name = "creacion", insertable = false, updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date creacion;
+    private String nombreusuario;
 
     @Basic(optional = false)
     @Column(name = "ultimasesion", insertable = false, updatable = false)

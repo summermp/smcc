@@ -10,7 +10,7 @@
     justify-content: center;
 }
 .splide{
-    width: 90%;
+    width: 100%;
 }
 .splide__slide{
     margin-right: 5px;
@@ -103,6 +103,8 @@ a:hover {
     display: flex;
     flex-flow: wrap;
     justify-content:center;
+    margin: 0%;
+    padding: 0%;
 }
 #nav-ul,#redesociales{
     list-style-type: none;
@@ -158,9 +160,6 @@ a:hover {
 .li-rsocial{
     margin: 5px;
 }
-.espacio{
-    visibility: hidden;
-}
 #footer-grupo{
     background-color: var(--color-fondo);
     display: flex;
@@ -170,8 +169,14 @@ a:hover {
 #footer-p{
     text-align: center;
 }
+.espacio{
+    display: none;
+}
 @media screen and (min-width: 800px) {
     /* header and nav borders rearranged for desktop */
+    .espacio{
+        visibility: hidden;
+    }
     #menu-header {
         border: none;
         margin: 0;

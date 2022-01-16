@@ -1,5 +1,4 @@
 package com.pac.smcc.web;
-
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -8,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
     public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registro){
-        registro.addViewController("/").setViewName("dashboard");
+        registro.addViewController("/dashboard").setViewName("dashboard");
 //        registro.addViewController("/").setViewName("index");
         registro.addViewController("/login");
         registro.addViewController("/errores/403").setViewName("/errores/403");

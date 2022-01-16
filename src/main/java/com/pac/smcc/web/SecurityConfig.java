@@ -43,13 +43,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().authorizeRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .antMatchers("/css/**", "/js/**","/images/**", "/webjars/**", "**/favicon.ico").permitAll().
-                antMatchers("/editar/**","/agregar/**","/eliminar","/codigo","/agregarcodigo").
+                antMatchers("/editar/**","/agregar/**","/eliminar","/codigo","/agregarcodigo",
+                        "/producto","/categoria","/usuarios").
                 hasRole("ADMIN").
-                antMatchers("/dashboard").
+                antMatchers("/dashboard","/cultivo",
+                        "/producto","/parametros","/agregarcultivo","/agregarproducto").
                 hasAnyRole("USER","ADMIN").
                 and().
                 formLogin().
-                loginPage("/login").permitAll().
+                loginPage("/login")
+                .defaultSuccessUrl("/dashboard", true).
+                permitAll().
                 and()
                 .logout()
                 .permitAll().and().

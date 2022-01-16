@@ -10,7 +10,7 @@
     justify-content: center;
 }
 .acerca{
-    border: 1px solid green;
+    /*border: 1px solid ;*/
     margin: auto 10% 5%;
     text-align: justify;
     font-size: 1.5rem;
@@ -137,8 +137,9 @@ a:hover {
     padding: 0%;
     margin: 0%;
 }
-.espacio{
-    visibility: hidden;
+#imgacerca {
+    height: auto;
+    border: solid 1px red;
 }
 #footer-grupo{
     background-color: var(--color-fondo);
@@ -149,8 +150,14 @@ a:hover {
 #footer-p{
     text-align: center;
 }
+.espacio{
+    display: none;
+}
 @media screen and (min-width: 800px) {
     /* header and nav borders rearranged for desktop */
+    .espacio{
+        visibility: hidden;
+    }
     #menu-header {
         border: none;
         margin: 0;

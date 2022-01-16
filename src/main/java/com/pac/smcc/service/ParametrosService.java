@@ -1,5 +1,7 @@
 package com.pac.smcc.service;
 import com.pac.smcc.domain.Parametros;
+import com.pac.smcc.dto.ParametroDTO;
+
 import java.util.List;
 public interface ParametrosService{
 
@@ -11,5 +13,8 @@ public interface ParametrosService{
 
     public List<Parametros> listaParametros(String fecha1, String fecha2, Integer idcultivo);
 
-    public List<Parametros> listarParametros(Integer idusuario);
+    public List<ParametroDTO> listarParametros(Integer idusuario);
+
+    public List<ParametroDTO> ultimaMedicion(Integer idusuario);
+
 }

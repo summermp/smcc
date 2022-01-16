@@ -21,7 +21,10 @@ public class Parametros implements Serializable {
     private float ph;
     private float uv;
     private float co2;
-//    private int npk;
+    private int ce;
+    private int nitrogeno;
+    private int potasio;
+    private int fosforo;
 
 //    @Basic(optional = false)
 //    @Column(name = "fechahora", insertable = false, updatable = false)
@@ -30,8 +33,7 @@ public class Parametros implements Serializable {
 
     private String fechahora;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "id_cultivo",insertable = true, updatable = true, nullable = false)
     private Cultivo parametrocultivo;
 }
-

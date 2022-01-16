@@ -5,10 +5,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Acerca de nosotros</title>
     <base href="/">
+    <link rel="icon" href="/img/ico.jpeg" type="image/x-icon"/>
     <link rel="stylesheet" type="text/css" href="../css/acerca.css">
+    <link rel="stylesheet" type="text/css" href="../css/team.css">
 </head>
 <body>
 <header id="header-horizontal">
@@ -64,11 +65,94 @@
 </div>
 <div class="centrarslide">
     <p class="acerca">
-        <img src="../img/somos.jpg" id="imgacerca" alt="Somos">
+        <img src="../img/productos.jpg" id="imgacerca" alt="productos">
     </p>
 </div>
+<p id="footer-equipo">Equipo de SMCC</p>
+    <ul id="footer-ul">
+        <li class="footer-li">
+            <div>
+                Manager at pac 👩‍💼
+            </div>
+            <figure>
+                <div class="contenedorimg">
+                    <img src="../img/lineth.jpg" class="grupo" alt="">
+                </div>
+                <figcaption>
+                    <span class="integrante">Lineth Alamo</span>
+                </figcaption>
+        </li>
+        </figure>
+        <li class="footer-li">
+            <div>
+                Business consultant at pac 👩
+            </div>
+            <figure>
+                <div class="contenedorimg">
+                    <img src="../img/icons/girl.svg" class="grupo" alt="">
+                </div>
+                <figcaption>
+                    <span class="integrante">Viviana Jurado</span>
+                </figcaption>
+            </figure>
+        </li>
+        <li class="footer-li">
+            <div>
+                Designer at pac 🌠
+            </div>
+            <figure>
+                <div class="contenedorimg">
+                    <img src="../img/icons/girl.svg" class="grupo" alt="">
+                </div>
+                <figcaption>
+                    <span class="integrante">Zulma Mayo</span></li>
+        </figcaption>
+        </figure>
+        <li class="footer-li">
+            <div>
+                Backend developer at pac 💻
+            </div>
+            <figure>
+                <div class="contenedorimg">
+                    <img src="../img/sam.jpg" class="grupo" id="foryou" alt="">
+                </div>
+                <figcaption>
+                    <span class="integrante">Summer Marcos</span></li>
+        </figcaption>
+        </figure>
+    </ul>
 <footer th:replace="layout/plantilla2 :: footer"></footer>
-
+<script>
+    let foryou=document.getElementById("foryou");
+    foryou.addEventListener("mouseover",()=>{
+        chngimg();
+    });
+    let grupo=document.querySelectorAll('.grupo');
+    for (let index = 0; index < grupo.length; index++) {
+        grupo[index].addEventListener("mouseover",()=>{
+            changeprofileimage();
+            console.log(index+' Soñar que algún día logran tenerlo es lo más triste...');
+        });
+    }
+    function chngimg() {
+        var img = document.getElementById('foryou').src;
+        if (img.indexOf('boy.svg')!=-1) {
+            document.getElementById('foryou').src  = '../img/icons/girl.svg';
+        }else {
+            document.getElementById('foryou').src = '../img/icons/boy.svg';
+        }
+    }
+    function changeprofileimage(){
+        var imgprofile = document.getElementsByClassName('grupo');
+        for (let index = 0; index < imgprofile.length; index++) {
+            if(imgprofile[index].src.indexOf('girl.svg')!=-1) {
+                document.getElementsByClassName('grupo')[index].src  = '../img/icons/girl.svg';
+            }else {
+                document.getElementsByClassName('grupo')[index].src = '../img/icons/girl.svg';
+            }
+        }
+    }
+</script>
 <script type="text/javascript" src="../js/fonawesome.js"></script>
 </body>
 </html>

@@ -2,6 +2,7 @@ package com.pac.smcc.web;
 import com.pac.smcc.domain.Producto;
 import com.pac.smcc.service.CategoriaService;
 import com.pac.smcc.service.ProductoService;
+import com.pac.smcc.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,17 +20,26 @@ public class ProductoControlador {
     private CategoriaService categoriaService;
 
     @Autowired
+    private UsuarioService usuarioService;
+
+    @Autowired
     private HttpSession httpSession;
 
     @GetMapping("/producto")
     public String incioProductos(Model model){
         var productos=productoService.listarProducto();
+        Integer idus= (Integer) httpSession.getAttribute("idusuario");
+        var datos_usuario=usuarioService.obtenerUsuario(idus);
+        model.addAttribute("datos_usuario",datos_usuario);
         model.addAttribute( "productos",productos);
         return "producto";
     }
     @GetMapping("/agregarproducto")
     public String agregar(Producto producto, Model model){
+        Integer idus= (Integer) httpSession.getAttribute("idusuario");
         model.addAttribute("categorias",categoriaService.listarCategoria());
+        var datos_usuario=usuarioService.obtenerUsuario(idus);
+        model.addAttribute("datos_usuario",datos_usuario);
         return "modificarproducto";
     }
 

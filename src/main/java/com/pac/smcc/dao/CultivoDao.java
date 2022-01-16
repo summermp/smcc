@@ -18,9 +18,11 @@ public interface CultivoDao extends JpaRepository<Cultivo,Integer> {
 
 
     @Transactional(readOnly = true)
-    @Query(value="select c.id as id,p.nombre as nombre from Cultivo c\n" +
-            "    inner join Producto p\n" +
-            "    on c.producto_id = p.id\n" +
-            "    where c.usuario_id =:idusuario",nativeQuery = true)
+    @Query(value="select c.id as id,p.nombre as nombre, c.fechasiembra as fechasiembra, c.medida as medida,\n" +
+            "c.ubicacion as ubicacion\n"+
+            "from Cultivo c\n" +
+            "inner join Producto p\n" +
+            "on c.producto_id = p.id\n" +
+            "where c.usuario_id =:idusuario",nativeQuery = true)
     List<CultivoDTO> findAllByUsuario(@Param("idusuario") Integer idusuario);
 }

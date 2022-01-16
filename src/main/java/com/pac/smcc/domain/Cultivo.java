@@ -1,12 +1,8 @@
 package com.pac.smcc.domain;
 import java.io.Serializable;
 import java.util.List;
-
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
-import org.springframework.transaction.annotation.Transactional;
 
 @Entity
 @Data
@@ -21,24 +17,23 @@ public class Cultivo implements Serializable {
     private float medida;
     private String ubicacion;
 
-
-    public Cultivo() {
-    }
-
-    public Cultivo(Integer id, String nombre) {
-        this.id = id;
-        this.fechasiembra = nombre;
-    }
-
-    public Cultivo(Integer id, String fechasiembra, float medida, String ubicacion, Producto producto, Usuario usuario, List<Parametros> parametros) {
-        this.id = id;
-        this.fechasiembra = fechasiembra;
-        this.medida = medida;
-        this.ubicacion = ubicacion;
-        this.producto = producto;
-        this.usuario = usuario;
-        this.parametros = parametros;
-    }
+//    public Cultivo() {
+//    }
+//
+//    public Cultivo(Integer id, String nombre) {
+//        this.id = id;
+//        this.fechasiembra = nombre;
+//    }
+//
+//    public Cultivo(Integer id, String fechasiembra, float medida, String ubicacion, Producto producto, Usuario usuario, List<Parametros> parametros) {
+//        this.id = id;
+//        this.fechasiembra = fechasiembra;
+//        this.medida = medida;
+//        this.ubicacion = ubicacion;
+//        this.producto = producto;
+//        this.usuario = usuario;
+//        this.parametros = parametros;
+//    }
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "producto_id",insertable = true, updatable = true, nullable = false)

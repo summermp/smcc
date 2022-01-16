@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nueva contraseña</title>
     <base href="/">
+    <link rel="icon" href="/img/ico.jpeg" type="image/x-icon"/>
     <link rel="stylesheet" type="text/css" href="../css/codigo.css">
     <link rel="stylesheet" type="text/css" href="../css/olvideclave.css">
 </head>
@@ -49,7 +50,7 @@
 </header>
         <br/>
 <form method="GET" th:if="${hideform !=null}" th:action="@{/verificarcorreo}" id="formcorreo">
-    <div id="row-form">
+    <div class="row-form">
         <div class="col-1">
             <input
                     type="email"
@@ -69,7 +70,7 @@
 
 <form method="POST" th:if="${verificado !=null}" th:action="@{/recuperarcuenta}" id="formclave">
     <input type="hidden" name="idusu" th:value="${idusuario}"/>
-    <div id="row-form" >
+    <div class="row-form" >
         <div class="col-1">
             <input
                     type="password"

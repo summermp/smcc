@@ -1,13 +1,6 @@
 @import url('../css/variables.css');
-.form-titulo{
-    display: flex;
-    flex-flow: row;
-    font-size: 80%;
-    justify-content: center;
-    border: var(--borde);
-}
 .contenedor {
-    border: 1px solid red;
+    /*border: 1px solid red;*/
     margin: 0 0;
     padding-left: auto;
     padding-right: auto;
@@ -23,31 +16,40 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-    border: 1px solid red;
+    /*border: 1px solid red;*/
 }
 .row-3 {
     display: flex;
     flex-flow: column wrap;
     align-content: center;
-    border: 1px solid red;
+    /*border: 1px solid red;*/
 }
 .row-ubicacion {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-    border: 1px solid red;
+    /*border: 1px solid red;*/
 }
 .col-ubicacion{
-    background-color: red;
+    /*background-color: red;*/
     width: 32.78vh;
     padding-right: 5px;
     height: 22.35vh;
 }
 .col-1 {
-    background-color: red;
+    /*background-color: red;*/
     width: 32.78vh;
     padding-right: 5px;
     height: 22.35vh;
+}
+
+.col-titulo{
+    width: 100%;
+    margin: 0 0 20px 0;
+    justify-content: center;
+}
+#titulo{
+    text-align: center;
 }
 .col-2 {
     background-color: blue;
@@ -85,6 +87,7 @@
 #enviar {
     background-color: teal;
     color: white;
+    margin-bottom: 10px;
 }
 #enviar:hover {
     background-color: var(--color-hover);

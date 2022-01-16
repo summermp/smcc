@@ -1,6 +1,7 @@
 package com.pac.smcc.service;
 import com.pac.smcc.dao.UsuarioDao;
 import com.pac.smcc.domain.Usuario;
+import com.pac.smcc.dto.UsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -58,5 +59,11 @@ public class UsuarioImpl implements UsuarioService{
     @Transactional
     public void actualizarclave(String clave, Integer idusuario) {
         usuarioDao.updateClaveUsuario(clave,idusuario);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<UsuarioDTO> obtenerUsuario(Integer idusuario) {
+        return usuarioDao.getUsuario(idusuario);
     }
 }

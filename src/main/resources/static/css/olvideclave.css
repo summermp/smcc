@@ -1,5 +1,5 @@
 @import url('/css/variables.css');
-#row-form{
+.row-form{
     display: flex;
     flex-flow: row wrap;
     text-align: center;

@@ -4,6 +4,7 @@ import com.pac.smcc.domain.Usuario;
 import com.pac.smcc.service.CategoriaService;
 import com.pac.smcc.service.CultivoService;
 import com.pac.smcc.service.ProductoService;
+import com.pac.smcc.service.UsuarioService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,9 @@ public class CultivoControlador {
     private CultivoService cultivoService;
 
     @Autowired
+    private UsuarioService usuarioService;
+
+    @Autowired
     private ProductoService productoService;
 
     @Autowired
@@ -26,7 +30,9 @@ public class CultivoControlador {
     @GetMapping("/cultivo")
     public String incioCultivo(Model model){
         Integer idus= (Integer) httpSession.getAttribute("idusuario");
+        var datos_usuario=usuarioService.obtenerUsuario(idus);
         var cultivos=cultivoService.listaCultivoUsuario(idus);
+        model.addAttribute("datos_usuario",datos_usuario);
         model.addAttribute( "cultivos",cultivos);
         return "cultivo";
     }
@@ -37,6 +43,8 @@ public class CultivoControlador {
         log.error("ID USUARIO ADD: "+idus);
 
         model.addAttribute("productos",productoService.listarProducto());
+        var datos_usuario=usuarioService.obtenerUsuario(idus);
+        model.addAttribute("datos_usuario",datos_usuario);
         model.addAttribute("idus",idus);
 
         return "modificarcultivo";

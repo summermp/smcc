@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,22 +30,33 @@ public class UsuarioSecService implements UserDetailsService {
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String usuario) throws UsernameNotFoundException {
-        Usuario us= usuarioDao.findByNombre(usuario);
-        if(usuario == null){
-            throw new UsernameNotFoundException(usuario);
-        }
-        if(us.getId() != null){
-            Integer idusuario=us.getId();
-            httpSession.setAttribute("idusuario",idusuario);
-        }
-
+        Usuario us  = usuarioDao.findByNombreusuario(usuario);
+        String nombre="", clave="";
         var roles=new ArrayList<GrantedAuthority>();
-        log.error("nose que pasa");
-        for(Rol rol: us.getRoles()){
-            roles.add(new SimpleGrantedAuthority(rol.getTipo()));
-            log.error("rol: "+rol.getTipo());
+        if(us == null){
+            nombre="none";
+            clave="none";
+            log.error(" No hay usuario ");
+        }else{
+            if(us.getId() != null){
+                Integer idusuario=us.getId();
+                httpSession.setAttribute("idusuario",idusuario);
+                nombre=us.getNombreusuario();
+                clave=us.getClave();
+            }
+            for(Rol rol: us.getRoles()){
+                roles.add(new SimpleGrantedAuthority(rol.getTipo()));
+                log.error("rol: "+rol.getTipo());
+            }
+            log.error("nombre: "+us.getNombreusuario()+" clave: "+us.getClave());
+
+            BCryptPasswordEncoder bcp=new BCryptPasswordEncoder();
+            boolean isPasswordMatch = bcp.matches("asd", us.getClave());
+            log.error(" Coincide: "+isPasswordMatch);
         }
-        log.error("nombre: "+us.getNombre()+" clave: "+us.getClave()+" "+roles);
-        return new User(us.getNombre(),us.getClave(),roles);
+        return new User(nombre,clave,roles);
+//        return new User(us.getNombre(),us.getClave(),roles);
+
     }
+
 }
