@@ -42,4 +42,10 @@ public class ProductoImpl implements ProductoService{
     public Producto buscarProducto(Producto producto) {
         return productoDao.findById(producto.getId()).orElse(null);
     }
+
+    @Override
+    @Transactional
+    public void eliminarproducto(Integer idproducto) {
+        productoDao.deleteProducto(idproducto);
+    }
 }

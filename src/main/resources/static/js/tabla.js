@@ -1,9 +1,10 @@
 $(document).ready(function () {
             $('#mitabla').DataTable({
+                responsive: true,
                 language: {
                     processing: "Tratamiento en curso...",
                     search: "Buscar&nbsp;:",
-                    lengthMenu: "Agrupar de_MENU_",
+                    lengthMenu: "Mostrar _MENU_",
                     info: "Mostrando de _START_ al _END_ de un total de _TOTAL_ ",
                     infoEmpty: "No existen datos.",
                     infoFiltered: "(filtrado de _MAX_ elementos en total)",
@@ -23,10 +24,15 @@ $(document).ready(function () {
                     }
                 },
                 scrollY: 400,
-                scroller:    true,
-                // "scrollX": true,
+                // scroller:    true,
+                "scrollX": true,
                 // "scrollY": 200,
                 // "scrollX": true,
                 lengthMenu: [ [10, 25, -1], [10, 25, "All"] ],
+
+        "columnDefs": [
+            { className: "my_class", "targets": [ 0 ] }
+        ]
             });
+
 });

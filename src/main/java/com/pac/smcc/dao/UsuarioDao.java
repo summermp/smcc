@@ -9,7 +9,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
 //jparepo tienes mas herramientas
 public interface UsuarioDao extends JpaRepository<Usuario,Integer> {
     Usuario findByNombreusuario(String nombre);
@@ -20,14 +19,20 @@ public interface UsuarioDao extends JpaRepository<Usuario,Integer> {
     @Query("select count(u) = 1 from Usuario u where email = ?1")
     public boolean findByEmail(String correo);
 
-    @Query(value="select * from Usuario u where email = ?1",nativeQuery = true)
+    @Query(value="select * from usuario u where email = ?1",nativeQuery = true)
     public Usuario getByEmail(String correo);
 
     @Transactional(readOnly = true)
-    @Query(value="select u.id as id, u.nombre as nombre,u.Foto as foto, u.email as email from Usuario u where u.id =:idusuario",nativeQuery = true)
+    @Query(value="select u.id as id, u.nombre as nombre,u.Foto as foto, u.email as email from usuario u where u.id =:idusuario",nativeQuery = true)
     public List<UsuarioDTO> getUsuario(@Param("idusuario") Integer idusuario);
 
     @Modifying
-    @Query(value="update Usuario u set clave =:clave where u.id =:idusuario",nativeQuery = true)
+    @Query(value="update usuario u set clave =:clave where u.id =:idusuario",nativeQuery = true)
     public void updateClaveUsuario(String clave, Integer idusuario);
+
+    @Modifying
+    @Query(value="update rol set usuario_id =:idusuario where id =:idrol",nativeQuery = true)
+    public void updateRol(Integer idusuario, Integer idrol);
+
+
 }

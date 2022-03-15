@@ -48,12 +48,14 @@ public class UsuarioSecService implements UserDetailsService {
                 roles.add(new SimpleGrantedAuthority(rol.getTipo()));
                 log.error("rol: "+rol.getTipo());
             }
+
             log.error("nombre: "+us.getNombreusuario()+" clave: "+us.getClave());
 
             BCryptPasswordEncoder bcp=new BCryptPasswordEncoder();
             boolean isPasswordMatch = bcp.matches("asd", us.getClave());
             log.error(" Coincide: "+isPasswordMatch);
         }
+
         return new User(nombre,clave,roles);
 //        return new User(us.getNombre(),us.getClave(),roles);
 

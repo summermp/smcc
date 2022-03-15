@@ -48,6 +48,9 @@ public class CategoriaControlador {
     @GetMapping("/editarcategoria/{id}")//ya existe lo asocia
     public String editar(Categoria categoria, Model model){
         categoria=categoriaService.buscarCategoria(categoria);
+        Integer idus= (Integer) httpSession.getAttribute("idusuario");
+        var datos_usuario=usuarioService.obtenerUsuario(idus);
+        model.addAttribute("datos_usuario",datos_usuario);
         model.addAttribute("categoria",categoria);
         return "modificarcategoria";
     }

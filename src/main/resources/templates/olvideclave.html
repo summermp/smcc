@@ -4,7 +4,8 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nueva contraseña</title>
     <base href="/">
     <link rel="icon" href="/img/ico.jpeg" type="image/x-icon"/>
@@ -49,56 +50,59 @@
     </nav>
 </header>
         <br/>
-<form method="GET" th:if="${hideform !=null}" th:action="@{/verificarcorreo}" id="formcorreo">
-    <div class="row-form">
-        <div class="col-1">
-            <input
-                    type="email"
-                    name="correo"
-                    minlength="10"
-                    id="correo"
-                    placeholder="Ingrese correo electronico"
-                    autofocus
-                    required
-            />
-        </div>
-        <div class="col-3">
+<div class="contenedor_olvide">
+    <form method="GET" th:if="${hideform !=null}" th:action="@{/verificarcorreo}" id="formcorreo">
+        <div class="row-form">
+            <div class="col-1">
+                <input
+                        type="email"
+                        name="correo"
+                        minlength="10"
+                        id="correo"
+                        placeholder="Ingrese correo electronico"
+                        autofocus
+                        required
+                />
+            </div>
+            <div class="col-3">
                 <button type="submit" class="btnenviar">Verificar <i class="fas fa-check"></i></button>
+            </div>
         </div>
-    </div>
-</form>
+    </form>
 
-<form method="POST" th:if="${verificado !=null}" th:action="@{/recuperarcuenta}" id="formclave">
-    <input type="hidden" name="idusu" th:value="${idusuario}"/>
-    <div class="row-form" >
-        <div class="col-1">
-            <input
-                    type="password"
-                    name="clave"
-                    minlength="8"
-                    id="clave"
-                    placeholder="Ingrese nueva contraseña"
-                    autofocus
-                    required
-            />
+    <form method="POST" th:if="${verificado !=null}" th:action="@{/recuperarcuenta}" id="formclave">
+        <input type="hidden" name="idusu" th:value="${idusuario}"/>
+        <div class="row-form" >
+            <div class="col-1">
+                <input
+                        type="password"
+                        name="clave"
+                        minlength="8"
+                        id="clave"
+                        placeholder="Ingrese nueva contraseña"
+                        autofocus
+                        required
+                />
+            </div>
+            <div class="col-2">
+                <input
+                        type="password"
+                        name="clave1"
+                        id="claveverificar"
+                        minlength="8"
+                        placeholder="Vuelva a escribir la contraseña"
+                        autofocus
+                        required
+                />
+            </div>
+            <div class="col-3">
+                <button type="submit" class="btnenviar">Actualizar <i class="fas fa-sync-alt"></i></button>
+            </div>
         </div>
-        <div class="col-2">
-            <input
-                    type="password"
-                    name="clave1"
-                    id="claveverificar"
-                    minlength="8"
-                    placeholder="Vuelva a escribir la contraseña"
-                    autofocus
-                    required
-            />
-        </div>
-        <div class="col-3">
-            <button type="submit" class="btnenviar">Actualizar <i class="fas fa-sync-alt"></i></button>
-        </div>
-    </div>
 
-</form>
+    </form>
+
+</div>
 
 <script>
     let formclave =document.querySelector("#formclave");

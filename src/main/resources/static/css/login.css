@@ -1,4 +1,87 @@
 @import url('/css/variables.css');
+
+html,
+body {
+    height: 100%;
+}
+#nav-horizontal{
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+#menu-header {
+    border: none;
+    margin: 0;
+}
+/* desktop assumes a pointer display */
+#main-menu #menu-a {
+    border-bottom: none;
+    display: inline;
+}
+.nav-title,
+#texto-download {
+    display: block;
+}
+.nav-li:last-child{
+    width:12%;
+    margin-right: 5%;
+    padding: 0%;
+}
+img {
+    display: block;
+    margin: 0 auto;
+}
+a {
+    text-decoration: none;
+}
+#nav-ul {
+    display: flex;
+    flex-flow: row nowrap;
+    margin: 0%;
+    align-items: center;
+    justify-content: space-between;
+}
+#nav-ul > .nav-li:nth-child(2){
+    margin-left: auto;
+}
+#nav-ul .nav-li .nav-a:hover {
+    color: black;
+}
+.nav-li:first-child img {
+    width: 100%;
+}
+.nav-li {
+    display: inline-block;
+    display: flex;
+    flex-direction: row nowrap;
+    align-items: center;
+    justify-content: center;
+}
+.nav-li {
+    /* border: solid red; */
+    width: 15%;
+    height: 8%;
+}
+.nav-a {
+    display: flex;
+    justify-content: center;
+    padding: 0%;
+    color: var(--color-boton);
+    width: 100%;
+}
+.fa-home,
+.fa-users,
+.fa-user,
+.fa-phone-volume,
+.fa-file-download {
+    display: block;
+}
+
+.espacio{
+    display: none;
+}
+
+/*this is header*/
+
+
 #enviar{
     background-color: teal;
     color: white;
@@ -11,11 +94,14 @@
     text-align: center;
     font-family: var(--letra);
 }
+main{
+    min-height: 100%;
+}
 .rowlogin {
+    padding-bottom: 60px;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-around;
-    margin-top: 0%;
 }
 .rowlogin-1,
 .rowlogin-2,
@@ -37,8 +123,10 @@
     border-left:none;
     color:#000;
 }
+
+
 .icon{
-    padding: 10px 0px 10px 0px;
+    padding: 10px 0px;
     background: #fff;
     color: #000;
     border:1px solid #000;
@@ -49,6 +137,7 @@
 }
 .rowlogin-1, .rowlogin-2{
     display: flex;
+
 }
 .enviar-form{
     width: 100%;
@@ -62,6 +151,17 @@
     margin-right: 0%;
     border-radius: var(--borde-img);
 }
+#password{
+    background: url(/img/candado.gif) no-repeat left;
+    background-size: 24px;
+    padding-left:30px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    width: 100%;
+    min-width: 50px;
+    border:1px solid #000;
+}
+
 #ancla {
     display: flex;
     flex-flow: row nowrap;
@@ -76,24 +176,64 @@
     padding: 2px;
     border-radius: 4px;
 }
-#footer-grupo{
-    background-color: var(--color-fondo);
-    bottom: -220px;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    height: 60px;
 
+
+.espacio{
+    visibility: hidden;
+}
+#menu-header {
+    border: none;
+    margin: 0;
+}
+#main-menu #menu-a {
+    border-bottom: none;
+    display: inline;
+}
+.nav-title,
+#texto-download {
+    display: block;
+}
+
+.fa-home,
+.fa-users,
+.fa-phone-volume,
+.fa-file-download,.fa-user {
+    display: none;
+}
+.nav-li:nth-child(2),
+.nav-li:nth-child(3){
+    margin-right: 0%;
+    margin-left: 0%;
+}
+
+
+
+
+
+footer {
+    bottom: 0;
+    background-color: var(--color-fondo);
+    width: 100%;
+    height: 60px;
+    left: 0px;
+    position: relative;
+    display:flex;
+    flex-flow: row nowrap;
+    justify-content:center;
+    align-items: center;
 }
 #footer-p{
-    text-align: center;
+    margin: auto;
 }
-@media (max-width: 550px) {
+
+
+@media (max-width: 480px) {
     .rowlogin {
         display: flex;
-        flex-flow: column nowrap;
+        flex-flow: column wrap;
     }
     .col-1 {
+        margin-top: 20px;
         width: 100%;
     }
     .col-2{
@@ -110,5 +250,16 @@
     .rowlogin-3,
     .rowlogin-4 {
         margin-bottom: 5vh;
+    }
+
+    .nav-title{
+        display: none;
+    }
+
+    .fa-home,
+    .fa-users,
+    .fa-phone-volume,
+    .fa-file-download,.fa-user {
+        display: block;
     }
 }

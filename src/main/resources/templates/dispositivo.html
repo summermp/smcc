@@ -4,10 +4,11 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="/img/ico.jpeg" type="image/x-icon"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="../css/dashboard.css">
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Dispositivo</title>
 </head>
 <body>
@@ -16,6 +17,15 @@
     <nav id="nav-horizontal">
         <ul id="nav-ul">
             <li class="nav-li">
+                <a
+                        href="#main-menu"
+                        id="main-menu-toggle"
+                        class="menu-toggle"
+                        aria-label="Open main menu"
+                >
+                    <span class="sr-only">Open main menu</span>
+                    <span class="fa fa-bars" area-hidden="true"></span>
+                </a>
                 <a th:href="@{/dashboard}">
                     <img src="/img/pac.svg" alt="pac">
                 </a>
@@ -44,13 +54,18 @@
 <header id="menu-header">
     <div id="header-row">
         <a
-                href="#main-menu"
-                id="main-menu-toggle"
-                class="menu-toggle"
-                aria-label="Open main menu"
+                href="#"
+                style="visibility: hidden;"
         >
-            <span class="sr-only">Open main menu</span>
-            <span class="fa fa-bars" area-hidden="true"></span>
+            this one
+        </a>
+        <a
+                th:href="@{/parametros}"
+                id="main-menu-download"
+                aria-label="Download history measurement"
+        >
+            <span id="texto-download">Generar reporte</span>
+            <span class="fas fa-file-download"></span>
         </a>
     </div>
     <nav id="main-menu" class="main-menu" aria-label="Main menu">
@@ -69,7 +84,7 @@
             <!--                    src="../img/user.png"-->
             <img
                     id="user-photo"
-                    th:src="@{${'../images/' + usu.foto}}"
+                    th:src="@{${'/image/' + usu.foto}}"
                     alt="user photo"
                     width="100px"
                     height="100px"
@@ -82,23 +97,35 @@
         </div>
         <ul id="menu-ul">
             <li class="menu-li">
-                <a class="menu-a" th:href="@{/agregarcultivo}"
-                ><i class="fas fa-plus"></i> Registrar cultivo</a
-                >
+                <a class="menu-a" th:href="@{/cultivo}"><i class="fas fa-seedling"></i> Cultivos</a>
+            </li>
+            <li class="menu-li" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a class="menu-a" th:href="@{/usuarios}"
+                ><i class="fas fa-user-plus"></i> Usuarios</a>
+            </li>
+            <li class="menu-li" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a class="menu-a" th:href="@{/categoria}"
+                ><i class="far fa-project-diagram"></i> Categorias</a>
+            </li>
+            <li class="menu-li" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a class="menu-a" th:href="@{/producto}"
+                ><i class="fas fa-leaf"></i> Productos</a>
+            </li>
+            <li class="menu-li" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a class="menu-a" th:href="@{/dispositivo}"
+                ><i class="fas fa-sensor"></i> Dispositivos</a>
             </li>
             <li class="menu-li">
-                <a class="menu-a" th:href="@{/cultivo}"
-                ><i class="fas fa-list-ol"></i> Listado de cultivo</a>
+                <a class="menu-a" th:href="@{/dashboard}"><span><i class="fas fa-chart-bar"></i> Dashboard</span></a>
             </li>
             <li class="menu-li">
-                <a class="menu-a" th:href="@{/parametros}"
-                ><i class="fas fa-file-chart-line"></i> Reportes</a
-                >
+                <a class="menu-a" th:href="@{/parametros}"><i class="fas fa-file-chart-line"></i> Reportes</a>
             </li>
             <li class="menu-li">
-                <a class="menu-a" th:href="@{/ayuda}"
-                ><i class="fas fa-life-ring"></i> Ayuda</a
-                >
+                <a class="menu-a" href="#" id="myBtn"><i class="fas fa-cog"></i> Configuración</a>
+            </li>
+            <li class="menu-li">
+                <a class="menu-a" th:href="@{/ayuda}"><i class="fas fa-life-ring"></i> Ayuda</a>
             </li>
             <li class="menu-li">
                 <a class="menu-a" th:href="@{/logout}">Cerrar sesión</a>
@@ -107,10 +134,11 @@
     </nav>
     <a href="#main-menu-toggle" class="backdrop" hidden tabindex="-1"></a>
 </header>
-<main id="contenidoprincipal">
-<a th:href="@{/agregardispositivo}">Crear dispositivos</a>
-<div th:if="${dispositivos !=null and !dispositivos.empty}">
-    <table id="mitabla">
+
+<div>
+<a th:href="@{/agregardispositivo}" style="color:teal;"><i class="fas fa-plus-circle"></i>Registrar dispositivos</a>
+<div th:if="${dispositivos !=null and !dispositivos.isEmpty()}">
+    <table id="mitabla" class="listadocultivo display cell-border compact stripe" style="width:100%">
         <thead>
         <tr>
             <th>ID</th>
@@ -126,21 +154,41 @@
             <td th:text="${dispositivo.id}">ID</td>
             <td th:text="${dispositivo.nombre}">Nombre</td>
             <td th:switch="${dispositivo.estado}">
-                <span th:case="'0'">Inactivo</span>
-                <span th:case="'1'">Activo</span>
+                <span th:case="'0'" style="background-color: red; color: white; border-radius: 8px; padding: 3px;">Inactivo</span>
+                <span th:case="'1'" style="background-color: green; color: white; border-radius: 8px; padding: 3px;">Activo</span>
                 <span th:case="*">Por defecto...</span>
             </td>
             <td th:text="${dispositivo.ip}">IP</td>
-            <td><a th:href="@{/eliminardispositivo/}+${dispositivo.id}" style="color: red;">Eliminar</a></td>
-            <td><a th:href="@{/editardispositivo/}+${dispositivo.id}">Editar</a></td>
+            <td><a th:onclick="eliminar([[${dispositivo.id}]],5)" style="cursor:pointer; color:red;"> <i class="fas fa-backspace"></i> Eliminar</a></td>
+            <td><a th:href="@{/editardispositivo/}+${dispositivo.id}"><i class="fas fa-edit"></i> Editar</a></td>
         </tr>
         </tbody>
     </table>
+
 </div>
-<div th:if="${dispositivos == null and dispositivos.empty}">La lista de dispositivos esta vacia</div>
-</main>
+
+
+    <div th:if="${dispositivos.isEmpty()}" style="color: black;
+    width: 100%; height: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    ">
+        <div>
+            <img src="../img/empty.png" alt="sin datos"/>
+            <h4>La lista de dispositivos esta vacía</h4>
+        </div>
+    </div>
+
+</div>
+
+
 <script src="https://code.jquery.com/jquery-3.5.1.js" crossorigin="anonymous"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript" src="../js/fonawesome.js"></script>
 <script src="../js/tabla.js"></script>
 <script src="../js/aviso.js"></script>

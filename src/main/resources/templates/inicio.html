@@ -4,7 +4,8 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="/img/ico.jpeg" type="image/x-icon"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.5.3/dist/css/splide.min.css">
     <link rel="stylesheet" type="text/css" href="../css/inicio.css">
@@ -16,7 +17,7 @@
     <nav id="nav-horizontal">
         <ul id="nav-ul">
             <li class="nav-li">
-                <a href="/public/menu.html">
+                <a th:href="@{/inicio}">
                     <img src="/img/pac.svg" alt="pac" />
                 </a>
             </li>
@@ -49,33 +50,37 @@
     </nav>
 </header>
 <!-- https://splidejs.com/guides/getting-started/ -->
-<div class="centrarslide">
-    <h4 id="titulo-acerca">
-        Publicidad
-    </h4>
-</div>
-<div class="centrarslide">
-    <div class="splide">
-        <div class="splide__track">
-            <ul class="splide__list">
-                <li class="splide__slide"><img class="slide-img" src="/img/banner1.jpeg" alt=""></li>
-                <li class="splide__slide"><img class="slide-img" src="/img/banner2.jpeg" alt=""></li>
-                <li class="splide__slide"><img class="slide-img" src="/img/banner3.jpeg" alt=""></li>
-            </ul>
-        </div>
-    </div>
-</div>
+<div id="contenedor_elementos">
+<div id="div_contenedor_main">
 
-<div class="centrarslide">
-    <ul id="redesociales">
-        <li class="li-rsocial"><a href="#" target="_blank"><span class="icon-fb"><i class="fab fa-facebook"></i></span> Facebook</a></li>
-        <li class="li-rsocial"><a href="#" target="_blank"><span class="icon-you"><i class="fab fa-youtube"></i></span> Youtube</a></li>
-        <li class="li-rsocial"><a href="#" target="_blank"><span class="icon-inst"><i class="fab fa-instagram"></i></span> Instagram</a></li>
-    </ul>
+       <div class="centrarslide">
+           <h4 id="titulo-acerca">
+               Publicidad
+           </h4>
+       </div>
+       <div class="centrarslide">
+           <div class="splide">
+               <div class="splide__track">
+                   <ul class="splide__list">
+                       <li class="splide__slide"><img class="slide-img" src="/img/banner1.jpeg" alt=""></li>
+                       <li class="splide__slide"><img class="slide-img" src="/img/banner2.jpeg" alt=""></li>
+                       <li class="splide__slide"><img class="slide-img" src="/img/banner3.jpeg" alt=""></li>
+                   </ul>
+               </div>
+           </div>
+       </div>
+
+       <div class="centrarslide">
+           <ul id="redesociales">
+               <li class="li-rsocial"><a href="#" target="_blank"><span class="icon-fb"><i class="fab fa-facebook"></i></span> Facebook</a></li>
+               <li class="li-rsocial"><a href="#" target="_blank"><span class="icon-you"><i class="fab fa-youtube"></i></span> Youtube</a></li>
+               <li class="li-rsocial"><a href="#" target="_blank"><span class="icon-inst"><i class="fab fa-instagram"></i></span> Instagram</a></li>
+           </ul>
+       </div>
+
 </div>
-<footer id="footer-grupo">
-    <p id="footer-p">Desarrollado con 💖 por PAC 😊 2021</p>
-</footer>
+</div>
+<footer th:replace="layout/plantilla2 :: footer"></footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.5.3/dist/js/splide.min.js"></script>
 <!-- <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script> -->

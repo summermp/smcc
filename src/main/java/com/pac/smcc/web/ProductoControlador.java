@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
@@ -51,15 +52,21 @@ public class ProductoControlador {
     }
     @GetMapping("/editarproducto/{id}")//ya existe lo asocia
     public String editar(Producto producto, Model model){
+        Integer idus= (Integer) httpSession.getAttribute("idusuario");
         producto=productoService.buscarProducto(producto);
         model.addAttribute("producto",producto);
+        var datos_usuario=usuarioService.obtenerUsuario(idus);
+        model.addAttribute("datos_usuario",datos_usuario);
         model.addAttribute("categorias",categoriaService.listarCategoria());
         return "modificarproducto";
     }
 
     @GetMapping("/eliminarproducto/{id}")
-    public String eliminar(Producto producto){
-        productoService.eliminar(producto);
+    public String eliminar(@PathVariable(value="id") Integer idproducto){
+        productoService.eliminarproducto(idproducto);
         return "redirect:/producto";
     }
+
+
+
 }

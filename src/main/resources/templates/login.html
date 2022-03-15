@@ -4,14 +4,18 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base href="/">
     <link rel="icon" href="/img/ico.jpeg" type="image/x-icon"/>
-    <link rel="stylesheet" type="text/css" href="../css/headerlogin.css">
+<!--    <link rel="stylesheet" type="text/css" href="../css/headerlogin.css">-->
     <link rel="stylesheet" type="text/css" href="../css/login.css">
     <title>Iniciar sesión</title>
 </head>
 <body>
 <header th:replace="layout/headerlogin :: header"></header>
+
+<main>
 <div class="rowlogin">
     <div class="col-1">
         <h2 class="form-titulo">INICIAR SESIÓN</h2>
@@ -23,16 +27,20 @@
                         name="username"
                         class="entrada-form"
                         placeholder="Usuario"
+                        value="pedro"
+                        id="username"
                         autofocus
                         required
                 />
             </div>
             <div class="rowlogin-2">
-                <i class="fas fa-lock icon"></i>
+<!--               <img src="/img/candado.gif" alt="icon" width="24px" height="24px"/>-->
                 <input
                         type="password"
                         name="password"
+                        id="password"
                         class="entrada-form"
+                        minlength="6"
                         placeholder="Contraseña"
                         required
                 />
@@ -48,15 +56,33 @@
         </form>
         <div id="ancla">
             <a th:href="@{/olvideclave}" id="ancla-1">¿Olvidé contraseña?</a>
-            <a th:href="@{/agregar}" id="ancla-2">Registrar ahora</a>
+            <a id="ancla-2">Registrar ahora</a>
         </div>
     </div>
     <div class="col-2">
         <img src="../img/agricultor.jpeg" class="login-img" alt="agricultores" />
     </div>
 </div>
+</main>
+<footer th:replace="layout/plantilla2 :: footer"></footer>
+<script>
 
-<footer th:replace="layout/publico :: footer"></footer>
+window.onload = function () {
+let base_url=window.location.href;
+
+if((base_url!=="http://www.smcc.studio/login") && (base_url!=="http://www.smcc.studio/login?logout")){
+// if((base_url!=="http://localhost:8081/login") && (base_url!=="http://localhost:8081/login?logout")){
+   swal("Usuario o clave incorrecto","", "error");
+}
+};
+
+document.getElementById("ancla-2").addEventListener('click',function () {
+    swal("Ingrese como administrador para registrar usuario (s)","", "info");
+});
+
+</script>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript" src="../js/fonawesome.js"></script>
 </body>
 </html>

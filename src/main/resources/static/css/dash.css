@@ -223,9 +223,6 @@ main {
     justify-content: center;
     width: 100%;
 }
-.nav-a:hover {
-    background-color: var(--color-fondo);
-}
 .fa-chart-line,
 .fa-users,
 .fa-user-headset,

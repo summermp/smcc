@@ -1,9 +1,13 @@
 package com.pac.smcc.domain;
 import lombok.Data;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
+import java.util.List;
+
 @Entity
 @Data
 @Table(name="rol")
@@ -15,4 +19,5 @@ public class Rol implements Serializable {
 
     @NotEmpty
     private String tipo;
+
 }

@@ -4,6 +4,8 @@
        xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base href="/">
     <link rel="icon" href="/img/ico.jpeg" type="image/x-icon"/>
     <link rel="stylesheet" type="text/css" href="../css/dashboard.css">
@@ -11,15 +13,19 @@
     <title>Registrar Producto</title>
 </head>
 <body>
-<style>
-    #footer-grupo{
-        margin-top: 15%;
-    }
-</style>
 <header id="header-horizontal">
     <nav id="nav-horizontal">
         <ul id="nav-ul">
             <li class="nav-li">
+                <a
+                        href="#main-menu"
+                        id="main-menu-toggle"
+                        class="menu-toggle"
+                        aria-label="Open main menu"
+                >
+                    <span class="sr-only">Open main menu</span>
+                    <span class="fa fa-bars" area-hidden="true"></span>
+                </a>
                 <a th:href="@{/dashboard}">
                     <img src="/img/pac.svg" alt="pac">
                 </a>
@@ -48,13 +54,18 @@
 <header id="menu-header">
     <div id="header-row">
         <a
-                href="#main-menu"
-                id="main-menu-toggle"
-                class="menu-toggle"
-                aria-label="Open main menu"
+                href="#"
+                style="visibility: hidden;"
         >
-            <span class="sr-only">Open main menu</span>
-            <span class="fa fa-bars" area-hidden="true"></span>
+            this one
+        </a>
+        <a
+                th:href="@{/parametros}"
+                id="main-menu-download"
+                aria-label="Download history measurement"
+        >
+            <span id="texto-download">Generar reporte</span>
+            <span class="fas fa-file-download"></span>
         </a>
     </div>
     <nav id="main-menu" class="main-menu" aria-label="Main menu">
@@ -73,7 +84,7 @@
             <!--                    src="../img/user.png"-->
             <img
                     id="user-photo"
-                    th:src="@{${'../images/' + usu.foto}}"
+                    th:src="@{${'/image/' + usu.foto}}"
                     alt="user photo"
                     width="100px"
                     height="100px"
@@ -86,23 +97,35 @@
         </div>
         <ul id="menu-ul">
             <li class="menu-li">
-                <a class="menu-a" th:href="@{/agregarcultivo}"
-                ><i class="fas fa-plus"></i> Registrar cultivo</a
-                >
+                <a class="menu-a" th:href="@{/cultivo}"><i class="fas fa-seedling"></i> Cultivos</a>
+            </li>
+            <li class="menu-li" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a class="menu-a" th:href="@{/usuarios}"
+                ><i class="fas fa-user-plus"></i> Usuarios</a>
+            </li>
+            <li class="menu-li" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a class="menu-a" th:href="@{/categoria}"
+                ><i class="far fa-project-diagram"></i> Categorias</a>
+            </li>
+            <li class="menu-li" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a class="menu-a" th:href="@{/producto}"
+                ><i class="fas fa-leaf"></i> Productos</a>
+            </li>
+            <li class="menu-li" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a class="menu-a" th:href="@{/dispositivo}"
+                ><i class="fas fa-sensor"></i> Dispositivos</a>
             </li>
             <li class="menu-li">
-                <a class="menu-a" th:href="@{/cultivo}"
-                ><i class="fas fa-list-ol"></i> Listado de cultivo</a>
+                <a class="menu-a" th:href="@{/dashboard}"><span><i class="fas fa-chart-bar"></i> Dashboard</span></a>
             </li>
             <li class="menu-li">
-                <a class="menu-a" href="#"
-                ><i class="fas fa-file-chart-line"></i> Reportes</a
-                >
+                <a class="menu-a" th:href="@{/parametros}"><i class="fas fa-file-chart-line"></i> Reportes</a>
             </li>
             <li class="menu-li">
-                <a class="menu-a" th:href="@{/ayuda}"
-                ><i class="fas fa-life-ring"></i> Ayuda</a
-                >
+                <a class="menu-a" href="#" id="myBtn"><i class="fas fa-cog"></i> Configuración</a>
+            </li>
+            <li class="menu-li">
+                <a class="menu-a" th:href="@{/ayuda}"><i class="fas fa-life-ring"></i> Ayuda</a>
             </li>
             <li class="menu-li">
                 <a class="menu-a" th:href="@{/logout}">Cerrar sesión</a>
@@ -111,7 +134,7 @@
     </nav>
     <a href="#main-menu-toggle" class="backdrop" hidden tabindex="-1"></a>
 </header>
-<main id="contenidoprincipal">
+<main  style="width:100%; margin-top: 0px">
 <div class="col-1">
     <h2 id="titulo"> REGISTRAR PRODUCTO</h2>
 </div>
@@ -120,18 +143,16 @@
     <div id="row-form">
             <input type="hidden" th:field="*{id}">
             <div class="col-1">
-                <input type="text" id="nombre" name="nombre" th:field="*{nombre}" placeholder="Ingrese nombre" autofocus/>
+                <input type="text" id="nombre" name="nombre" th:field="*{nombre}" placeholder="Ingrese nombre" autofocus required/>
             </div>
             <div class="col-1">
-            <select id="categoria" name="categoria" th:field="*{categoriaproducto.id}">
+            <select id="categoria" style="height:25px; width:25.5%;margin-left: 5px; margin-right: 5px;" name="categoria" th:field="*{categoriaproducto.id}" required>
                 <option value="0" selected="selected">Seleccione categoria</option>
                 <option  th:each="cat : ${categorias}" th:value="${cat.id}" th:text="${cat.nombre}"></option>
             </select>
             </div>
         <div class="col-1">
-            <button type="submit" id="btnenviar">Registrar
-                <i class="fas fa-plus"></i>
-            </button>
+            <button type="submit" id="btnenviar">Registrar producto</button>
         </div>
     </div>
 </form>

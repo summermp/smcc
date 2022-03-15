@@ -3,10 +3,11 @@
       xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="/img/ico.jpeg" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="../css/dashboard.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
     <title>Cultivo</title>
 </head>
 <body>
@@ -15,6 +16,15 @@
     <nav id="nav-horizontal">
         <ul id="nav-ul">
             <li class="nav-li">
+                <a
+                        href="#main-menu"
+                        id="main-menu-toggle"
+                        class="menu-toggle"
+                        aria-label="Open main menu"
+                >
+                    <span class="sr-only">Open main menu</span>
+                    <span class="fa fa-bars" area-hidden="true"></span>
+                </a>
                 <a th:href="@{/dashboard}">
                     <img src="/img/pac.svg" alt="pac">
                 </a>
@@ -43,13 +53,18 @@
 <header id="menu-header">
     <div id="header-row">
         <a
-                href="#main-menu"
-                id="main-menu-toggle"
-                class="menu-toggle"
-                aria-label="Open main menu"
+                href="#"
+                style="visibility: hidden;"
         >
-            <span class="sr-only">Open main menu</span>
-            <span class="fa fa-bars" area-hidden="true"></span>
+            this one
+        </a>
+        <a
+                th:href="@{/parametros}"
+                id="main-menu-download"
+                aria-label="Download history measurement"
+        >
+            <span id="texto-download">Generar reporte</span>
+            <span class="fas fa-file-download"></span>
         </a>
     </div>
     <nav id="main-menu" class="main-menu" aria-label="Main menu">
@@ -68,7 +83,7 @@
             <!--                    src="../img/user.png"-->
             <img
                     id="user-photo"
-                    th:src="@{${'../images/' + usu.foto}}"
+                    th:src="@{${'/image/' + usu.foto}}"
                     alt="user photo"
                     width="100px"
                     height="100px"
@@ -81,23 +96,35 @@
         </div>
         <ul id="menu-ul">
             <li class="menu-li">
-                <a class="menu-a" th:href="@{/agregarcultivo}"
-                ><i class="fas fa-plus"></i> Registrar cultivo</a
-                >
+                <a class="menu-a" th:href="@{/cultivo}"><i class="fas fa-seedling"></i> Cultivos</a>
+            </li>
+            <li class="menu-li" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a class="menu-a" th:href="@{/usuarios}"
+                ><i class="fas fa-user-plus"></i> Usuarios</a>
+            </li>
+            <li class="menu-li" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a class="menu-a" th:href="@{/categoria}"
+                ><i class="far fa-project-diagram"></i> Categorias</a>
+            </li>
+            <li class="menu-li" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a class="menu-a" th:href="@{/producto}"
+                ><i class="fas fa-leaf"></i> Productos</a>
+            </li>
+            <li class="menu-li" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a class="menu-a" th:href="@{/dispositivo}"
+                ><i class="fas fa-sensor"></i> Dispositivos</a>
             </li>
             <li class="menu-li">
-                <a class="menu-a" th:href="@{/cultivo}"
-                ><i class="fas fa-list-ol"></i> Listado de cultivo</a>
+                <a class="menu-a" th:href="@{/dashboard}"><span><i class="fas fa-chart-bar"></i> Dashboard</span></a>
             </li>
             <li class="menu-li">
-                <a class="menu-a" th:href="@{/parametros}"
-                ><i class="fas fa-file-chart-line"></i> Reportes</a
-                >
+                <a class="menu-a" th:href="@{/parametros}"><i class="fas fa-file-chart-line"></i> Reportes</a>
             </li>
             <li class="menu-li">
-                <a class="menu-a" th:href="@{/ayuda}"
-                ><i class="fas fa-life-ring"></i> Ayuda</a
-                >
+                <a class="menu-a" href="#" id="myBtn"><i class="fas fa-cog"></i> Configuración</a>
+            </li>
+            <li class="menu-li">
+                <a class="menu-a" th:href="@{/ayuda}"><i class="fas fa-life-ring"></i> Ayuda</a>
             </li>
             <li class="menu-li">
                 <a class="menu-a" th:href="@{/logout}">Cerrar sesión</a>
@@ -106,42 +133,58 @@
     </nav>
     <a href="#main-menu-toggle" class="backdrop" hidden tabindex="-1"></a>
 </header>
-<main id="contenidoprincipal">
-<a th:href="@{/agregarcultivo}"><i class="fas fa-plus-circle"></i> Registrar cultivo</a>
-<div th:if="${cultivos !=null and !cultivos.empty}">
-        <table id="mitabla" class="listadocultivo" style="width:80%">
+<main style="width:100%;  margin-top: 0px">
+<a th:href="@{/agregarcultivo}" style="color:teal;"><i class="fas fa-plus-circle"></i> Registrar cultivo</a>
+<div th:if="${cultivos !=null and !cultivos.isEmpty()}">
+        <table id="mitabla" class="listadocultivo display cell-border compact stripe" style="width:100%">
         <thead>
         <tr>
             <th>ID</th>
             <th>Nombre</th>
             <th>Fecha siembra</th>
-            <th>Medida</th>
-            <th>Ubicacion</th>
+            <th>Hectarea (s)</th>
+            <th>Ubicación</th>
             <th>Eliminar</th>
             <th>Editar</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="cultivo: ${cultivos}">
-            <td th:text="${cultivo.id}">ID</td>
-            <td th:text="${cultivo.nombre}">Nombre</td>
-            <td th:text="${cultivo.fechasiembra}">Fecha siembra</td>
-            <td th:text="${cultivo.medida}">medida</td>
-            <td th:text="${cultivo.ubicacion}">ubicacion</td>
-            <td><a th:href="@{/eliminarcultivo/}+${cultivo.id}" id="eliminar" style="color: red;"
+            <td align="center" valign="center" th:text="${cultivo.id}">ID</td>
+            <td align="center" valign="center" th:text="${cultivo.nombre}">Nombre</td>
+            <td align="center" valign="center" th:text="${cultivo.fechasiembra}">Fecha siembra</td>
+            <td align="center" valign="center" th:text="${cultivo.medida}">Hectarea (s)</td>
+            <td align="center" valign="center" th:text="${cultivo.ubicacion}">ubicacion</td>
+            <td align="center" valign="center"><a th:onclick="eliminar([[${cultivo.id}]],3)" id="eliminar" style="color: red; cursor: pointer;"
             ><i class="fas fa-backspace"></i> Eliminar</a></td>
-            <td><a th:href="@{/editarcultivo/}+${cultivo.id}" id="editar"><i class="fas fa-edit"></i> Editar</a></td>
+            <td align="center" valign="center"> <a th:href="@{/editarcultivo/}+${cultivo.id}" id="editar"><i class="fas fa-edit"></i> Editar</a></td>
         </tr>
         </tbody>
     </table>
 </div>
-    <div th:if="${cultivos ==null and cultivos.empty}">La lista de cultivos esta vacia</div>
+    <div th:if="${cultivos.isEmpty()}" style="color: black;
+    width: 100%; height: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    ">
+        <div>
+            <img src="../img/empty.png" alt="sin datos"/>
+            <h4>La lista de cultivos esta vacía</h4>
+        </div>
+    </div>
+
 </main>
+
 <footer th:replace="layout/plantilla2 :: footer"></footer>
+
 <script src="https://code.jquery.com/jquery-3.5.1.js" crossorigin="anonymous"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="../js/fonawesome.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="../js/tabla.js"></script>
 <script src="../js/aviso.js"></script>
 </body>

@@ -35,10 +35,12 @@ public class UsuarioControlador {
     @Autowired
     private HttpSession httpSession;
 
+
     @Autowired
     public BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/images/";
+//    public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/images/";
+    public static String uploadDirectory = System.getProperty("user.dir") + "/image";
 
     @GetMapping("/usuarios")
     public String incio(Model model, @AuthenticationPrincipal User user) throws IOException {
@@ -149,8 +151,10 @@ public class UsuarioControlador {
 
     @GetMapping("/editar/{id}")//ya existe lo asocia
     public String editar(Usuario usuario, Model model){
+        Integer idus= (Integer) httpSession.getAttribute("idusuario");
         usuario=usuarioService.buscarUsuario(usuario);
-//        String password= bCryptPasswordEncoder.encode()
+        var datos_usuario=usuarioService.obtenerUsuario(idus);
+        model.addAttribute("datos_usuario",datos_usuario);
         model.addAttribute("usuario",usuario);
         return "modificarusuario";
     }
@@ -238,5 +242,26 @@ public class UsuarioControlador {
         model.addAttribute("hideform",hideform);
         return "olvideclave";
     }
+
+    @GetMapping("/redes")
+    public String redes(Model model) {
+        var redes = usuarioService.listarUsuario();
+        model.addAttribute("redes", redes);
+        return "redes";
+    }
+
+        @PostMapping("/actualizar_imagen")
+        public String actualizar_redsocial(@RequestParam("clave") String clave, @RequestParam("idusu") String idusuario,
+                Model model) {
+            log.error("ID USUARIO: "+idusuario);
+            String msg="";
+            String password = bCryptPasswordEncoder.encode(clave);
+            usuarioService.actualizarclave(password,Integer.parseInt(idusuario));
+            model.addAttribute("actualizado",msg);
+            return "login";
+        }
+
+
+
 }
 

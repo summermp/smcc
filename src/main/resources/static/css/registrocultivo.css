@@ -1,4 +1,8 @@
 @import url('../css/variables.css');
+html,
+body {
+    height: 100%;
+}
 #row-form{
     display: flex;
     flex-flow: row wrap;

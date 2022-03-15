@@ -1,36 +1,67 @@
 @import url('/css/variables.css');
+form{
+    width:auto;
+}
 .row-form{
     display: flex;
+    width:350px;
+    height:250px;
+    background-color: var(--color-fondo);
     flex-flow: row wrap;
     text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
     justify-content: center;
     padding:0;
+    border-radius: 8px;
 }
 .col-1, .col-2, .col-3{
-    width: 100%;
+    width: 80%;
     margin: 0 0 20px 0;
     justify-content: center;
 }
+
 .col-1{
     margin-top: 20px;
 }
+
 #clave,#claveverificar,#correo{
-    width: 25%;
+    width: 98%;
     height: 30px;
+    border-radius: 8px;
 }
+
 .btnenviar{
-    height: 30px;
-    width: 25.5%;
+    height: 35px;
+    width: 100%;
     background-color: teal;
     cursor: pointer;
     border-radius: 8px;
     color: white;
 }
+
 .btnenviar:hover{
     background-color: var(--color-fondo);
 }
 
+.contenedor_olvide{
+    margin-top: 10%;
+    margin-bottom: auto;
+    height: auto;
+    width:auto;
+}
+
 @media (max-width: 550px) {
+
+    .col-1, .col-2, .col-3{
+        /*width:300px;*/
+        border:1px solid green;
+        width: 250px;
+        margin: 20px 0 20px 0;
+        justify-content: center;
+    }
+
     #clave, #claveverificar,#correo{
         width: 98%;
     }

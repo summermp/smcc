@@ -3,19 +3,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
@@ -58,15 +46,24 @@ public class Usuario implements Serializable {
 
     private String nombreusuario;
 
-    @Basic(optional = false)
-    @Column(name = "ultimasesion", insertable = false, updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date ultimasesion;
+//    @Basic(optional = false)
+//    @Column(name = "ultimasesion", insertable = false, updatable = false)
+//    @Temporal(TemporalType.TIMESTAMP)
+//    private Date ultimasesion;
+
 //,cascade=CascadeType.ALL
     @OneToMany(mappedBy="usuario",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<Cultivo> cultivos;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="usuario_id")
+    @JoinColumn(name="usuario_id",insertable = true, updatable = true, nullable = false)
     private List<Rol> roles;
+
+//
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "usuario_id",insertable = true, updatable = true, nullable = false)
+//    private Rol roles;
+//
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "producto_id",insertable = true, updatable = true, nullable = false)
 }

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="/img/ico.jpeg" type="image/x-icon"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" type="text/css" href="../css/dashboard.css">
     <title>Parametros</title>
 </head>
@@ -13,6 +14,15 @@
     <nav id="nav-horizontal">
         <ul id="nav-ul">
             <li class="nav-li">
+                <a
+                        href="#main-menu"
+                        id="main-menu-toggle"
+                        class="menu-toggle"
+                        aria-label="Open main menu"
+                >
+                    <span class="sr-only">Open main menu</span>
+                    <span class="fa fa-bars" area-hidden="true"></span>
+                </a>
                 <a th:href="@{/dashboard}">
                     <img src="/img/pac.svg" alt="pac">
                 </a>
@@ -39,17 +49,7 @@
     </nav>
 </header>
 <header id="menu-header">
-    <div id="header-row">
-        <a
-                href="#main-menu"
-                id="main-menu-toggle"
-                class="menu-toggle"
-                aria-label="Open main menu"
-        >
-            <span class="sr-only">Open main menu</span>
-            <span class="fa fa-bars" area-hidden="true"></span>
-        </a>
-    </div>
+
     <nav id="main-menu" class="main-menu" aria-label="Main menu">
         <a
                 href="#main-menu-toggle"
@@ -66,7 +66,7 @@
             <!--                    src="../img/user.png"-->
             <img
                     id="user-photo"
-                    th:src="@{${'../images/' + usu.foto}}"
+                    th:src="@{${'/image/' + usu.foto}}"
                     alt="user photo"
                     width="100px"
                     height="100px"
@@ -79,23 +79,35 @@
         </div>
         <ul id="menu-ul">
             <li class="menu-li">
-                <a class="menu-a" href="../public/registrar_cultivo.html"
-                ><i class="fas fa-plus"></i> Registrar cultivo</a
-                >
+                <a class="menu-a" th:href="@{/cultivo}"><i class="fas fa-seedling"></i> Cultivos</a>
+            </li>
+            <li class="menu-li" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a class="menu-a" th:href="@{/usuarios}"
+                ><i class="fas fa-user-plus"></i> Usuarios</a>
+            </li>
+            <li class="menu-li" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a class="menu-a" th:href="@{/categoria}"
+                ><i class="far fa-project-diagram"></i> Categorias</a>
+            </li>
+            <li class="menu-li" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a class="menu-a" th:href="@{/producto}"
+                ><i class="fas fa-leaf"></i> Productos</a>
+            </li>
+            <li class="menu-li" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a class="menu-a" th:href="@{/dispositivo}"
+                ><i class="fas fa-sensor"></i> Dispositivos</a>
             </li>
             <li class="menu-li">
-                <a class="menu-a" th:href="@{/cultivo}"
-                ><i class="fas fa-list-ol"></i> Listado de cultivo</a>
+                <a class="menu-a" th:href="@{/dashboard}"><span><i class="fas fa-chart-bar"></i> Dashboard</span></a>
             </li>
             <li class="menu-li">
-                <a class="menu-a" th:href="@{/parametros}"
-                ><i class="fas fa-file-chart-line"></i> Reportes</a
-                >
+                <a class="menu-a" th:href="@{/parametros}"><i class="fas fa-file-chart-line"></i> Reportes</a>
             </li>
             <li class="menu-li">
-                <a class="menu-a" th:href="@{/ayuda}"
-                ><i class="fas fa-life-ring"></i> Ayuda</a
-                >
+                <a class="menu-a" href="#" id="myBtn"><i class="fas fa-cog"></i> Configuración</a>
+            </li>
+            <li class="menu-li">
+                <a class="menu-a" th:href="@{/ayuda}"><i class="fas fa-life-ring"></i> Ayuda</a>
             </li>
             <li class="menu-li">
                 <a class="menu-a" th:href="@{/logout}">Cerrar sesión</a>
@@ -104,70 +116,119 @@
     </nav>
     <a href="#main-menu-toggle" class="backdrop" hidden tabindex="-1"></a>
 </header>
-<main id="contenidoprincipal">
-<div id="consultaparametro">
+<main style="width:100%; margin-top: 4px; margin-bottom: 4px;">
 <form th:action="@{/parametrosfecha}" method="get">
-    <label>Fecha desde:
-        <input type="date" name="fecha1" id="fechadesde" class="fecha"  min='2021-01-01' max='2021-12-13' required>
-    </label>
-    <label>Fecha hasta:
-        <input type="date" name="fecha2" id="fechahasta" class="fecha"  min='2021-01-01' max='2021-12-13' required.>
-    </label>
-    <label>
+    <div style="display:flex; flex-flow:row wrap; justify-content:space-evenly">
+        <div style="margin-bottom: 4px">
+            <input type="text" name="fecha1" id="fechadesde" class="fecha"  min='2021-01-01' max='2022-12-31' required>
+        </div>
+        <div style="margin-bottom: 4px">
+            <input type="text" name="fecha2" id="fechahasta" class="fecha"  min='2021-01-01' max='2022-12-31' required>
+        </div>
+        <div style="margin-bottom: 4px">
         <select id="idcultivo" name="idcultivo">
             <option value="0" selected="selected">Seleccione cultivo</option>
             <option  th:each="cul : ${cultivos}" th:value="${cul.id}" th:text="${cul.nombre}"></option>
         </select>
-    </label>
-    <input type="submit" onclick="ExportToExcel('xlsx')" id="btnreporte" value="Generar reporte">
+        </div>
+        <div style="margin-bottom: 4px">
+            <button type="submit" style="background-color:#1ebd88; border-radius: 8px; padding-top: 3px; padding-bottom: 3px; border: none; padding-right: 4px; padding-left:4px;" id="btnreporte"><span class="fas fa-file-download"></span> Generar reporte</button>
+        </div>
+    </div>
 </form>
 </div>
-<div th:if="${parametros!=null and !parametros.empty}">
-    <table id="mitabla">
+<div th:if="${parametros!=null and !parametros.isEmpty()}">
+    <table id="mitabla" class="listadocultivo display cell-border compact stripe" style="width:100%">
         <thead>
         <tr>
             <th>ID</th>
-            <th>HA</th>
-            <th>HS</th>
-            <th>TA</th>
-            <th>TS</th>
-            <th>PH</th>
-            <th>CE</th>
-            <th>N</th>
-            <th>P</th>
-            <th>F</th>
-            <th>UV</th>
-            <th>CO2</th>
-            <th>FECHA-HORA</th>
+            <th>Humedad ambiente (%)</th>
+            <th>Humedad suelo (%)</th>
+            <th>Temperatura ambiente (ºC)</th>
+            <th>Temperatura suelo (ºC)</th>
+            <th>Potencial hidrogénico (PH)</th>
+            <th>Conductividad eléctrica (us/cm)</th>
+            <th>Nitrogeno (mg/kg,mg/L)</th>
+            <th>Potasio (mg/kg,mg/L)</th>
+            <th>Fosforo (mg/kg,mg/L)</th>
+            <th>Radiación solar (UV)</th>
+            <th>Dióxido de carbono (PPM)</th>
+            <th>Fecha-hora</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="parametro: ${parametros}">
-            <td th:text="${parametro.id}">#</td>
-            <td th:text="${parametro.ha}">HA</td>
-            <td th:text="${parametro.hs}">HS</td>
-            <td th:text="${parametro.ta}">TA</td>
-            <td th:text="${parametro.ts}">TS</td>
-            <td th:text="${parametro.ph}">PH</td>
-            <td th:text="${parametro.ce}">EC</td>
-            <td th:text="${parametro.nitrogeno}">Nitrogeno</td>
-            <td th:text="${parametro.potasio}">Potasio</td>
-            <td th:text="${parametro.fosforo}">Fosforo</td>
-            <td th:text="${parametro.uv}">UV</td>
-            <td th:text="${parametro.co2}">CO2</td>
-            <td th:text="${parametro.fechahora}">FECHA - HORA</td>
+            <td align="center" valign="center" th:text="${parametro.id}">#</td>
+            <td align="center" valign="center" th:text="${parametro.ha}">HA</td>
+            <td align="center" valign="center" th:text="${parametro.hs}">HS</td>
+            <td align="center" valign="center" th:text="${parametro.ta}">TA</td>
+            <td align="center" valign="center" th:text="${parametro.ts}">TS</td>
+            <td align="center" valign="center" th:text="${parametro.ph}">PH</td>
+            <td align="center" valign="center" th:text="${parametro.ce}">EC</td>
+            <td align="center" valign="center" th:text="${parametro.nitrogeno}">Nitrogeno</td>
+            <td align="center" valign="center" th:text="${parametro.potasio}">Potasio</td>
+            <td align="center" valign="center" th:text="${parametro.fosforo}">Fosforo</td>
+            <td align="center" valign="center" th:text="${parametro.uv}">UV</td>
+            <td align="center" valign="center" th:text="${parametro.co2}">CO2</td>
+            <td align="center" valign="center" th:text="${parametro.fechahora}">FECHA - HORA</td>
         </tr>
         </tbody>
     </table>
 </div>
-<div th:if="${parametros == null and parametros.empty}">La lista de parametros esta vacia</div>
+    <div th:if="${parametros.isEmpty()}" style="color: black;
+    width: 100%; height: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    ">
+        <div>
+            <img src="../img/empty.png" alt="sin datos"/>
+            <h4>La lista de parametros esta vacía</h4>
+        </div>
+    </div>
 </main>
 <footer th:replace="layout/plantilla2 :: footer"></footer>
 <script>
+    window.onload = function (){
+        let fechadesde=document.getElementById('fechadesde');
+        let fechahasta=document.getElementById('fechahasta');
+        fechadesde.setAttribute("placeholder","Ingrese fecha desde:");
+        fechahasta.setAttribute("placeholder","Ingrese fecha hasta:");
+    };
+
+    fechadesde.addEventListener('click', function (){
+        document.getElementById('fechadesde').setAttribute("type","date");
+    });
+
+    fechahasta.addEventListener('click', function (){
+        document.getElementById('fechahasta').setAttribute("type","date");
+    });
+
+    document.getElementById("btnreporte").addEventListener("click", function() {
+        Swal.fire({
+            title: 'Descargar reporte?',
+            text: "No será posible revertir los cambios!",
+            icon: 'success',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Cancelar',
+            confirmButtonText: 'Descargar!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                ExportToExcel('xlsx');
+            }
+        })
+    });
+
+
     function FechaHora() {
         var currentdate = new Date();
-        var datetime =
-            "Parametros Cultivo-" +
+        var fecha_hora =
+            "Reporte parametros -" +
             currentdate.getFullYear() +
             +(currentdate.getMonth() + 1) +
             +currentdate.getDate() +
@@ -175,21 +236,23 @@
             currentdate.getHours() +
             +currentdate.getMinutes() +
             +currentdate.getSeconds();
-        return datetime;
+        return fecha_hora;
     }
+
     function ExportToExcel(type, fn, dl) {
         var elt = document.getElementById('mitabla');
-        var wb = XLSX.utils.table_to_book(elt, { sheet: "listadocultivo" });
+        var wb = XLSX.utils.table_to_book(elt, { sheet: "mitabla" });
         return dl
             ? XLSX.write(wb, { bookType: type, bookSST: true, type: "base64" })
             : XLSX.writeFile(wb, fn || FechaHora()+"." + (type || "xlsx"));
     }
-
 </script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js" crossorigin="anonymous"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script type="text/javascript" src="../js/fonawesome.js"></script>
 <script type="text/javascript" src="../js/fecha.js"></script>
 <script src="../js/tabla.js"></script>

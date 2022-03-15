@@ -33,4 +33,14 @@ public class DispositivoImpl implements DispositivoService {
     public Dispositivo buscarDispositivo(Dispositivo dispositivo) {
         return dispositivoDao.findById(dispositivo.getId()).orElse(null);
     }
+
+    @Override
+    public void actualizarCultivo(Integer idcultivo) {
+        dispositivoDao.updateCultivoById(idcultivo);
+    }
+
+    @Override
+    public Dispositivo obtenerIdcultivo() {
+       return dispositivoDao.getIdcultivo();
+    }
 }

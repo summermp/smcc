@@ -65,9 +65,11 @@ public class CultivoControlador {
     public String editar(Cultivo cultivo, Model model){
         Integer idusuario= (Integer) httpSession.getAttribute("idusuario");
         log.error("ID US EDIT CULTIVO: "+idusuario);
+        var datos_usuario=usuarioService.obtenerUsuario(idusuario);
         cultivo=cultivoService.buscarCultivo(cultivo);
         model.addAttribute("cultivo",cultivo);
         model.addAttribute("idusuario",idusuario);
+        model.addAttribute("datos_usuario",datos_usuario);
         model.addAttribute("productos",productoService.listarProducto());
         return "modificarcultivo";
     }

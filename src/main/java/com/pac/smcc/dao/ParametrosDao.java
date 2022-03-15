@@ -17,22 +17,22 @@ public interface ParametrosDao extends JpaRepository<Parametros, Integer> {
             "p.nitrogeno as nitrogeno,p.potasio as potasio,p.fosforo as fosforo,\n"+
             "p.ph as ph,p.co2 as co2,p.ce as ce,p.uv as uv,pro.nombre as nombrecultivo,p.fechahora as fechahora\n"+
             "from parametro p\n" +
-            "inner join cultivo c on p.id_cultivo = c.Id\n" +
-            "inner join usuario u on c.usuario_id = u.Id\n" +
-            "inner join producto pro on c.producto_id = pro.Id\n" +
-            "where u.Id=:idusuario and\n" +
-            "c.Id=(select id from cultivo where usuario_id=:idusuario order by id desc limit 1)", nativeQuery=true)
+            "inner join cultivo c on p.id_cultivo = c.id\n" +
+            "inner join usuario u on c.usuario_id = u.id\n" +
+            "inner join producto pro on c.producto_id = pro.id\n" +
+            "where u.id=:idusuario and\n" +
+            "c.id=(select d.idcultivo from dispositivo d where d.id=1)", nativeQuery=true)
     List<ParametroDTO> findAllByCultivo(@Param("idusuario") Integer idusuario);
 
     @Query(value="select p.id as id,p.ha as ha,p.hs as hs,p.ta as ta,p.ts as ts,\n" +
             "p.nitrogeno as nitrogeno,p.potasio as potasio,p.fosforo as fosforo,\n"+
             "p.ph as ph,p.co2 as co2,p.ce as ce,p.uv as uv,pro.nombre as nombrecultivo,p.fechahora as fechahora\n"+
             "from parametro p\n" +
-            "inner join cultivo c on p.id_cultivo = c.Id\n" +
-            "inner join usuario u on c.usuario_id = u.Id\n" +
-            "inner join producto pro on c.producto_id = pro.Id\n" +
-            "where u.Id=:idusuario and\n" +
-            "c.Id=(select id from cultivo where usuario_id=:idusuario order by id desc limit 1)\n"+
+            "inner join cultivo c on p.id_cultivo = c.id\n" +
+            "inner join usuario u on c.usuario_id = u.id\n" +
+            "inner join producto pro on c.producto_id = pro.id\n" +
+            "where u.id=:idusuario and\n" +
+            "c.id=(select d.idcultivo from dispositivo d where d.id=1)\n"+
             "order by p.id desc limit 1;", nativeQuery=true)
     List<ParametroDTO> findParametros(@Param("idusuario") Integer idusuario);
 }

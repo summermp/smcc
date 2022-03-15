@@ -51,6 +51,8 @@ public class ParametrosControlador {
         log.error("ID USUARIO PARAMETRO: "+idusuario);
         var parametros=parametrosService.ultimaMedicion(idusuario);
         var datos_usuario=usuarioService.obtenerUsuario(idusuario);
+        var cultivos=cultivoService.listaCultivoUsuario(idusuario);
+        model.addAttribute("cultivos",cultivos);
         model.addAttribute("parametros",parametros);
         model.addAttribute("datos_usuario",datos_usuario);
         return "dashboard";
@@ -62,8 +64,10 @@ public class ParametrosControlador {
         log.error("ID USUARIO CULTIVO - PARAMETRO: "+idusuario);
         var parametros=parametrosService.listaParametros(fecha1, fecha2,idcultivo);
         var cultivos=cultivoService.listaCultivoUsuario(idusuario);
-        model.addAttribute("parametros",parametros);
+        var datos_usuario=usuarioService.obtenerUsuario(idusuario);
         model.addAttribute("cultivos",cultivos);
+        model.addAttribute("parametros",parametros);
+        model.addAttribute("datos_usuario",datos_usuario);
         return "parametros";
     }
 }

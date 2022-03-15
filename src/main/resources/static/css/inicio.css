@@ -1,4 +1,8 @@
 @import url("../css/variables.css");
+html,
+body {
+    height: 100%;
+}
 #nav-horizontal{
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
@@ -15,12 +19,13 @@
 .splide__slide{
     margin-right: 5px;
     width:50%;
-    height:500px;
+    height:400px;
 }
 .splide__list{
     display: flex;
     list-style-type: none;
 }
+
 #acerca{
     border: 1px solid green;
     margin: auto 5% 5%;
@@ -101,9 +106,9 @@ a:hover {
 }
 #redesociales{
     display: flex;
-    flex-flow: wrap;
+    flex-flow: row wrap;
     justify-content:center;
-    margin: 0%;
+    margin: 5%;
     padding: 0%;
 }
 #nav-ul,#redesociales{
@@ -160,15 +165,34 @@ a:hover {
 .li-rsocial{
     margin: 5px;
 }
-#footer-grupo{
+
+
+#contenedor_elementos{
+    min-height: 100%;
+}
+
+#div_contenedor_main{
+    overflow: auto;
+    padding-bottom: 60px;
+}
+
+footer {
+    bottom: 0;
     background-color: var(--color-fondo);
-    display: flex;
-    justify-content: center;
+    width: 100%;
     height: 60px;
+    left: 0px;
+    position: relative;
+    margin-top: -60px;
+    display:flex;
+    flex-flow: row nowrap;
+    justify-content:center;
+    align-items: center;
 }
 #footer-p{
-    text-align: center;
+    margin: auto;
 }
+
 .espacio{
     display: none;
 }
@@ -221,5 +245,40 @@ a:hover {
     .nav-li:last-child .nav-a:last-child{
         text-align: center;
         color: white;
+    }
+}
+
+@media (max-width: 480px){
+    .slide-img{
+        height: 250px;
+        margin-top:auto;
+        margin-bottom: auto;
+    }
+
+    .splide{
+        margin: auto 0;
+
+    }
+
+    .splide__slide{
+        margin-right: 0;
+        margin-left: 0;
+        width:100%;
+        height:auto;
+    }
+    .splide__list{
+        display: flex;
+        margin-right: 0;
+        margin-left: 0;
+        list-style-type: none;
+    }
+    .centrarslide{
+       margin-top: 20%;
+    }
+
+    #redesociales{
+        margin-top:20%;
+        /*display: flex;*/
+        /*flex-flow: column nowrap;*/
     }
 }

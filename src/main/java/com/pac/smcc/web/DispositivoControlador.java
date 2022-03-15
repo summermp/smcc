@@ -1,5 +1,7 @@
 package com.pac.smcc.web;
+import com.pac.smcc.domain.Cultivo;
 import com.pac.smcc.domain.Dispositivo;
+import com.pac.smcc.domain.Usuario;
 import com.pac.smcc.service.DispositivoService;
 import com.pac.smcc.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 
@@ -48,8 +51,11 @@ public class DispositivoControlador {
     }
     @GetMapping("/editardispositivo/{id}")//ya existe lo asocia
     public String editar(Dispositivo dispositivo, Model model){
+        Integer idus= (Integer) httpSession.getAttribute("idusuario");
+        var datos_usuario=usuarioService.obtenerUsuario(idus);
         dispositivo=dispositivoService.buscarDispositivo(dispositivo);
         model.addAttribute("dispositivo",dispositivo);
+        model.addAttribute("datos_usuario",datos_usuario);
         return "modificardispositivo";
     }
 
@@ -57,6 +63,14 @@ public class DispositivoControlador {
     public String eliminar(Dispositivo dispositivo){
         dispositivoService.eliminar(dispositivo);
         return "redirect:/dispositivo";
+    }
+
+    @PostMapping("/actualizarcultivo")
+    public String actualizarcultivo(@RequestParam("id_actualizar_cultivo") Integer id_actualizar_cultivo) {
+        if(id_actualizar_cultivo>0){
+            dispositivoService.actualizarCultivo(id_actualizar_cultivo);
+        }
+            return "redirect:/dashboard";
     }
 
 }

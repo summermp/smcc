@@ -6,4 +6,6 @@ public interface DispositivoService {
     public void guardar(Dispositivo dispositivo);
     public void eliminar(Dispositivo dispositivo);
     public Dispositivo buscarDispositivo(Dispositivo dispositivo);
+    public void actualizarCultivo(Integer idcultivo);
+    Dispositivo obtenerIdcultivo();
 }

@@ -19,6 +19,7 @@
     margin-bottom: 4px;
     margin-right: 4px;
     border-radius: 8px;
+    width:200px;
 }
 .footer-li:hover{
     background-color: var(--color-fondo);
@@ -43,6 +44,7 @@ figure{
     margin-bottom: 4px;
 }
 #footer-equipo{
+    margin-top:5px;
     text-align: center;
 }
 @media screen and (max-width: 750px) {
@@ -52,3 +54,4 @@ figure{
         text-align: center;
     }
 }
+
