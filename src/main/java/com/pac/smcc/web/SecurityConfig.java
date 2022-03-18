@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .antMatchers("/css/**", "/js/**","/images/**", "/webjars/**", "**/favicon.ico").permitAll().
+                .antMatchers("/css/**", "/js/**","/image/**","/images/**", "/webjars/**", "**/favicon.ico").permitAll().
                 antMatchers("/editar/**","/agregar/**","/eliminar","/codigo","/agregarcodigo",
                         "/producto","/categoria","/usuarios").
                 hasRole("ADMIN").

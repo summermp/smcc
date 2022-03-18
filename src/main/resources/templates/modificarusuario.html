@@ -156,7 +156,7 @@
                                 th:field="*{nombre}"
                                 required
                         />
-                        <span th:text="${error}"></span>
+                        <span th:text="${error}" style="color: red;"></span>
                     </div>
                     <div class="padding-bottom">
                         <input
@@ -236,6 +236,7 @@
                         id="clave"
                         placeholder="CONTRASEÑA"
                         minlength="6"
+                        maxlength="10"
                         required
                 />
             </div>
@@ -247,6 +248,7 @@
                         id="claveverificar"
                         placeholder="CONFIRME CONTRASEÑA"
                         minlength="6"
+                        maxlength="10"
                         required
                 />
             </div>
@@ -266,7 +268,18 @@
 </main>
 
 <script>
-
+    window.onload = function () {
+        let base_url=window.location.href;
+        if(base_url==="http://www.smcc.studio/agregar"){
+            document.getElementById('clave').value="";
+            document.getElementById('claveverificar').value="";
+            document.getElementById('clave').setAttribute("type","text");
+            document.getElementById('claveverificar').setAttribute("type","text");
+        }else{
+            document.getElementById('clave').setAttribute("type","password");
+            document.getElementById('claveverificar').setAttribute("type","password");
+        }
+    }
     fechanac.addEventListener('click', function (){
         document.getElementById('fechanac').setAttribute("type","date");
     });

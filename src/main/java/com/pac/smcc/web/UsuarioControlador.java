@@ -40,10 +40,12 @@ public class UsuarioControlador {
     public BCryptPasswordEncoder bCryptPasswordEncoder;
 
 //    public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/images/";
-    public static String uploadDirectory = System.getProperty("user.dir") + "/image";
+    public static String uploadDirectory = System.getProperty("user.dir") + "/image/";
+
 
     @GetMapping("/usuarios")
     public String incio(Model model, @AuthenticationPrincipal User user) throws IOException {
+        log.error(uploadDirectory);
         Integer idusuario= (Integer) httpSession.getAttribute("idusuario");
         log.error("ID USUARIO: "+idusuario);
         var usuarios=usuarioService.listarUsuario();
@@ -87,7 +89,7 @@ public class UsuarioControlador {
             log.error("username: "+splited[0]);
             usuario.setNombreusuario(splited[0].toLowerCase());
             //CLAVES ANTES DE CREAR USUARIO
-            if(usuario.getClave().length()<=10){
+            if(usuario.getClave().length()<=22){
                     String codificado=bCryptPasswordEncoder.encode(usuario.getClave().split(",")[1]);
                     System.out.println("CLAVE CON: "+usuario.getClave());
                     System.out.println("CLAVE SIN: "+usuario.getClave().split(",")[1]);
@@ -118,7 +120,7 @@ public class UsuarioControlador {
                     usuario.setFoto(filename);
             }else {
                     if(usuario.getId()==null) {
-                        usuario.setFoto("lineth.jpg");
+                        usuario.setFoto("lucho.jpg");
                     }else {
                         Usuario us=new Usuario();
                         us=usuarioService.buscarUsuario(usuario);
@@ -261,7 +263,5 @@ public class UsuarioControlador {
             return "login";
         }
 
-
-
-}
+    }
 

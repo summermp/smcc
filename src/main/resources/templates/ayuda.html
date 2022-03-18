@@ -249,7 +249,6 @@
             contentType: 'application/json'
         }).done(function() {
             swal("Nos pondremos en contacto muy pronto!","", "success");
-            setTimeout(redigir_inicio(),2500);
         }).fail(function(error) {
             swal('Oops... ' + JSON.stringify(error), "error");
         });

@@ -163,7 +163,7 @@
         <td th:text="${usuario.celular}">Celular</td>
         <td th:text="${usuario.email}">Email</td>
         <td th:text="${usuario.direccion}">Dirección</td>
-        <td><img th:src="@{/image/}+${usuario.foto}" width="50px" height="50px"/></td>
+        <td><img th:src="@{${'/image/' + usuario.foto}}" width="50px" height="50px" alt="user profile"/></td>
         <td th:text="${usuario.nombreusuario}">nombreusuario</td>
         <td th:text="${usuario.clave}">Clave</td>
         <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:onclick="eliminar([[${usuario.id}]],4)" id="eliminar" style="color: red;cursor:pointer;"
