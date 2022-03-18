@@ -39,13 +39,8 @@ public class UsuarioControlador {
     @Autowired
     public BCryptPasswordEncoder bCryptPasswordEncoder;
 
-//    public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/images/";
-    public static String uploadDirectory = System.getProperty("user.dir") + "/image/";
-
-
     @GetMapping("/usuarios")
-    public String incio(Model model, @AuthenticationPrincipal User user) throws IOException {
-        log.error(uploadDirectory);
+    public String incio(Model model, @AuthenticationPrincipal User user) {
         Integer idusuario= (Integer) httpSession.getAttribute("idusuario");
         log.error("ID USUARIO: "+idusuario);
         var usuarios=usuarioService.listarUsuario();
@@ -53,8 +48,6 @@ public class UsuarioControlador {
         var datos_usuario=usuarioService.obtenerUsuario(idus);
         model.addAttribute("datos_usuario",datos_usuario);
         model.addAttribute( "usuarios",usuarios);
-        String path = new File(".").getCanonicalPath();
-        log.error(path);
         return "index";
     }
 
@@ -67,9 +60,8 @@ public class UsuarioControlador {
     }
 
     @PostMapping("/guardar")
-    public String guardar(@Valid Usuario usuario, @RequestParam("fotoperfil") MultipartFile file,
+    public String guardar(@Valid Usuario usuario, @RequestParam("foto") String fotoUsuario,
                           Errors errores, Model model) throws IOException {
-        log.error("Name IMG Init: "+file.getOriginalFilename().length());
         //GUARDA ID USUARIO AL INICIAR SESION
         if(httpSession.getAttribute("idusuario")!=null){
             Integer idusuario= (Integer) httpSession.getAttribute("idusuario");
@@ -103,48 +95,7 @@ public class UsuarioControlador {
                     usuario.setClave(mismaclave);
                     log.error("Es la misma clave");
             }
-            if(file.getOriginalFilename().length()>0) {
-                log.error("Nombre IMG INICIO: "+file.getOriginalFilename().length());
-                    String content = new String(file.getBytes(), StandardCharsets.UTF_8);
-                    String extension = file.getOriginalFilename().split("\\.")[1];
-                log.error("IMG extension: "+extension);
-                    log.error("Nombre IMG DEFAULT: "+file.getOriginalFilename());
-                    String filename=usuario.getNombre()+"."+extension;
-                    log.error("Nombre de la imagen: "+filename);
-                    Path fileNameAndPath = Paths.get(uploadDirectory,filename);
-                    try {
-                        Files.write(fileNameAndPath,file.getBytes());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    usuario.setFoto(filename);
-            }else {
-                    if(usuario.getId()==null) {
-                        usuario.setFoto("lucho.jpg");
-                    }else {
-                        Usuario us=new Usuario();
-                        us=usuarioService.buscarUsuario(usuario);
-
-                        String extension1 = us.getFoto().split("\\.")[1];
-                        String fotonombreantiguo = us.getFoto();
-                        String fotonombrenuevo=usuario.getNombre()+"."+extension1;
-
-                        if(!fotonombreantiguo.equalsIgnoreCase(fotonombrenuevo)) {
-                            File oldFile = new File(uploadDirectory+fotonombreantiguo);
-                            File newFile = new File(uploadDirectory+fotonombrenuevo);
-                            if(oldFile.renameTo(newFile)){
-                                usuario.setFoto(fotonombrenuevo);
-                                System.out.println("Renombrado");
-                            }else{
-                                System.out.println("Error al renombrar");
-                            }
-                        }
-
-//                    Rol r1=new Rol();
-//                    r1.set
-
-                    }
-                }
+            usuario.setFoto(fotoUsuario);
             log.error(usuario.getFoto());
             usuarioService.guardar(usuario);
             return "redirect:/usuarios";
@@ -164,14 +115,6 @@ public class UsuarioControlador {
     @GetMapping("/eliminar/{id}")
     public String eliminar(Usuario usuario) throws IOException{
         usuario=usuarioService.buscarUsuario(usuario);
-        log.error("Nombre de la imagen a eliminar: "+usuario.getFoto());
-        String rutaimg=uploadDirectory+usuario.getFoto();
-        try{
-            Path fileToDeletePath = Paths.get(rutaimg);
-            Files.delete(fileToDeletePath);
-        }catch (Exception e) {
-            System.out.println(e.getClass());
-        }
         usuarioService.eliminar(usuario);
         return "redirect:/usuarios";
     }

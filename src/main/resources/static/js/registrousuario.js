@@ -138,11 +138,7 @@ window.addEventListener("keydown", function (event) {
 });
 // http://jsfiddle.net/qvxg6ok4/14/
 //https://www.webtrickshome.com/forum/how-to-display-uploaded-image-in-html-using-javascript
-var cargarImagen = function (event) {
-  var image = document.getElementById("fotousuario");
-  image.src = URL.createObjectURL(event.target.files[0]);
-};
-   
+
 
 function validarEntrada(e) {
   if (e.value.length === 0) {
@@ -159,26 +155,6 @@ function validarEntrada(e) {
   }
 }
 
-async function handleSubmit(event) {
-  mensaje.value.trim();
-  // event.preventDefault();
-  const formdata = new FormData(form);
-  const response = await fetch(form.action, {
-    method: "POST",
-    body: formdata,
-    headers: {
-      Accept: "application/json",
-    },
-  });
-  if (response.ok) {
-    form.reset();
-    Swal.fire(
-      "Ayuda con el sistema!",
-      "Gracias por contactarme, te escribiré pronto!",
-      "success"
-    );
-  } else {
-    form.reset();
-    Swal.fire("Ayuda con el sistema!", "Sucedio un error inesperado!", "error");
-  }
-}
+
+
+

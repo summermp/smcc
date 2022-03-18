@@ -48,6 +48,7 @@ public class CodigoControlador {
         log.error("No existe el codigo: "+codigo.getCodigo());
         StringBuilder codigogenerado=new StringBuilder();
         codigogenerado.append(codregion).append(dni);
+
         if(!codigoService.existeCodigo(String.valueOf(codigogenerado))){
             log.error("CODIGO: "+codigogenerado);
             codigo.setCodigo(String.valueOf(codigogenerado));
@@ -63,6 +64,10 @@ public class CodigoControlador {
     @GetMapping("/editarcodigo/{id}")//ya existe lo asocia
     public String editar(Codigo codigo, Model model){
         codigo=codigoService.buscarCodigo(codigo);
+        Integer idus= (Integer) httpSession.getAttribute("idusuario");
+        var codigos=codigoService.listarCodigo();
+        var datos_usuario=usuarioService.obtenerUsuario(idus);
+        model.addAttribute("datos_usuario",datos_usuario);
         model.addAttribute("codigo",codigo);
         return "modificarcodigo";
     }

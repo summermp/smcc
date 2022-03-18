@@ -83,7 +83,7 @@
             <!--                    src="../img/user.png"-->
             <img
                     id="user-photo"
-                    th:src="@{${'/image/' + usu.foto}}"
+                    th:src="${usu.foto}"
                     alt="user photo"
                     width="100px"
                     height="100px"
@@ -192,9 +192,9 @@
                 </div>
 
                 <div class="col-2 padding-bottom" style="border: solid 1px black;">
-                    <img src="../img/pac.svg" alt="foto" class="foto" id="fotousuario">
-                    <input type="hidden" name="ajeno" th:field="*{foto}" id="ajeno"/>
-                    <input type="file" name="fotoperfil" id="fotoperfil" onchange="cargarImagen(event)" accept="image/png, image/jpeg, image/jpg"/>
+                    <img src="../img/pac.svg" alt="foto" id="subirimage" class="foto">
+                    <label for="subirimage" style="position:absolute; margin-top: -35px; text-align: center; width: 200px; cursor:pointer;">Subir foto</label>
+                    <input type="hidden" th:field="*{foto}" id="fotoperfil"/>
                 </div>
           </div>
 
@@ -263,9 +263,12 @@
                 />
             </div>
         </div>
+
     </form>
     </div>
 </main>
+
+<script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
 
 <script>
     window.onload = function () {
@@ -283,9 +286,33 @@
     fechanac.addEventListener('click', function (){
         document.getElementById('fechanac').setAttribute("type","date");
     });
+
+
+    document.getElementById("subirimage").addEventListener("click", function(){
+        subirimage();
+    });
+
+    let token="AEYw6ltEcTMuO4J892OaYz";
+
+    function subirimage() {
+        const client = filestack.init("Al23XFtE6RLSwfCJaR0gdz");
+        const options = {
+            uploadInBackground: false,
+            onFileUploadFinished: (response) => {
+                document.getElementById("fotoperfil").value=response.url;
+                console.log(response.url);
+            }
+        };
+
+        const picker = client.picker(options);
+        picker.open();
+
+    }
+
 </script>
-<!--</div>-->
+
 <footer th:replace="layout/plantilla2 :: footer"></footer>
+
 <script type="text/javascript" src="../js/registrousuario.js"></script>
 <script type="text/javascript" src="../js/fonawesome.js"></script>
 </body>
