@@ -31,7 +31,7 @@
                 </a>
             </li>
             <li class="nav-li">
-                <a class="nav-a" href="#">
+                <a class="nav-a" href="#" id="busqueda_header">
                     <input type="search" placeholder="Buscar mediciones o reporte"
                            id="buscarreporte" autofocus/>
                     <i class="fas fa-search"></i>
@@ -52,22 +52,7 @@
     </nav>
 </header>
 <header id="menu-header">
-    <div id="header-row">
-        <a
-                href="#"
-                style="visibility: hidden;"
-        >
-            this one
-        </a>
-        <a
-                th:href="@{/parametros}"
-                id="main-menu-download"
-                aria-label="Download history measurement"
-        >
-            <span id="texto-download">Generar reporte</span>
-            <span class="fas fa-file-download"></span>
-        </a>
-    </div>
+    <div id="header-row"></div>
     <nav id="main-menu" class="main-menu" aria-label="Main menu">
         <a
                 href="#main-menu-toggle"
@@ -136,7 +121,7 @@
 </header>
 
 <div>
-<a th:href="@{/agregardispositivo}" style="color:teal;"><i class="fas fa-plus-circle"></i>Registrar dispositivos</a>
+<a th:href="@{/agregardispositivo}" style="color:teal;"><i class="fas fa-plus-circle"></i>Registrar dispositivo</a>
 <div th:if="${dispositivos !=null and !dispositivos.isEmpty()}">
     <table id="mitabla" class="listadocultivo display cell-border compact stripe" style="width:100%">
         <thead>

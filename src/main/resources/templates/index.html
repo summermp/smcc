@@ -31,7 +31,7 @@
                 </a>
             </li>
             <li class="nav-li">
-                <a class="nav-a" href="#">
+                <a class="nav-a" href="#" id="busqueda_header">
                     <input type="search" placeholder="Buscar mediciones o reporte"
                            id="buscarreporte" autofocus/>
                     <i class="fas fa-search"></i>
@@ -52,22 +52,7 @@
     </nav>
 </header>
 <header id="menu-header">
-    <div id="header-row">
-        <a
-                href="#"
-                style="visibility: hidden;"
-        >
-            this one
-        </a>
-        <a
-                th:href="@{/parametros}"
-                id="main-menu-download"
-                aria-label="Download history measurement"
-        >
-            <span id="texto-download">Generar reporte</span>
-            <span class="fas fa-file-download"></span>
-        </a>
-    </div>
+    <div id="header-row"></div>
     <nav id="main-menu" class="main-menu" aria-label="Main menu">
         <a
                 href="#main-menu-toggle"
@@ -135,7 +120,7 @@
     <a href="#main-menu-toggle" class="backdrop" hidden tabindex="-1"></a>
 </header>
 <main style="width:100%; margin-top: 0px">
-<a  sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/agregar}" style="color:teal;"><i class="fas fa-plus-circle"></i> Crear usuario</a>
+<a  sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/agregar}" style="color:teal;"><i class="fas fa-plus-circle"></i> Registrar usuario</a>
 <div th:if="${usuarios !=null and !usuarios.isEmpty()}">
 <table id="mitabla" class="listadocultivo display cell-border compact stripe" style="width:100%">
     <thead>

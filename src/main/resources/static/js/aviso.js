@@ -1,3 +1,4 @@
+let operacion=0;
 function eliminar(id,opcion) {
     console.log(id,opcion);
     let ruta="";
@@ -20,6 +21,7 @@ function eliminar(id,opcion) {
             redirigir="/cultivo";
             break;
         case 4:
+            operacion=4;
             registro="Usuario";
             ruta="/eliminar/";
             redirigir="/usuarios";
@@ -32,29 +34,49 @@ function eliminar(id,opcion) {
         default:
             console.log('none');
     }
-    swal({
-        title: "Desea Eliminar?",
-        text: "Una vez eliminado no se prodrá restablecer!",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-    })
-        .then((OK) => {
-            if (OK) {
-                $.ajax({
-                    url:ruta+id,
-                    success: function(res) {
-                        console.log(res);
-                    },
-                });
-                swal(registro+" eliminado!", {
-                    icon: "success",
-                })
-                .then((ok)=>{
-                    if(ok){
-                        window.location.href=redirigir;
-                    }
-                });
-            }
+
+
+    if(operacion===4 && id===21){
+        operacion=0;
+        swal({
+            title: "No puedes eliminar a un usuario administrador",
+            text: "                      ",
+            icon: "warning",
+            buttons: false,
+            timer:2000,
+            dangerMode: true,
         });
+        setTimeout(evitarEliminarUsuarioAdmin(),2000);
+    }else{
+        swal({
+            title: "¿Desea Eliminar?",
+            text: "¡Una vez eliminado no se prodrá restablecer!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((OK) => {
+                if (OK) {
+                    $.ajax({
+                        url:ruta+id,
+                        success: function(res) {
+                            console.log(res);
+                        },
+                    });
+                    swal(registro+" eliminado!", {
+                        icon: "success",
+                    })
+                        .then((ok)=>{
+                            if(ok){
+                                window.location.href=redirigir;
+                            }
+                        });
+                }
+            });
+    }
+
+}
+
+function evitarEliminarUsuarioAdmin(){
+    window.location.href="/usuarios";
 }

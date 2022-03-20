@@ -31,7 +31,7 @@
                 </a>
             </li>
             <li class="nav-li">
-                <a class="nav-a" href="#">
+                <a class="nav-a" href="#" id="busqueda_header">
                     <input type="search" placeholder="Buscar mediciones o reporte"
                            id="buscarreporte" autofocus/>
                     <i class="fas fa-search"></i>
@@ -228,31 +228,34 @@
         let usuario_correo=document.getElementById("correo").innerHTML;
         let usuario_mensaje=document.getElementById("mensaje").value;
 
-        // code fragment
-        var data = {
-            service_id: 'service_qq6uwif',
-            template_id: 'template_9hwtbqu',
-            user_id: 'user_WTeAUUZU60pyA58lL2gD6',
-            template_params: {
-                'userEmail': usuario_correo,
-                'userMensaje': usuario_mensaje
-            }
-        };
+        // code fragmen
+       if(usuario_correo!=null && usuario_correo.length>9 && usuario_mensaje!=null && usuario_mensaje.length>=20){
+           var data = {
+               service_id: 'service_qq6uwif',
+               template_id: 'template_9hwtbqu',
+               user_id: 'user_WTeAUUZU60pyA58lL2gD6',
+               template_params: {
+                   'userEmail': usuario_correo,
+                   'userMensaje': usuario_mensaje
+               }};
 
-        function redigir_inicio(){
-            window.location.href='/dashboard';
+           $.ajax('https://api.emailjs.com/api/v1.0/email/send', {
+               type: 'POST',
+               data: JSON.stringify(data),
+               contentType: 'application/json'
+           }).done(function() {
+               swal("Nos pondremos en contacto muy pronto!","", "success");
+           }).fail(function(error) {
+               swal('Oops... ' + JSON.stringify(error), "error");
+           });
+       }else{
+           document.getElementById("correo").autofocus;
         }
 
-        $.ajax('https://api.emailjs.com/api/v1.0/email/send', {
-            type: 'POST',
-            data: JSON.stringify(data),
-            contentType: 'application/json'
-        }).done(function() {
-            swal("Nos pondremos en contacto muy pronto!","", "success");
-        }).fail(function(error) {
-            swal('Oops... ' + JSON.stringify(error), "error");
-        });
+    }
 
+    function redigir_inicio(){
+        window.location.href='/dashboard';
     }
 
     document.getElementById('btnenviar').addEventListener('click', function() {

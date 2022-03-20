@@ -28,20 +28,28 @@
                 </a>
             </li>
             <li class="nav-li">
-                <a class="nav-a" href="#">
+                <a class="nav-a" href="#"  id="busqueda_header">
                     <input type="search" placeholder="Buscar mediciones o reporte"
                            id="buscarreporte" autofocus/>
-                    <i class="fas fa-search"></i>
                 </a>
             </li>
-            <li class="nav-li">
-                <a class="nav-a" href="#"><i class="fas fa-comment-alt-dots"></i>
-                    <span class="quantity">1</span>
+            <li class="nav-li" style="    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    height: 8%;
+">
+                <a class="nav-a" href="#" style="margin:0px; padding: 5px 0px;width:40%;" id="btnreporte">
+                    <span style="background-color:#1ebd88; width: 100%; color: white; padding: 5px 0px;
+                    border-radius: 8px;"><span class="fas fa-file-download"></span>
+                    <span id="texto-download">Generar reporte</span>
+                    </span>
                 </a>
-                <a class="nav-a" href="#"><i class="fas fa-envelope"></i>
+                <a class="nav-a" href="#" style="margin-left:10%;width: 25%;"><i class="fas fa-envelope"></i>
                     <span class="quantity">2</span>
                 </a>
-                <a class="nav-a" href="#"><i class="fas fa-bell"></i>
+                <a class="nav-a" href="#" style="width:25%;"><i class="fas fa-bell"></i>
                     <span class="quantity">3</span>
                 </a>
             </li>
@@ -117,7 +125,7 @@
     <a href="#main-menu-toggle" class="backdrop" hidden tabindex="-1"></a>
 </header>
 <main style="width:100%; margin-top: 4px; margin-bottom: 4px;">
-<form th:action="@{/parametrosfecha}" method="get">
+<form th:action="@{/parametrosfecha}" method="get" id="reporteXfecha">
     <div style="display:flex; flex-flow:row wrap; justify-content:space-evenly">
         <div style="margin-bottom: 4px">
             <input type="text" name="fecha1" id="fechadesde" class="fecha"  min='2021-01-01' max='2022-12-31' required>
@@ -131,10 +139,7 @@
             <option  th:each="cul : ${cultivos}" th:value="${cul.id}" th:text="${cul.nombre}"></option>
         </select>
         </div>
-        <div style="margin-bottom: 4px">
-            <button type="submit" style="background-color:#1ebd88; border-radius: 8px; padding-top: 3px; padding-bottom: 3px; border: none; padding-right: 4px; padding-left:4px;" id="btnreporte"><span class="fas fa-file-download"></span> Generar reporte</button>
         </div>
-    </div>
 </form>
 </div>
 <div th:if="${parametros!=null and !parametros.isEmpty()}">
@@ -207,21 +212,59 @@
         document.getElementById('fechahasta').setAttribute("type","date");
     });
 
+
+   document.getElementById("idcultivo").addEventListener("change", function(){
+      let fdesde=document.getElementById("fechadesde").value;
+      let fhasta=document.getElementById("fechahasta").value;
+      if(fdesde!=null && fdesde.length>=8 && fhasta!=null && fhasta.length>=8){
+        document.getElementById("reporteXfecha").submit();
+      }else{
+          document.getElementById("idcultivo").selectedIndex=0;
+          swal({
+              title: "Ingrese rango de fechas",
+              text:"                             ",
+              icon: "warning",
+              type:"error",
+              buttons: false,
+              timer: 2000,
+
+          });
+      }
+
+   }) ;
+
     document.getElementById("btnreporte").addEventListener("click", function() {
-        Swal.fire({
-            title: 'Descargar reporte?',
+        swal({
+            title: "¿Descargar reporte?",
             text: "No será posible revertir los cambios!",
-            icon: 'success',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            cancelButtonText: 'Cancelar',
-            confirmButtonText: 'Descargar!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                ExportToExcel('xlsx');
-            }
+            icon: "info",
+            buttons: true,
+            dangerMode: true,
         })
+        .then((willDelete) => {
+            if (willDelete) {
+                swal({
+                        title: "Descargando reporte de parámetros",
+                        text:"                             ",
+                        icon: "success",
+                        type:"succcess",
+                        buttons: false,
+                        timer: 2000,
+                    }
+                 )
+                ExportToExcel('xlsx');
+            } else {
+                swal({
+                    title: "¡Se canceló la acción!",
+                    text:"                             ",
+                    icon: "warning",
+                    type:"warning",
+                    buttons: false,
+                    timer: 2000,
+                });
+            }
+        });
+
     });
 
 
@@ -251,7 +294,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js" crossorigin="anonymous"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script type="text/javascript" src="../js/fonawesome.js"></script>
 <script type="text/javascript" src="../js/fecha.js"></script>

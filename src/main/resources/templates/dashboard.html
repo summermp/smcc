@@ -30,7 +30,7 @@
                 </a>
             </li>
             <li class="nav-li">
-                <a class="nav-a" href="#">
+                <a class="nav-a" href="#" id="busqueda_header">
                     <input type="search" placeholder="Buscar mediciones o reporte"
                     id="buscarreporte" autofocus/>
                     <i class="fas fa-search"></i>
@@ -51,22 +51,7 @@
     </nav>
 </header>
 <header id="menu-header">
-    <div id="header-row">
-        <a
-            href="#"
-            style="visibility: hidden;"
-        >
-            this one
-        </a>
-        <a
-            th:href="@{/parametros}"
-            id="main-menu-download"
-            aria-label="Download history measurement"
-        >
-            <span id="texto-download">Generar reporte</span>
-            <span class="fas fa-file-download"></span>
-        </a>
-    </div>
+    <div id="header-row"></div>
     <nav id="main-menu" class="main-menu" aria-label="Main menu">
         <a
             href="#main-menu-toggle"
@@ -79,8 +64,6 @@
             <span aria-hidden="true"></span>
         </a>
         <div id="contenedor-foto" th:each="usu: ${datos_usuario}">
-<!--                    th:src="@{${'/img/' + players.id +'_'+ players.name + '.png'}}"-->
-<!--                    src="../img/user.png"-->
             <img
                     id="user-photo"
                     th:src="${usu.foto}"
@@ -136,7 +119,7 @@
 
 <main id="contenidoprincipal">
     <div class="div_contenedor_main">
-<div th:if="${parametros !=null and !parametros.isEmpty()}">
+<div th:if="${parametros !=null and !parametros.isEmpty()}" style="margin-top: 20px;">
         <ul class='circle-container' th:each="parametro: ${parametros}">
         <li>
             <div class="parametro_cultivo">
@@ -272,7 +255,7 @@
 
         #centrar_formulario{
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             justify-content:space-evenly;
             align-items:center;
         }
@@ -282,15 +265,14 @@
             border-radius:8px;
             padding:4px;
             width:130px;
+            cursor: pointer;
             border: none;
             outline: none;
             color:white;
         }
-        @media(min-width:480px){
-            #centrar_formulario{
-                display: flex;
-                flex-direction: column;
-                justify-content:center;
+        @media (max-width:480px){
+              .modal-content{
+                width:90%;
             }
         }
 
@@ -299,11 +281,11 @@
 
     <!-- The Modal -->
     <div id="myModal" class="modal">
-
         <!-- Modal content -->
         <div class="modal-content">
             <span class="close">&times;</span>
             <p>
+            <h4 style="justify-content:center; width:100%; text-align:center;">Asignar dispositivo a un cultivo</h4>
             <form th:action="@{/actualizarcultivo}" method="post" id="centrar_formulario">
                 <label>
                     <select id="idcultivo" name="id_actualizar_cultivo">
@@ -311,7 +293,13 @@
                         <option  th:each="cul : ${cultivos}" th:value="${cul.id}" th:text="${cul.nombre}"></option>
                     </select>
                 </label>
-                <input type="submit"  id="btn_asignar_cultivo" value="Asignar Cultivo">
+                <button type="submit" id="btn_asignar_cultivo">
+                <span style="color: white; font-size: 1.5rem;">
+                    <i class="fas fa-sensor-on"></i>
+                    <i class="fad fa-ellipsis-h"></i>
+                    <i class="fas fa-seedling"></i>
+                </span>
+                </button>
             </form>
             </p>
         </div>
@@ -423,16 +411,51 @@ function alerta_parametros(){
             }
         }
 
-        document.getElementById("buscarreporte").addEventListener("input", function(event){
-            location.href="/parametros";
+        document.getElementById("idcultivo").addEventListener("change",function(){
+           if(document.getElementById("idcultivo").selectedIndex!==0){
+               swal({
+                       title: "Cultivo seleccionado",
+                       text:"                             ",
+                       icon: "success",
+                       type:"succcess",
+                       buttons: false,
+                       timer: 2000,
+                   }
+               );
+           }
         });
+
+        document.getElementById("btn_asignar_cultivo").addEventListener("click",function(){
+            let micultivo= document.getElementById("idcultivo");
+            let nombrecultivo=micultivo.options[micultivo.selectedIndex].innerHTML;
+            if(document.getElementById("idcultivo").selectedIndex!==0){
+                swal({
+                        title: "Dispositivo asignado al cultivo "+nombrecultivo,
+                        text:"                             ",
+                        icon: "success",
+                        type:"succcess",
+                        buttons: false,
+                        timer: 2000,
+                    }
+                );
+            }else{
+                swal({
+                    title: "Seleccione un cultivo",
+                    text:"                             ",
+                    icon: "warning",
+                    type:"warning",
+                    buttons: false,
+                    timer: 2000,
+                });
+            }
+
+        });
+
 
     </script>
 
 
-
-
-        <div th:if="${parametros.isEmpty()}" style="color: black;
+    <div th:if="${parametros.isEmpty()}" style="color: black;
     width: 100%; height: auto;
     margin-top: auto;
     margin-bottom: auto;
@@ -454,6 +477,7 @@ function alerta_parametros(){
     <a th:href="@{/agregarcultivo}" id="registro-cultivo"><i class="fas fa-plus"></i></a>
 </div>
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <footer th:replace="layout/plantilla2 :: footer"></footer>
 <script type="text/javascript" src="../js/fonawesome.js"></script>
 </body>

@@ -30,7 +30,7 @@
                 </a>
             </li>
             <li class="nav-li">
-                <a class="nav-a" href="#">
+                <a class="nav-a" href="#" id="busqueda_header">
                     <input type="search" placeholder="Buscar mediciones o reporte"
                            id="buscarreporte" autofocus/>
                     <i class="fas fa-search"></i>
@@ -52,20 +52,6 @@
 </header>
 <header id="menu-header">
     <div id="header-row">
-        <a
-                href="#"
-                style="visibility: hidden;"
-        >
-            this one
-        </a>
-        <a
-                th:href="@{/parametros}"
-                id="main-menu-download"
-                aria-label="Download history measurement"
-        >
-            <span id="texto-download">Generar reporte</span>
-            <span class="fas fa-file-download"></span>
-        </a>
     </div>
     <nav id="main-menu" class="main-menu" aria-label="Main menu">
         <a
@@ -194,7 +180,7 @@
                 <div class="col-2 padding-bottom" style="border: solid 1px black;">
                     <img src="../img/pac.svg" alt="foto" id="subirimage" class="foto">
                     <label for="subirimage" style="position:absolute; margin-top: -35px; text-align: center; width: 200px; cursor:pointer;">Subir foto</label>
-                    <input type="hidden" th:field="*{foto}" id="fotoperfil"/>
+                    <input type="hidden" th:field="*{foto}" id="fotoperfil" required/>
                 </div>
           </div>
 
@@ -300,6 +286,7 @@
             uploadInBackground: false,
             onFileUploadFinished: (response) => {
                 document.getElementById("fotoperfil").value=response.url;
+                document.getElementById("subirimage").setAttribute("src",response.url);
                 console.log(response.url);
             }
         };

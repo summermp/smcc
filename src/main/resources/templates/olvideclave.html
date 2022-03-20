@@ -50,6 +50,7 @@
     </nav>
 </header>
         <br/>
+<span th:text="${noexiste}" style="color:red;" id="noexiste"></span>
 <div class="contenedor_olvide">
     <form method="GET" th:if="${hideform !=null}" th:action="@{/verificarcorreo}" id="formcorreo">
         <div class="row-form">
@@ -77,7 +78,8 @@
                 <input
                         type="password"
                         name="clave"
-                        minlength="8"
+                        minlength="6"
+                        maxlength="10"
                         id="clave"
                         placeholder="Ingrese nueva contraseña"
                         autofocus
@@ -89,7 +91,8 @@
                         type="password"
                         name="clave1"
                         id="claveverificar"
-                        minlength="8"
+                        minlength="6"
+                        maxlength="10"
                         placeholder="Vuelva a escribir la contraseña"
                         autofocus
                         required
@@ -105,59 +108,107 @@
 </div>
 
 <script>
+
+    window.onload = function(){
+        let noexiste=document.getElementById("noexiste").innerText;
+        if(noexiste!=null && noexiste.length>=3){
+            swal({
+                title: "El correo no existe",
+                text:"                             ",
+                icon: "warning",
+                type:"warning",
+                buttons: false,
+                timer: 2000,
+            });
+        }
+    }
+
+
     let formclave =document.querySelector("#formclave");
     let clave =document.querySelector("#clave");
     let claveverificar =document.querySelector("#claveverificar");
-    let correo =document.querySelector("#correo");
-
-    correo.addEventListener("keypress", function (event) {
-        correo.value = correo.value.replace(
-            /(\s{2,})|[^@.a-zA-Z']/g,
-            ""
-        );
-        correo.value = correo.value.replace(/^\s*/, "");
-        console.log(correo.value);
-    });
-
-    clave.addEventListener("input", function (event) {
-        console.log(clave.value);
-    });
-    claveverificar.addEventListener("change", function (event) {
-        if (clave.value === claveverificar.value) {
-            claveverificar.style.borderColor = 'green';
-            console.log("match");
-        } else {
-            console.log("doesn't match");
-            claveverificar.style.borderColor = 'red';
-            claveverificar.value="";
-        }
-        console.log(claveverificar.value);
+\
+   claveverificar.addEventListener("keyup",function(){
+        verificando();
     });
 
     formclave.addEventListener("keyup", function (event) {
         // Number 13 is the "Enter" key on the keyboard
         if (event.keyCode === 13) {
-            if (clave.value !== claveverificar.value) {
+            if (document.getElementById('clave').value !==
+                document.getElementById('claveverificar').value) {
                 console.log("doesn't match");
                 claveverificar.style.borderColor = 'red';
                 claveverificar.value="";
-                mySubmit(this);
+                mySubmit(event);
             }
         }
     });
 
+    formclave.addEventListener("submit", function (event) {
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13) {
+            if (document.getElementById('clave').value !==
+                document.getElementById('claveverificar').value) {
+                console.log("doesn't match");
+                claveverificar.style.borderColor = 'red';
+                claveverificar.value="";
+                mySubmit(event);
+            }
+        }
+    });
+
+    if(document.querySelector("#correo")!==null){
+    let correo =document.querySelector("#correo");
+    correo.addEventListener("keypress", function (event) {
+        if(correo.value!=null){
+            correo.value = correo.value.replace(
+                /(\s{2,})|[^@.a-zA-Z']/g,
+                ""
+            );
+            correo.value = correo.value.replace(/^\s*/, "");
+            console.log(correo.value);
+        }
+    });
+    }
+
     function mySubmit(e) {
-        e.preventDefault();
         try {
+            verificando();
+            e.preventDefault();
             console.log(e.value)
         } catch (e) {
             throw new Error(e.message);
         }
         return false;
     }
-</script>
 
+    function verificando() {
+        if (document.getElementById('clave').value ==
+            document.getElementById('claveverificar').value) {
+            document.getElementById('clave').style.borderColor = 'green';
+            document.getElementById('claveverificar').style.borderColor = 'green';
+            document.getElementById('claveverificar').setCustomValidity('');
+            swal({
+                title: "¡Contraseña actualizada exitosamente!",
+                text:"                             ",
+                type:"success",
+                icon: "success",
+                buttons: false,
+                timer: 2000,
+
+            });
+
+
+        } else {
+            document.getElementById('claveverificar').style.borderColor = 'red';
+            document.getElementById('claveverificar').setCustomValidity('La contraseña no coincide con la anterior');
+        }
+    }
+
+</script>
 <script type="text/javascript" src="../js/fonawesome.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <footer th:replace="layout/plantilla2 :: footer"></footer>
 </body>
 </html>

@@ -95,6 +95,11 @@ public class UsuarioControlador {
                     usuario.setClave(mismaclave);
                     log.error("Es la misma clave");
             }
+            if(fotoUsuario.length()<10){
+                usuario.setFoto("https://cdn.filestackcontent.com/e0uTGIlRSi6u6doxJPjA");
+            }else{
+                usuario.setFoto(fotoUsuario);
+            }
             usuario.setFoto(fotoUsuario);
             log.error(usuario.getFoto());
             usuarioService.guardar(usuario);
@@ -146,7 +151,8 @@ public class UsuarioControlador {
                 model.addAttribute("hideform",hideform);
                 return "olvideclave";
             }else{
-                return "inicio";
+                model.addAttribute("noexiste","noexiste");
+                return "redirect:/olvideclave";
             }
         }else{
             return "olvideclave";

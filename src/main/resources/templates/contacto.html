@@ -57,7 +57,8 @@
                     <input type="email" class="cajaentrada" id="correo" name="correo" placeholder="Correo electrónico" autofocus required/>
             </div>
             <div class="rowcontacto">
-                  <textarea name="asunto" id="mensaje" cols="39" rows="4" maxlength="80" placeholder="Escriba el asunto..." required></textarea>
+                  <textarea name="asunto" id="mensaje" cols="39" rows="4" minlength="20"
+                            maxlength="80" placeholder="Escriba el asunto..." required autofocus></textarea>
             </div>
             <div class="rowcontacto">
                     <button type="submit" id="enviar" name="enviar"><span>Enviar <i class="far fa-paper-plane"></i></span></button>
@@ -79,10 +80,17 @@
     const correo = document.querySelector('#correo');
     const mensaje = document.querySelector('#mensaje');
 
+
+    function redigir_inicio(){
+        window.location.href='/inicio';
+    }
+
     function enviar() {
         let usuario_correo=document.getElementById("correo").value;
         let usuario_mensaje=document.getElementById("mensaje").value;
 
+        if(usuario_correo!=null && usuario_correo.length>9 && usuario_mensaje!=null && usuario_mensaje.length>=20){
+            document.getElementById("mensaje").style.borderColor="green";
         // code fragment
         var data = {
             service_id: 'service_qq6uwif',
@@ -94,10 +102,6 @@
             }
         };
 
-        function redigir_inicio(){
-            window.location.href='/inicio';
-        }
-
         $.ajax('https://api.emailjs.com/api/v1.0/email/send', {
             type: 'POST',
             data: JSON.stringify(data),
@@ -108,6 +112,11 @@
         }).fail(function(error) {
             swal('Oops... ' + JSON.stringify(error), "error");
         });
+
+    }else{
+            document.getElementById("correo").autofocus;
+            document.getElementById("mensaje").style.borderColor="red";
+        }
 
     }
 

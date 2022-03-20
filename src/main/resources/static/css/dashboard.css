@@ -17,6 +17,9 @@ ul {
     list-style-type: none;
 }
 
+#busqueda_header{
+    visibility: hidden;
+}
 /* CSS hamburger button code, h/t
 https://medium.com/@heyoka/responsive-pure-css-off-canvas-hamburger-menu-aebc8d11d793
 */
@@ -28,12 +31,16 @@ https://medium.com/@heyoka/responsive-pure-css-off-canvas-hamburger-menu-aebc8d1
     display: flex;
     flex-flow: row nowrap;
     width: 100%;
+    height:35px;
     margin-top: 2px;
     /* border: 1px solid red; */
     justify-content: space-between;
 }
 #main-menu-toggle {
-    margin-left: 7.3%;
+    margin-left: 3%;
+    color: black !important;
+    margin-right:4%;
+    font-size: 1.5rem;
 }
 #main-menu-toggle,
 #main-menu-download {
@@ -212,6 +219,7 @@ main {
     width: 30%;
     height: 8%;
 }
+
 .nav-a {
     /* NO PONER>>> NOWRAP */
     display: flex;
@@ -227,6 +235,9 @@ main {
     display: block;
 }
 
+.nav-li:nth-child(2) .nav-a {
+    width: 100%;
+}
 /*BAR NOTIFICATIONS */
 #buscarreporte {
     margin-left: 0%;
@@ -353,10 +364,15 @@ a .quantity {
     font-size: 12px;
 }
 
-.nav-li:nth-child(2) .nav-a {
-    width: 100%;
+.nav-li:nth-child(2){
+    margin-right: 0;
 }
-
+.nav-li:last-child{
+    margin-left: 0;
+    display: flex;
+    flex-flow:row nowrap;
+    width: 40%;
+}
 svg {
     display: none;
 }
@@ -617,6 +633,10 @@ footer {
         display: block;
     }
 
+    .circle-container {
+        margin-top: 40px;
+    }
+
     #texto-download,
     .fa-file-download {
         display: inline-table;
@@ -668,10 +688,6 @@ footer {
         width: 100%;
         margin-right: 1%;
         text-align: center;
-    }
-
-    .fa-search{
-        display: block;
     }
     #div_contenedor_main{
         margin-top: 15%;

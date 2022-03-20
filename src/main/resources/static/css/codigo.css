@@ -38,16 +38,6 @@ body {
 .nav-title{
     display: block;
 }
-.nav-li:last-child{/* border: 2px solid red; */
-    border-radius:8px;
-    background-color: var(--color-fondo);
-    width:12%;
-    margin-right: 5%;
-    padding: 0%;
-}
-.nav-li:last-child .nav-a:last-child{
-    color: white;
-}
 #menu-header {
     border: none;
     margin: 0;
@@ -94,7 +84,8 @@ a:hover {
     justify-content: space-between;
 }
 #nav-ul > .nav-li:nth-child(2){
-    margin-left: auto;
+    margin-left: 0px;
+    margin-right:20px;
 }
 #nav-ul .nav-li .nav-a:hover {
     color: black;
@@ -144,19 +135,19 @@ a:hover {
 .espacio{
     visibility: hidden;
 }
-#footer-grupo{
-    background-color: var(--color-fondo);
-    margin-top: 20px;
-    bottom: -305px;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    height: 60px;
+/*#footer-grupo{*/
+/*    background-color: var(--color-fondo);*/
+/*    margin-top: 20px;*/
+/*    bottom: -305px;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    position: relative;*/
+/*    height: 60px;*/
 
-}
-#footer-p{
-    text-align: center;
-}
+/*}*/
+/*#footer-p{*/
+/*    text-align: center;*/
+/*}*/
 #registrocodigo{
     display: flex;
     flex-flow: column wrap;
