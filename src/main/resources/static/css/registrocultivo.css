@@ -24,7 +24,7 @@ body {
 #cultivo{
     width: 25.5%;
 }
-#fecha,#medida,#nombre,#ubicacion,#categoria,#estado,#ip{
+#fecha,#medida,#nombre,#ubicacion,#categoria,#estado, #cultivo, #ip{
     width: 25%;
 }
 #btnenviar{

@@ -4,10 +4,10 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<!--    <meta http-equiv="refresh" content="5">-->
-    <link rel="icon" href="/img/ico.jpeg" type="image/x-icon" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!--    <meta http-equiv="refresh" content="5">-->
+    <link rel="icon" href="/img/ico.jpeg" type="image/x-icon"/>
     <link rel="stylesheet" type="text/css" href="../css/dashboard.css">
     <title>Inicio</title>
 </head>
@@ -32,7 +32,7 @@
             <li class="nav-li">
                 <a class="nav-a" href="#" id="busqueda_header">
                     <input type="search" placeholder="Buscar mediciones o reporte"
-                    id="buscarreporte" autofocus/>
+                           id="buscarreporte" autofocus/>
                     <i class="fas fa-search"></i>
                 </a>
             </li>
@@ -54,10 +54,10 @@
     <div id="header-row"></div>
     <nav id="main-menu" class="main-menu" aria-label="Main menu">
         <a
-            href="#main-menu-toggle"
-            id="main-menu-close"
-            class="menu-close"
-            aria-label="Close main menu"
+                href="#main-menu-toggle"
+                id="main-menu-close"
+                class="menu-close"
+                aria-label="Close main menu"
         >
             <span class="fa fa-times"></span>
             <span class="sr-only">Close main menu</span>
@@ -71,9 +71,9 @@
                     width="100px"
                     height="100px"
             />
-            <br />
+            <br/>
             <h4 id="user-data">
-                <span class="user-data" th:text="${usu.nombre}">Luis Vip Huge</span><br />
+                <span class="user-data" th:text="${usu.nombre}">Luis Vip Huge</span><br/>
                 <span class="user-data" th:text="${usu.email}">luivph@gmail.com</span>
             </h4>
         </div>
@@ -119,359 +119,558 @@
 
 <main id="contenidoprincipal">
     <div class="div_contenedor_main">
-<div th:if="${parametros !=null and !parametros.isEmpty()}" style="margin-top: 20px;">
-        <ul class='circle-container' th:each="parametro: ${parametros}">
-        <li>
-            <div class="parametro_cultivo">
-                <div class="contenedor_icon">
-                    <img src="../img/icons/co2.png" class="parametro_icon" alt="co2" />
-                </div>
-                <span class="textomedicion"><span id="co2" th:text="${parametro.co2}"></span> <span> PPM</span> </span>
-            </div>
-        </li>
-        <li>
-            <div class="parametro_cultivo">
-                <div class="contenedor_icon">
-                    <img src="../img/icons/uv.png" class="parametro_icon" alt="radiacion" />
-                </div>
-                <span class="textomedicion"><span id="uv" th:text="${parametro.uv}"></span> <span> UV</span></span>
-            </div>
-        </li>
-        <li>
-            <div class="parametro_cultivo">
-                <div class="contenedor_icon">
-                    <img src="../img/icons/tambiente.svg" class="parametro_icon" alt="tambiente" />
-                </div>
-                <span class="textomedicion"><span id="ta" th:text="${parametro.ta}"></span> <span> ºC</span></span>
-            </div>
-        </li>
-        <li>
-            <div class="parametro_cultivo">
-                <div class="contenedor_icon">
-                    <img src="../img/icons/hambiente.svg" class="parametro_icon" alt="hambiente" />
-                </div>
-                <span class="textomedicion"><span id="ha" th:text="${parametro.ha}"></span> <span> %</span></span>
-            </div>
-        </li>
-        <li>
-            <div class="parametro_cultivo">
-                <div class="contenedor_icon">
-                    <img src="../img/icons/tsuelo.svg" class="parametro_icon" alt="tsuelo" />
-                </div>
-                <span class="textomedicion"><span id="ts" th:text="${parametro.ts}"></span> <span> ºC</span></span>
-            </div>
-        </li>
-        <li>
-            <div class="parametro_cultivo">
-                <div class="contenedor_icon">
-                    <img src="../img/icons/hsuelo.svg" class="parametro_icon" alt="hsuelo" />
-                </div>
-                <span class="textomedicion"><span id="hs" th:text="${parametro.hs}"></span> <span> %</span></span>
-            </div>
-        </li>
-        <li>
-            <div class="parametro_cultivo">
-                <div class="contenedor_icon">
-                    <img src="../img/icons/ph-meter.png" class="parametro_icon" alt="ph" />
-                </div>
-                <span class="textomedicion"><span id="ph" th:text="${parametro.ph}"></span> <span> PH</span></span>
-            </div>
-        </li>
-        <li>
-            <div class="parametro_cultivo">
-                <div class="contenedor_icon">
-                    <img src="../img/icons/ec.svg" class="parametro_icon" alt="ec" />
-                </div>
-                <span class="textomedicion"><span id="ce" th:text="${parametro.ce}"></span> <span> CE</span></span>
-            </div>
-        </li>
-        <li>
-            <div class="parametro_cultivo">
-                <div class="contenedor_icon">
-                    <img src="../img/icons/npk.png" class="parametro_icon" alt="npk" />
-                </div>
-                <span class="textomedicion">
+        <div th:if="${parametros !=null and !parametros.isEmpty()}" style="margin-top: 20px;">
+            <ul class='circle-container' th:each="parametro: ${parametros}">
+                <li>
+                    <div class="parametro_cultivo">
+                        <div class="contenedor_icon">
+                            <img src="../img/icons/co2.png" class="parametro_icon" alt="co2"/>
+                        </div>
+                        <span class="textomedicion"><span id="co2" th:text="${parametro.co2}"></span> <span> PPM</span> </span>
+                    </div>
+                </li>
+                <li>
+                    <div class="parametro_cultivo">
+                        <div class="contenedor_icon">
+                            <img src="../img/icons/uv.png" class="parametro_icon" alt="radiacion"/>
+                        </div>
+                        <span class="textomedicion"><span id="uv"
+                                                          th:text="${parametro.uv}"></span> <span> UV</span></span>
+                    </div>
+                </li>
+                <li>
+                    <div class="parametro_cultivo">
+                        <div class="contenedor_icon">
+                            <img src="../img/icons/tambiente.svg" class="parametro_icon" alt="tambiente"/>
+                        </div>
+                        <span class="textomedicion"><span id="ta"
+                                                          th:text="${parametro.ta}"></span> <span> ºC</span></span>
+                    </div>
+                </li>
+                <li>
+                    <div class="parametro_cultivo">
+                        <div class="contenedor_icon">
+                            <img src="../img/icons/hambiente.svg" class="parametro_icon" alt="hambiente"/>
+                        </div>
+                        <span class="textomedicion"><span id="ha"
+                                                          th:text="${parametro.ha}"></span> <span> %</span></span>
+                    </div>
+                </li>
+                <li>
+                    <div class="parametro_cultivo">
+                        <div class="contenedor_icon">
+                            <img src="../img/icons/tsuelo.svg" class="parametro_icon" alt="tsuelo"/>
+                        </div>
+                        <span class="textomedicion"><span id="ts"
+                                                          th:text="${parametro.ts}"></span> <span> ºC</span></span>
+                    </div>
+                </li>
+                <li>
+                    <div class="parametro_cultivo">
+                        <div class="contenedor_icon">
+                            <img src="../img/icons/hsuelo.svg" class="parametro_icon" alt="hsuelo"/>
+                        </div>
+                        <span class="textomedicion"><span id="hs"
+                                                          th:text="${parametro.hs}"></span> <span> %</span></span>
+                    </div>
+                </li>
+                <li>
+                    <div class="parametro_cultivo">
+                        <div class="contenedor_icon">
+                            <img src="../img/icons/ph-meter.png" class="parametro_icon" alt="ph"/>
+                        </div>
+                        <span class="textomedicion"><span id="ph"
+                                                          th:text="${parametro.ph}"></span> <span> PH</span></span>
+                    </div>
+                </li>
+                <li>
+                    <div class="parametro_cultivo">
+                        <div class="contenedor_icon">
+                            <img src="../img/icons/ec.svg" class="parametro_icon" alt="ec"/>
+                        </div>
+                        <span class="textomedicion"><span id="ce"
+                                                          th:text="${parametro.ce}"></span> <span> CE</span></span>
+                    </div>
+                </li>
+                <li>
+                    <div class="parametro_cultivo">
+                        <div class="contenedor_icon">
+                            <img src="../img/icons/npk.png" class="parametro_icon" alt="npk"/>
+                        </div>
+                        <span class="textomedicion">
                 <span th:text="${parametro.nitrogeno}" id="nitro">nitrogeno</span>
                 <span th:text="${parametro.potasio}" id="pota">potasio</span>
                 <span th:text="${parametro.fosforo}" id="fosfo">fosforo</span>
                 <span id="unidadnpk">mg/kg</span>
                 </span>
-            </div>
-        </li>
+                    </div>
+                </li>
 
-        <li>
-            <div class="parametro_cultivo">
-                <!-- https://www.flaticon.com/free-icon/corn_4986877?term=corn%20plant&related_id=4986877 -->
-                <div class="corn_icon">
-                    <img src="../img/icons/corn.png" class="parametro_icon" alt="corn" />
-                </div>
-            </div>
-        </li>
+                <li>
+                    <div class="parametro_cultivo">
+                        <!-- https://www.flaticon.com/free-icon/corn_4986877?term=corn%20plant&related_id=4986877 -->
+                        <div class="corn_icon">
+                            <img src="../img/icons/corn.png" class="parametro_icon" alt="corn"/>
+                        </div>
+                    </div>
+                </li>
 
-    </ul>
-    </div>
+            </ul>
+        </div>
 
-    <style>
-        body {font-family: Arial, Helvetica, sans-serif;}
+        <style>
+            /*body {*/
+            /*    font-family: Arial, Helvetica, sans-serif;*/
+            /*}*/
 
-        /* The Modal (background) */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            padding-top: 100px; /* Location of the box */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        }
-
-        /* Modal Content */
-        .modal-content {
-            background-color: #fefefe;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 40%;
-        }
-
-        /* The Close Button */
-        .close {
-            color: #aaaaaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: #000;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        #centrar_formulario{
-            display: flex;
-            flex-direction: column;
-            justify-content:space-evenly;
-            align-items:center;
-        }
-        #btn_asignar_cultivo{
-            margin-top: 5px;
-            background-color: #1ebd88;
-            border-radius:8px;
-            padding:4px;
-            width:130px;
-            cursor: pointer;
-            border: none;
-            outline: none;
-            color:white;
-        }
-        @media (max-width:480px){
-              .modal-content{
-                width:90%;
+            /* The Modal (background) */
+            .modal {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                padding-top: 100px; /* Location of the box */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0, 0, 0); /* Fallback color */
+                background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
             }
-        }
 
-    </style>
+            .modals {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                padding-top: 0px; /* Location of the box */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0, 0, 0); /* Fallback color */
+                background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+            }
+
+            /* Modal Content */
+            .modal-content {
+                background-color: #fefefe;
+                margin: auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 40%;
+            }
+
+            .modal-contents {
+                background-color: #fefefe;
+                margin: auto;
+                padding:2px 5px 5px 5px;
+                border: 1px solid #888;
+                width: 550px;
+            }
+
+            /* The Close Button */
+            .close {
+                color: #aaaaaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
+            .closes {
+                color: black;
+                float: right;
+                font-size: 14px;
+            }
+
+            .close:hover, .closes:hover,
+            .close:focus, .closes:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
 
 
-    <!-- The Modal -->
-    <div id="myModal" class="modal">
-        <!-- Modal content -->
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p>
-            <h4 style="justify-content:center; width:100%; text-align:center;">Asignar dispositivo a un cultivo</h4>
-            <form th:action="@{/actualizarcultivo}" method="post" id="centrar_formulario">
-                <label>
-                    <select id="idcultivo" name="id_actualizar_cultivo">
-                        <option value="0" selected="selected">Seleccione cultivo</option>
-                        <option  th:each="cul : ${cultivos}" th:value="${cul.id}" th:text="${cul.nombre}"></option>
-                    </select>
-                </label>
-                <button type="submit" id="btn_asignar_cultivo">
+            #centrar_formulario {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                align-items: center;
+            }
+
+            #btn_asignar_cultivo {
+                margin-top: 5px;
+                background-color: #1ebd88;
+                border-radius: 8px;
+                padding: 4px;
+                width: 130px;
+                cursor: pointer;
+                border: none;
+                outline: none;
+                color: white;
+            }
+
+            #sugerencia {
+                margin-top: 0;
+                display: flex;
+                margin-left: 0px;
+                flex-flow: row wrap;
+                text-align: center;
+                justify-content: space-around;
+                align-items: center;
+                width: 550px;
+                /* display:none; */
+            }
+
+            .recomendacion {
+                border: red solid 1px;
+                width: 48%;
+                height: 40px;
+                display: flex;
+                justify-content: start;
+                align-items: center;
+
+            }
+
+            .recomendacion:nth-child(1),
+            .recomendacion:nth-child(2) {
+                height: 18px;
+            }
+            .recomendacion:nth-child(1){
+                color: #1ebd88;
+            }
+
+            .recomendacion:nth-child(2) {
+                color: saddlebrown;
+            }
+
+            .recomendacion:nth-of-type(odd) {
+                border: 1px solid #1ebd88;
+                padding: 2px;
+            }
+
+            .recomendacion:nth-of-type(even) {
+                border: 1px solid saddlebrown;
+                margin-right: 0px;
+                padding: 2px 2px 2px 0px;
+            }
+
+            .rimg {
+                margin-left: 1px;
+            }
+
+            .reancho {
+                margin-left: 1px;
+                width: 160px;
+                text-align: left;
+            }
+
+            .rtexto {
+                text-align: center;
+                width: 100%;
+
+                justify-content: center;
+            }
+            #myBtns{
+                border: solid 1px #1ebd88;
+                color: #1ebd88;
+                background-color:white;
+                border-radius: 8px;
+                height: 30px;
+            }
+
+            #acciones{
+                border: solid 1px #1ebd88;
+                color: #1ebd88;
+                background-color:white;
+                border-radius: 8px;
+                height: 20px;
+                margin-bottom: 1px;
+            }
+
+            #myBtns:hover,#acciones{
+                background-color:#1ebd88;
+                color: white;
+                cursor: pointer;
+            }
+
+            #rco2,#ruv,#rta,#rts,#rhs,#rph,#rce,#rha,#rnitrogeno,#rpotasio,#rfosforo{
+                border-radius: 8px;
+                padding: 0px 1px;
+            }
+            .valorancho{
+                width:45px;
+
+            }
+
+            @media (max-width: 480px) {
+                #myBtns{
+                    top: 10%;
+                }
+                #acciones{
+                    margin-bottom: 5px;
+                }
+                .modal-content {
+                    width: 90%;
+                }
+
+                .modal-contents {
+                    width: 90%;
+                }
+
+                #sugerencia {
+                    width: 92%;
+                    flex-flow: row wrap;
+                    text-align: start;
+                    justify-content: start;
+                }
+
+                .recomendacion {
+                    width: 48%;
+                    margin-right: 0px;
+                    margin-left: 0px;
+                    height: 50px
+                }
+
+                .recomendacion:nth-child(1),
+                .recomendacion:nth-child(2) {
+                    height: 40px;
+                }
+
+                .reancho {
+                    margin-left: 0px;
+                }
+
+                .rimg {
+                    width: 24px;
+                    height: 24px;
+                    margin-right: 2px;
+                }
+
+            }
+
+        </style>
+
+
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>
+                <h4 style="justify-content:center; width:100%; text-align:center;">Asignar dispositivo a un cultivo</h4>
+                <form th:action="@{/actualizarcultivo}" method="post" id="centrar_formulario">
+                    <label>
+                        <select id="idcultivo" name="id_actualizar_cultivo">
+                            <option value="0" selected="selected">Seleccione cultivo</option>
+                            <option th:each="cul : ${cultivos}" th:value="${cul.id}" th:text="${cul.nombre}"></option>
+                        </select>
+                    </label>
+                    <button type="submit" id="btn_asignar_cultivo">
                 <span style="color: white; font-size: 1.5rem;">
                     <i class="fas fa-sensor-on"></i>
                     <i class="fad fa-ellipsis-h"></i>
                     <i class="fas fa-seedling"></i>
                 </span>
-                </button>
-            </form>
-            </p>
+                    </button>
+                </form>
+                </p>
+            </div>
+
         </div>
 
-    </div>
-
-    <script>
-        // let co2 = document.querySelector('#co2');
-        // let uv = document.querySelector('#uv');
-        // let ta = document.querySelector('#ta');
-        // let ts = document.querySelector('#ts');
-        // let ha = document.querySelector('#ha');
-        // let hs = document.querySelector('#hs');
-        // let ph = document.querySelector('#ph');
-        // let ce = document.querySelector('#ce');
-        // let nitro = document.querySelector('#nitro');
-        // let pota = document.querySelector('#pota');
-        // let fosfo = document.querySelector('#fosfo');
-        //
-        // co2 = parseInt(co2.innerHTML);
-        // uv = parseInt(uv.innerHTML);
-        // ta = parseFloat(ta.innerHTML).toFixed(2);
-        // ha = parseInt(ha.innerHTML);
-        // ts = parseInt(ts.innerHTML).toFixed(2);
-        // hs = parseInt(hs.innerHTML);
-        // ph = parseInt(ph.innerHTML).toFixed(1);
-        // ce = parseInt(ce.innerHTML);
-        // nitro = parseInt(nitro.innerHTML);
-        // pota = parseInt(pota.innerHTML);
-        // fosfo = parseInt(fosfo.innerHTML);
-window.onload=function () {
-    alerta_parametros();
-}
-
-
-
-function alerta_parametros(){
-    evaluar_parametro('co2', 340, 1000);
-    evaluar_parametro('uv', 3, 11);
-    evaluar_parametro('ta', 24, 30);
-    evaluar_parametro('ha', 40, 60);
-    evaluar_parametro('ts', 10, 15);
-    evaluar_parametro('hs', 40, 60);
-    evaluar_parametro('ph', 5.5, 7.8);
-    evaluar_parametro('ce', 2, 60);
-    evaluar_parametro('nitro',2, 38);
-    evaluar_parametro('pota',1 ,26);
-    evaluar_parametro('fosfo',4, 66);
-}
-
-        function evaluar_parametro(parametro, rango_desde, rango_hasta) {
-           let valores=document.querySelector(`#${parametro}`);
-           let valor;
-           if(valores!=null){
-               valor=valores.innerHTML;
-
-            if ((parametro==='ta')|| (parametro==='ts')) {
-                valor=parseFloat(valor).toFixed(2);
-            } else {
-                valor=parseInt(valor);
-            }
-
-            if( (valor > rango_desde) && (valor < rango_hasta)){
-                console.log(`Nivel adecuado ${parametro}`, valor)
-                document.querySelector(`#${parametro}`).parentNode.style.backgroundColor = "green";
-                document.querySelector(`#${parametro}`).parentNode.style.color = "white";
-            } else {
-                if (valor <= rango_desde){
-                    console.log(`Nivel bajo de ${parametro}`, valor);
-                    document.querySelector(`#${parametro}`).parentNode.style.backgroundColor = "yellow";
-                    document.querySelector(`#${parametro}`).parentNode.style.color = "black";
-                }else {
-                    console.log(`Sobredosis de ${parametro}`, valor);
-                    document.querySelector(`#${parametro}`).parentNode.style.backgroundColor = "red";
-                    document.querySelector(`#${parametro}`).parentNode.style.color = "white";
-                }
-            }
-           }
-        }
-
-
-
-
-
-
-        // Get the modal
-        var modal = document.getElementById("myModal");
-
-        // Get the button that opens the modal
-        var btn = document.getElementById("myBtn");
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-
-        // When the user clicks the button, open the modal
-        btn.onclick = function() {
-            modal.style.display = "block";
-        }
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-
-        document.getElementById("idcultivo").addEventListener("change",function(){
-           if(document.getElementById("idcultivo").selectedIndex!==0){
-               swal({
-                       title: "Cultivo seleccionado",
-                       text:"                             ",
-                       icon: "success",
-                       type:"succcess",
-                       buttons: false,
-                       timer: 2000,
-                   }
-               );
-           }
-        });
-
-        document.getElementById("btn_asignar_cultivo").addEventListener("click",function(){
-            let micultivo= document.getElementById("idcultivo");
-            let nombrecultivo=micultivo.options[micultivo.selectedIndex].innerHTML;
-            if(document.getElementById("idcultivo").selectedIndex!==0){
-                swal({
-                        title: "Dispositivo asignado al cultivo "+nombrecultivo,
-                        text:"                             ",
-                        icon: "success",
-                        type:"succcess",
-                        buttons: false,
-                        timer: 2000,
-                    }
-                );
-            }else{
-                swal({
-                    title: "Seleccione un cultivo",
-                    text:"                             ",
-                    icon: "warning",
-                    type:"warning",
-                    buttons: false,
-                    timer: 2000,
-                });
-            }
-
-        });
-
-
-    </script>
-
-
-    <div th:if="${parametros.isEmpty()}" style="color: black;
-    width: 100%; height: auto;
-    margin-top: auto;
-    margin-bottom: auto;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    align-items: center;
-    ">
+        <div th:if="${parametros.isEmpty()}" style="color: black;
+            width: 100%; height: auto;
+            margin-top: auto;
+            margin-bottom: auto;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            align-items: center;
+            ">
             <div>
-                <img src="../img/empty.png" alt="sin datos"/>
+          <img src="../img/empty.png" alt="sin datos"/>
                 <h4>La lista de parametro esta vacía</h4>
             </div>
         </div>
 
     </div>
 </main>
+
+
+<div id="myModals" class="modals">
+    <!-- Modal content -->
+    <div class="modal-contents">
+        <span class="closes">x</span>
+            <button id="acciones">Descargar</button>
+
+        <div id="sugerencia">
+            <div class="recomendacion">
+            <span style="width:100%; font-size: 14px;">
+                <b>SITUACIÓN ACTUAL DEL CULTIVO</b>
+            </span>
+            </div>
+            <div class="recomendacion">
+            <span style="width:100%;font-size: 14px;">
+                <b>RECOMENDACIONES</b>
+            </span>
+            </div>
+            <div class="recomendacion">
+                <img src="../img/icons/co2.png" class="rimg" alt="" width="30px" height="30px" />
+                <span class="reancho">Dioxido de carbono</span>
+                <span class="valorancho">
+                <span id="rco2">100</span>
+                <span>&nbsp;PPM</span>
+                </span>
+            </div>
+            <div class="recomendacion">
+                <p class="rtexto">
+                    <span id="rco2texto">No necesita realizar ninguna acción</span>
+                </p>
+            </div>
+            <div class="recomendacion">
+                <img src="../img/icons/uv.png" class="rimg" alt="" width="30px" height="30px" />
+                <span class="reancho">Radiación solar</span>
+                <span class="valorancho">
+                <span id="ruv">100</span>
+                <span>&nbsp;UV</span>
+                </span>
+            </div>
+            <div class="recomendacion">
+                <p class="rtexto">
+                    <span id="ruvtexto">No necesita realizar ninguna acción</span>
+                </p>
+            </div>
+            <div class="recomendacion">
+                <img src="../img/icons/temperauttamaiente.png" class="rimg" alt="" width="30px" height="30px" />
+                <span class="reancho">Temperatura ambiente</span>
+                    <span class="valorancho">
+                    <span id="rta">100</span>
+                    <span>&nbsp;ºC</span>
+                </span>
+            </div>
+            <div class="recomendacion">
+                <p class="rtexto">
+                    <span id="rtatexto">No necesita realizar ninguna acción.</span>
+                </p>
+            </div>
+            <div class="recomendacion">
+                <img src="../img/icons/temperaturasuelo.svg" class="rimg" alt="" width="30px" height="30px" />
+                <span class="reancho">Temperatura suelo</span>
+                <span class="valorancho">
+                <span id="rts">100 </span>
+                <span>&nbsp;ºC</span>
+                </span>
+            </div>
+            <div class="recomendacion">
+                <p class="rtexto">
+                    <span id="rtstexto">Se recomienda realizar
+                    riego moderado hasta que la humedad
+                    alcance 40%.</span>
+                </p>
+            </div>
+
+            <div class="recomendacion">
+                <img src="../img/icons/humedad.png" class="rimg" alt="" width="30px" height="30px" />
+                <span class="reancho">Humedad ambiente</span>
+                <span class="valorancho">
+                <span id="rha">100</span>
+                <span>&nbsp;%</span>
+                </span>
+            </div>
+            <div class="recomendacion">
+                <p class="rtexto">
+                    <span id="rhatexto">No necesita realizar ninguna acción</span>
+                </p>
+            </div>
+            <div class="recomendacion">
+                <img src="../img/icons/hsuelo.svg" class="rimg" alt="" width="30px" height="30px" />
+                <span class="reancho">Humedad suelo</span>
+                <span class="valorancho">
+                <span id="rhs">100</span>
+                <span>&nbsp;%</span>
+                </span>
+            </div>
+            <div class="recomendacion">
+                <p class="rtexto">
+                    <span id="rhstexto">Disminuir el riego hasta que humedad este 40%.</span>
+                </p>
+            </div>
+            <div class="recomendacion">
+                <img src="../img/icons/ph-meter.png" class="rimg" alt="" width="30px" height="30px" />
+                <span class="reancho">PH</span>
+                <span class="valorancho">
+                <span id="rph">100</span>
+                <span>&nbsp;PH</span>
+                </span>
+            </div>
+            <div class="recomendacion">
+                <p class="rtexto">
+                    <span id="rphtexto">Corregir el PH del suelo con insumos agrarios.</span>
+                </p>
+            </div>
+            <div class="recomendacion">
+                <img src="../img/icons/conductividad.png" class="rimg" alt="" width="30px" height="30px" />
+                <span class="reancho">Conductividad eléctrica</span>
+                <span class="valorancho">
+                    <span id="rce">100</span>
+                    <span>&nbsp;CE</span>
+                </span>
+            </div>
+            <div class="recomendacion">
+                <p class="rtexto">
+                    <span id="rcetexto">Aplicar dosis recomendada de fertilizantes.</span>
+                </p>
+            </div>
+            <div class="recomendacion">
+                <img src="../img/icons/npk.png" class="rimg" alt="" width="30px" height="30px" />
+                <span class="reancho">Nitrogeno</span>
+                <span class="valorancho">
+                    <span id="rnitrogeno">100</span>
+                    <span>&nbsp;mg/kg</span>
+                 </span>
+            </div>
+            <div class="recomendacion">
+                <p class="rtexto">
+                    <span id="rnitrogenotexto">Aplicar dosis recomendada de fertilizante nitrogenado</span>
+                </p>
+            </div>
+            <div class="recomendacion">
+                <img src="../img/icons/npk.png" class="rimg" alt="" width="30px" height="30px" />
+                <span class="reancho">Potasio</span>
+                <span class="valorancho">
+                    <span id="rpotasio">100</span>
+                    <span>&nbsp;mg/kg</span>
+                </span>
+            </div>
+            <div class="recomendacion">
+                <p class="rtexto">
+                    <span id="rpotasiotexto">Aplicar dosis recomendada de fertilizante potásico</span>
+                </p>
+            </div>
+            <div class="recomendacion">
+                <img src="../img/icons/npk.png" class="rimg" alt="" width="30px" height="30px" />
+                <span class="reancho">Fosforo</span>
+                <span class="valorancho">
+                <span id="rfosforo">100</span>
+                <span>&nbsp;mg/kg</span>
+                </span>
+            </div>
+            <div class="recomendacion">
+                <p class="rtexto">
+                    <span id="rfosforotexto">Aplicar dosis recomendada de fertilizante fosfato.</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="boton_recomendaciones">
+    <button id="myBtns"><span id="btnrecomendaciones">Recomendaciones</span></button>
+</div>
+
+
 
 <div id="boton_registro_cultivo">
     <a th:href="@{/agregarcultivo}" id="registro-cultivo"><i class="fas fa-plus"></i></a>
@@ -480,6 +679,470 @@ function alerta_parametros(){
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <footer th:replace="layout/plantilla2 :: footer"></footer>
 <script type="text/javascript" src="../js/fonawesome.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+                integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+
+<script>
+    // let co2 = document.querySelector('#co2');
+    // let uv = document.querySelector('#uv');
+    // let ta = document.querySelector('#ta');
+    // let ts = document.querySelector('#ts');
+    // let ha = document.querySelector('#ha');
+    // let hs = document.querySelector('#hs');
+    // let ph = document.querySelector('#ph');
+    // let ce = document.querySelector('#ce');
+    // let nitro = document.querySelector('#nitro');
+    // let pota = document.querySelector('#pota');
+    // let fosfo = document.querySelector('#fosfo');
+    //
+    // co2 = parseInt(co2.innerHTML);
+    // uv = parseInt(uv.innerHTML);
+    // ta = parseFloat(ta.innerHTML).toFixed(2);
+    // ha = parseInt(ha.innerHTML);
+    // ts = parseInt(ts.innerHTML).toFixed(2);
+    // hs = parseInt(hs.innerHTML);
+    // ph = parseInt(ph.innerHTML).toFixed(1);
+    // ce = parseInt(ce.innerHTML);
+    // nitro = parseInt(nitro.innerHTML);
+    // pota = parseInt(pota.innerHTML);
+    // fosfo = parseInt(fosfo.innerHTML);
+    window.onload = function () {
+        alerta_parametros();
+    }
+
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    function FechaHora() {
+        var currentdate = new Date();
+        var fecha_hora =
+            "Recomendaciones-" +
+            currentdate.getFullYear() +
+            +(currentdate.getMonth() + 1) +
+            +currentdate.getDate() +
+            "-" +
+            currentdate.getHours() +
+            +currentdate.getMinutes() +
+            +currentdate.getSeconds();
+        return fecha_hora;
+    }
+
+
+
+                document.getElementById("acciones").addEventListener("click", function (e) {
+
+                    swal({
+                        title: "¿Descargar recomendaciones?",
+                        text: "No será posible revertir los cambios!",
+                        icon: "info",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                swal({
+                                    title: "Descargando recomendaciones del cultivo actual",
+                                    text: "                             ",
+                                    icon: "success",
+                                    type: "succcess",
+                                    buttons: false,
+                                    timer: 2000,
+                                })
+
+                                var element = document.getElementById('sugerencia');
+                                // var source = window.document.getElementById("sugerencia").innerHTML;
+                                let nombrepdf = FechaHora();
+                                var opt = {
+                                    margin: 1,
+                                    filename: nombrepdf,
+                                    image: {
+                                        type: 'jpeg',
+                                        quality: 0.98
+                                    },
+                                    html2canvas: {
+                                        scale: 2,
+                                        letterRendering: true
+                                    },
+                                    jsPDF: {
+                                        unit: 'in',
+                                        format: 'letter',
+                                        orientation: 'portrait'
+                                    }
+                                };
+
+                                html2pdf().set(opt).from(element).save();
+
+                            } else {
+                                swal({
+                                    title: "¡Se canceló la acción!",
+                                    text: "                             ",
+                                    icon: "warning",
+                                    type: "warning",
+                                    buttons: false,
+                                    timer: 2000,
+                                });
+                            }
+                        });
+                });
+
+    function alerta_parametros() {
+        evaluar_parametro('co2', 340, 1000);
+        evaluar_parametro('uv', 3, 11);
+        evaluar_parametro('ta', 24, 30);
+        evaluar_parametro('ha', 40, 60);
+        evaluar_parametro('ts', 10, 15);
+        evaluar_parametro('hs', 40, 60);
+        evaluar_parametro('ph', 5.5, 7.8);
+        evaluar_parametro('ce', 2, 60);
+        evaluar_parametro('nitro', 2, 38);
+        evaluar_parametro('pota', 1, 26);
+        evaluar_parametro('fosfo', 4, 66);
+    }
+
+    function evaluar_parametro(parametro, rango_desde, rango_hasta) {
+        let valores = document.querySelector(`#${parametro}`);
+        let valor;
+        if (valores != null) {
+            valor = valores.innerHTML;
+
+            if ((parametro === 'ta') || (parametro === 'ts')) {
+                valor = parseFloat(valor).toFixed(2);
+            } else {
+                valor = parseInt(valor);
+            }
+
+            switch(parametro){
+                case 'co2':
+                    document.querySelector("#rco2").innerHTML=valor;
+                    break;
+                case 'uv':
+                    document.querySelector("#ruv").innerHTML=valor;
+                    break;
+                case 'ta':
+                    document.querySelector("#rta").innerHTML=valor;
+                    break;
+                case 'ts':
+                    document.querySelector("#rts").innerHTML=valor;
+                    break;
+                case 'hs':
+                    document.querySelector("#rhs").innerHTML=valor;
+                    break;
+                case 'ha':
+                    document.querySelector("#rha").innerHTML=valor;
+                    break;
+                case 'ph':
+                    document.querySelector("#rph").innerHTML=valor;
+                    break;
+                case 'ce':
+                    document.querySelector("#rce").innerHTML=valor;
+                    break;
+                case 'nitro':
+                    document.querySelector("#rnitrogeno").innerHTML=valor;
+                    break;
+                case 'pota':
+                    document.querySelector("#rpotasio").innerHTML=valor;
+                    break;
+                default:
+                    document.querySelector("#rfosforo").innerHTML=valor;
+                    break;
+            }
+
+            if ((valor > rango_desde) && (valor < rango_hasta)) {
+                console.log(`Nivel adecuado ${parametro}`, valor)
+                document.querySelector(`#${parametro}`).parentNode.style.backgroundColor = "green";
+                document.querySelector(`#${parametro}`).parentNode.style.color = "white";
+                pintarParametros(parametro,"greenyellow","green");
+                sinAccion(parametro,"No necesita realizar ninguna acción");
+            } else {
+                if (valor <= rango_desde) {
+                    console.log(`Nivel bajo de ${parametro}`, valor);
+                    document.querySelector(`#${parametro}`).parentNode.style.backgroundColor = "yellow";
+                    document.querySelector(`#${parametro}`).parentNode.style.color = "black";
+                    pintarParametros(parametro,"yellow","black");
+                    debajoNivel(parametro,"green")
+                } else {
+                    pintarParametros(parametro,"#FFB5B5","red");
+                    fueraNivel(parametro,"red");
+
+                    console.log(`Sobredosis de ${parametro}`, valor);
+                    document.querySelector(`#${parametro}`).parentNode.style.backgroundColor = "red";
+                    document.querySelector(`#${parametro}`).parentNode.style.color = "white";
+                }
+            }
+        }
+    }
+
+    // Get the modal
+    // Get the button that opens the modal
+
+    var modal = document.getElementById("myModal");
+    var modals = document.getElementById("myModals");
+
+    var btn = document.getElementById("myBtn");
+    var btns = document.getElementById("myBtns");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    var spans = document.getElementsByClassName("closes")[0];
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    btns.onclick = function () {
+        modals.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    spans.onclick = function () {
+        modals.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+        if (event.target == modals) {
+            modals.style.display = "none";
+        }
+    }
+
+    function pintarParametros(parametro,colorfondo,cololetra){
+        switch(parametro){
+            case 'co2':
+                document.querySelector("#rco2").style.backgroundColor=colorfondo;
+                document.querySelector("#rco2").style.color=cololetra;
+                break;
+            case 'uv':
+                document.querySelector("#ruv").style.backgroundColor=colorfondo;
+                document.querySelector("#ruv").style.color=cololetra;
+                break;
+            case 'ta':
+                document.querySelector("#rta").style.backgroundColor=colorfondo;
+                document.querySelector("#rta").style.color=cololetra;
+                break;
+            case 'ts':
+                document.querySelector("#rts").style.backgroundColor=colorfondo;
+                document.querySelector("#rts").style.color=cololetra;
+                break;
+            case 'hs':
+                document.querySelector("#rhs").style.backgroundColor=colorfondo;
+                document.querySelector("#rhs").style.color=cololetra;
+                break;
+            case 'ha':
+                document.querySelector("#rha").style.backgroundColor=colorfondo;
+                document.querySelector("#rha").style.color=cololetra;
+                break;
+            case 'ph':
+                document.querySelector("#rph").style.backgroundColor=colorfondo;
+                document.querySelector("#rph").style.color=cololetra;
+                break;
+            case 'ce':
+                document.querySelector("#rce").style.backgroundColor=colorfondo;
+                document.querySelector("#rce").style.color=cololetra;
+                break;
+            case 'nitro':
+                document.querySelector("#rnitrogeno").style.backgroundColor=colorfondo;
+                document.querySelector("#rnitrogeno").style.color=cololetra;
+                break;
+            case 'pota':
+                document.querySelector("#rpotasio").style.backgroundColor=colorfondo;
+                document.querySelector("#rpotasio").style.color=cololetra;
+                break;
+            default:
+                document.querySelector("#rfosforo").style.backgroundColor=colorfondo;
+                document.querySelector("#rfosforo").style.color=cololetra;
+                break;
+        }
+    }
+
+    function fueraNivel(parametro,cololetra){
+        switch(parametro){
+            case 'co2':
+                document.querySelector("#rco2texto").style.color=cololetra;
+                document.querySelector("#rco2texto").innerHTML="Disminuir la dosis de pesticida.";
+                break;
+            case 'uv':
+                document.querySelector("#ruvtexto").style.color=cololetra;
+                document.querySelector("#ruvtexto").innerHTML="Consulte con un (a) agrónomo (a).";
+                break;
+            case 'ta':
+                document.querySelector("#rtatexto").style.color=cololetra;
+                document.querySelector("#rtatexto").innerHTML="Consulte con un (a) agrónomo (a).";
+                break;
+            case 'ts':
+                document.querySelector("#rtstexto").style.color=cololetra;
+                document.querySelector("#rtstexto").innerHTML="Relizar riego hasta que la humedad este dentro del rango adecuado.";
+                break;
+            case 'hs':
+                document.querySelector("#rhstexto").style.color=cololetra;
+                document.querySelector("#rhstexto").innerHTML="Evitar el riego hasta que la humedad sea al mínimo establecido.";
+                break;
+            case 'ha':
+                document.querySelector("#rhatexto").style.color=cololetra;
+                document.querySelector("#rhatexto").innerHTML="Evitar riego hasta que la humedad sea al mínimo establecido.";
+                break;
+            case 'ph':
+                document.querySelector("#rphtexto").style.color=cololetra;
+                document.querySelector("#rphtexto").innerHTML="Corregir el nivel de PH con insumos agrarios.";
+                break;
+            case 'ce':
+                document.querySelector("#rcetexto").style.color=cololetra;
+                document.querySelector("#rcetexto").innerHTML="Disminuir la dosis de fertilizantes";
+                break;
+            case 'nitro':
+                document.querySelector("#rnitrogenotexto").style.color=cololetra;
+                document.querySelector("#rnitrogenotexto").innerHTML="Disminuir la dosis de fertilizantes.";
+                break;
+            case 'pota':
+                document.querySelector("#rpotasiotexto").style.color=cololetra;
+                document.querySelector("#rpotasiotexto").innerHTML="Disminuir la dosis de fertilizantes.";
+                break;
+            default:
+                document.querySelector("#rfosforotexto").style.color=cololetra;
+                document.querySelector("#rfosforotexto").innerHTML="Disminuir la dosis de fertilizantes.";
+                break;
+        }
+    }
+
+    function debajoNivel(parametro,cololetra){
+        switch(parametro){
+            case 'co2':
+                document.querySelector("#rco2texto").style.color=cololetra;
+                document.querySelector("#rco2texto").innerHTML="Consulte con un (a) agrónomo (a).";
+                break;
+            case 'uv':
+                document.querySelector("#ruvtexto").style.color=cololetra;
+                document.querySelector("#ruvtexto").innerHTML="Consulte con un (a) agrónomo (a).";
+                break;
+            case 'ta':
+                document.querySelector("#rtatexto").style.color=cololetra;
+                document.querySelector("#rtatexto").innerHTML="Consulte con un (a) agrónomo (a).";
+                break;
+            case 'ts':
+                document.querySelector("#rtstexto").style.color=cololetra;
+                document.querySelector("#rtstexto").innerHTML="Consulte con un (a) agrónomo (a).";
+                break;
+            case 'hs':
+                document.querySelector("#rhstexto").style.color=cololetra;
+                document.querySelector("#rhstexto").innerHTML="Se recomienda realizar riego moderado hasta alcanzar la humedad adecuada.";
+                break;
+            case 'ha':
+                document.querySelector("#rhatexto").style.color=cololetra;
+                document.querySelector("#rhatexto").innerHTML="Se recomienda realizar riego moderado hasta alcanzar la humedad adecuada.";
+                break;
+            case 'ph':
+                document.querySelector("#rphtexto").style.color=cololetra;
+                document.querySelector("#rphtexto").innerHTML="Se recomienda aplicar insumos agrarios.";
+                break;
+            case 'ce':
+                document.querySelector("#rcetexto").style.color=cololetra;
+                document.querySelector("#rcetexto").innerHTML="Aplicar la dosis recomendada de fertilizantes.";
+                break;
+            case 'nitro':
+                document.querySelector("#rnitrogenotexto").style.color=cololetra;
+                document.querySelector("#rnitrogenotexto").innerHTML="Aplicar la dosis recomendada de fertilizantes.";
+                break;
+            case 'pota':
+                document.querySelector("#rpotasiotexto").style.color=cololetra;
+                document.querySelector("#rpotasiotexto").innerHTML="Aplicar la dosis recomendada de fertilizantes.";
+                break;
+            default:
+                document.querySelector("#rfosforotexto").style.color=cololetra;
+                document.querySelector("#rfosforotexto").innerHTML="Aplicar la dosis recomendada de fertilizantes.";
+                break;
+        }
+    }
+
+
+   function sinAccion(parametro,valor){
+       switch(parametro){
+           case 'co2':
+               document.querySelector("#rco2texto").innerHTML=valor;
+               break;
+           case 'uv':
+               document.querySelector("#ruvtexto").innerHTML=valor;
+               break;
+           case 'ta':
+               document.querySelector("#rtatexto").innerHTML=valor;
+               break;
+           case 'ts':
+               document.querySelector("#rtstexto").innerHTML=valor;
+               break;
+           case 'hs':
+               document.querySelector("#rhstexto").innerHTML=valor;
+               break;
+           case 'ha':
+               document.querySelector("#rhatexto").innerHTML=valor;
+               break;
+           case 'ph':
+               document.querySelector("#rphtexto").innerHTML=valor;
+               break;
+           case 'ce':
+               document.querySelector("#rcetexto").innerHTML=valor;
+               break;
+           case 'nitro':
+               document.querySelector("#rnitrogenotexto").innerHTML=valor;
+               break;
+           case 'pota':
+               document.querySelector("#rpotasiotexto").innerHTML=valor;
+               break;
+           default:
+               document.querySelector("#rfosforotexto").innerHTML=valor;
+               break;
+       }
+   }
+    document.getElementById("idcultivo").addEventListener("change", function () {
+        if (document.getElementById("idcultivo").selectedIndex !== 0) {
+            swal({
+                    title: "Cultivo seleccionado",
+                    text: "                             ",
+                    icon: "success",
+                    type: "succcess",
+                    buttons: false,
+                    timer: 2000,
+                }
+            );
+        }
+    });
+
+    document.getElementById("btn_asignar_cultivo").addEventListener("click", function () {
+        let micultivo = document.getElementById("idcultivo");
+        let nombrecultivo = micultivo.options[micultivo.selectedIndex].innerHTML;
+        if (document.getElementById("idcultivo").selectedIndex !== 0) {
+            swal({
+                    title: "Dispositivo asignado al cultivo " + nombrecultivo,
+                    text: "                             ",
+                    icon: "success",
+                    type: "succcess",
+                    buttons: false,
+                    timer: 2000,
+                }
+            );
+        } else {
+            swal({
+                title: "Seleccione un cultivo",
+                text: "                             ",
+                icon: "warning",
+                type: "warning",
+                buttons: false,
+                timer: 2000,
+            });
+        }
+
+    });
+</script>
+
 </body>
 </html>
 

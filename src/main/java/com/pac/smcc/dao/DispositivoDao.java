@@ -13,7 +13,7 @@ import java.util.List;
 public interface DispositivoDao extends JpaRepository<Dispositivo, Integer> {
     @Transactional
     @Modifying
-    @Query(value="update dispositivo d set d.Idcultivo=:idcultivo  where d.id=1",nativeQuery = true)
+    @Query(value="update dispositivo d set d.cultivo_id=:idcultivo  where d.id=1",nativeQuery = true)
     void updateCultivoById(@Param("idcultivo") Integer idcultivo);
 
     @Transactional(readOnly = true)

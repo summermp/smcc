@@ -36,7 +36,7 @@ function eliminar(id,opcion) {
     }
 
 
-    if(operacion===4 && id===21){
+    if(operacion===4 && id===1){
         operacion=0;
         swal({
             title: "No puedes eliminar a un usuario administrador",

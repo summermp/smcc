@@ -62,6 +62,7 @@ public class UsuarioControlador {
     @PostMapping("/guardar")
     public String guardar(@Valid Usuario usuario, @RequestParam("foto") String fotoUsuario,
                           Errors errores, Model model) throws IOException {
+//
         //GUARDA ID USUARIO AL INICIAR SESION
         if(httpSession.getAttribute("idusuario")!=null){
             Integer idusuario= (Integer) httpSession.getAttribute("idusuario");
@@ -95,12 +96,11 @@ public class UsuarioControlador {
                     usuario.setClave(mismaclave);
                     log.error("Es la misma clave");
             }
-            if(fotoUsuario.length()<10){
-                usuario.setFoto("https://cdn.filestackcontent.com/e0uTGIlRSi6u6doxJPjA");
+            if(fotoUsuario.trim().length()<10 ){
+                usuario.setFoto("https://i.pravatar.cc/200");
             }else{
                 usuario.setFoto(fotoUsuario);
             }
-            usuario.setFoto(fotoUsuario);
             log.error(usuario.getFoto());
             usuarioService.guardar(usuario);
             return "redirect:/usuarios";

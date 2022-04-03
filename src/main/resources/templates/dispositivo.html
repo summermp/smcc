@@ -139,8 +139,8 @@
             <td th:text="${dispositivo.id}">ID</td>
             <td th:text="${dispositivo.nombre}">Nombre</td>
             <td th:switch="${dispositivo.estado}">
-                <span th:case="'0'" style="background-color: red; color: white; border-radius: 8px; padding: 3px;">Inactivo</span>
-                <span th:case="'1'" style="background-color: green; color: white; border-radius: 8px; padding: 3px;">Activo</span>
+                <span th:case="'0'" style="background-color: red; color: white; border-radius: 8px; padding:0px 3px;">Inactivo</span>
+                <span th:case="'1'" style="background-color: green; color: white; border-radius: 8px; padding:0px 3px;">Activo</span>
                 <span th:case="*">Por defecto...</span>
             </td>
             <td th:text="${dispositivo.ip}">IP</td>

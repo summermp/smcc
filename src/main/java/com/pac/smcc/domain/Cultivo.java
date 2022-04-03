@@ -3,6 +3,8 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Data
@@ -31,4 +33,8 @@ public class Cultivo implements Serializable {
 
     @OneToMany(mappedBy="parametrocultivo",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<Parametros> parametros;
+
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "cultivoDispositivo")
+    private List<Dispositivo> discultivo;
 }

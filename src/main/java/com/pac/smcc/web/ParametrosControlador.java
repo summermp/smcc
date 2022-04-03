@@ -57,6 +57,7 @@ public class ParametrosControlador {
         model.addAttribute("datos_usuario",datos_usuario);
         return "dashboard";
     }
+
     @GetMapping("/parametrosfecha")
     public String listaParametros(@RequestParam("fecha1") String fecha1,@RequestParam("fecha2") String fecha2
             ,@RequestParam("idcultivo") Integer idcultivo,Model model){

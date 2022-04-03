@@ -143,6 +143,14 @@
             </label>
         </div>
         <div class="col-1">
+            <label>
+                <select id="cultivo" name="id_cultivo" th:field="*{cultivoDispositivo.id}">
+                    <option value="0" selected="selected">Seleccione cultivo</option>
+                    <option  th:each="cul : ${cultivos}" th:value="${cul.id}" th:text="${cul.nombre}"></option>
+                </select>
+            </label>
+        </div>
+        <div class="col-1">
             <input type="text" id="ip" name="ip" th:field="*{ip}" placeholder="Ingrese IP" required/>
         </div>
         <span th:if="${#fields.hasErrors('ip')}" th:errors="*{ip}">Error ip</span>

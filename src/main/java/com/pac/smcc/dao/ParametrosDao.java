@@ -21,7 +21,7 @@ public interface ParametrosDao extends JpaRepository<Parametros, Integer> {
             "inner join usuario u on c.usuario_id = u.id\n" +
             "inner join producto pro on c.producto_id = pro.id\n" +
             "where u.id=:idusuario and\n" +
-            "c.id=(select d.idcultivo from dispositivo d where d.id=1)", nativeQuery=true)
+            "c.id=(select d.cultivo_id from dispositivo d where d.id=1)", nativeQuery=true)
     List<ParametroDTO> findAllByCultivo(@Param("idusuario") Integer idusuario);
 
     @Query(value="select p.id as id,p.ha as ha,p.hs as hs,p.ta as ta,p.ts as ts,\n" +
@@ -32,7 +32,7 @@ public interface ParametrosDao extends JpaRepository<Parametros, Integer> {
             "inner join usuario u on c.usuario_id = u.id\n" +
             "inner join producto pro on c.producto_id = pro.id\n" +
             "where u.id=:idusuario and\n" +
-            "c.id=(select d.idcultivo from dispositivo d where d.id=1)\n"+
+            "c.id=(select d.cultivo_id from dispositivo d where d.id=1)\n"+
             "order by p.id desc limit 1;", nativeQuery=true)
     List<ParametroDTO> findParametros(@Param("idusuario") Integer idusuario);
 }

@@ -13,10 +13,8 @@ public class Dispositivo implements Serializable {
     private String nombre;
     private String estado;
     private String ip;
-    private Integer idcultivo;
-//
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "cultivo_id",insertable = true, updatable = true, nullable = false)
-//    private Cultivo cultivo;
 
+    @ManyToOne
+    @JoinColumn(name = "cultivo_id",insertable = true, updatable = true, nullable = false)
+    private Cultivo cultivoDispositivo;
 }

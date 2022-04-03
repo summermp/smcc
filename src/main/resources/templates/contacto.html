@@ -58,7 +58,7 @@
             </div>
             <div class="rowcontacto">
                   <textarea name="asunto" id="mensaje" cols="39" rows="4" minlength="20"
-                            maxlength="80" placeholder="Escriba el asunto..." required autofocus></textarea>
+                            maxlength="80" placeholder="Escribe el asunto..." required autofocus></textarea>
             </div>
             <div class="rowcontacto">
                     <button type="submit" id="enviar" name="enviar"><span>Enviar <i class="far fa-paper-plane"></i></span></button>
@@ -108,7 +108,7 @@
             contentType: 'application/json'
         }).done(function() {
             swal("Correo enviado satisfactoriamente!","", "success");
-            setTimeout(redigir_inicio(),2500);
+            setTimeout(redigir_inicio(),3000);
         }).fail(function(error) {
             swal('Oops... ' + JSON.stringify(error), "error");
         });

@@ -127,7 +127,7 @@
     let formclave =document.querySelector("#formclave");
     let clave =document.querySelector("#clave");
     let claveverificar =document.querySelector("#claveverificar");
-\
+
    claveverificar.addEventListener("keyup",function(){
         verificando();
     });
@@ -172,23 +172,17 @@
     });
     }
 
-    function mySubmit(e) {
-        try {
-            verificando();
-            e.preventDefault();
-            console.log(e.value)
-        } catch (e) {
-            throw new Error(e.message);
-        }
-        return false;
-    }
-
     function verificando() {
         if (document.getElementById('clave').value ==
-            document.getElementById('claveverificar').value) {
+            document.getElementById('claveverificar').value &&
+            document.getElementById('clave').value.length>=6 &&
+            document.getElementById('claveverificar').value.length>=6
+        ) {
             document.getElementById('clave').style.borderColor = 'green';
             document.getElementById('claveverificar').style.borderColor = 'green';
             document.getElementById('claveverificar').setCustomValidity('');
+            document.getElementById('clave').value="";
+            document.getElementById('claveverificar').value="";
             swal({
                 title: "¡Contraseña actualizada exitosamente!",
                 text:"                             ",
@@ -198,14 +192,19 @@
                 timer: 2000,
 
             });
-
+            setTimeout(redigir_inicio(),3000);
 
         } else {
             document.getElementById('claveverificar').style.borderColor = 'red';
             document.getElementById('claveverificar').setCustomValidity('La contraseña no coincide con la anterior');
+
         }
     }
 
+
+    function redigir_inicio(){
+        window.location.href='/';
+    }
 </script>
 <script type="text/javascript" src="../js/fonawesome.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

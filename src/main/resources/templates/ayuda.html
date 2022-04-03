@@ -124,7 +124,7 @@
     <div id="row-ayuda">
         <!-- action="https://formspree.io/f/meqvpley" camibar a esto-->
 <!--        https://formspree.io/f/meqvpley-->
-        <form  id="form" onsubmit="return mySubmit(this)" >
+        <div  id="form" >
             <textarea name="asunto" id="mensaje"
                       cols="30" rows="3"
                       minlength="20"
@@ -142,7 +142,7 @@
                 ENVIAR <i class="far fa-paper-plane"></i>
             </button>
 
-        </form>
+        </div>
     </div>
     </div>
 </main>
@@ -151,9 +151,8 @@
 
 <script src="https://code.jquery.com/jquery-3.5.1.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <script>
-    const form = document.querySelector('#form');
     const btnenviar = document.querySelector('#enviar');
     const mensaje = document.querySelector('#mensaje');
     //form.addEventListener("submit ", handleSubmit);
@@ -228,7 +227,6 @@
         let usuario_correo=document.getElementById("correo").innerHTML;
         let usuario_mensaje=document.getElementById("mensaje").value;
 
-        // code fragmen
        if(usuario_correo!=null && usuario_correo.length>9 && usuario_mensaje!=null && usuario_mensaje.length>=20){
            var data = {
                service_id: 'service_qq6uwif',
@@ -244,8 +242,11 @@
                data: JSON.stringify(data),
                contentType: 'application/json'
            }).done(function() {
-               swal("Nos pondremos en contacto muy pronto!","", "success");
+               console.log("Nos pondremos en contacto muy pronto");
+               swal("Nos pondremos en contacto muy pronto!","  ", "success");
+               console.log("Se ejecuto la funcion de envio");
            }).fail(function(error) {
+               console.log(JSON.stringify(error))
                swal('Oops... ' + JSON.stringify(error), "error");
            });
        }else{
@@ -264,6 +265,7 @@
 
 </script>
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript" src="../js/fonawesome.js"></script>
 
 </body>

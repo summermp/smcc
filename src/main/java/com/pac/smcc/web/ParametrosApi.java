@@ -27,7 +27,7 @@ public class ParametrosApi {
         Cultivo micultivo=new Cultivo();
         Dispositivo dispositivo =dispositivoService.obtenerIdcultivo();
 
-        micultivo.setId(dispositivo.getIdcultivo());
+        micultivo.setId(dispositivo.getCultivoDispositivo().getId());
         parametros.setParametrocultivo(micultivo);
         parametros.setFechahora(fechahora);
         return parametrosService.guardar(parametros);
