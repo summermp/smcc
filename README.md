@@ -1,4 +1,4 @@
-# SISTEMA DE MONITOREO DE CALIDAD DE CULTVIVOS
+# SISTEMA DE MONITOREO DE CALIDAD DE CULTIVOS
 ## Aplicación web SMCC <br/>
 http://www.smcc.studio/ <br/>
 
