@@ -1,5 +1,5 @@
 # SISTEMA DE MONITOREO DE CALIDAD DE CULTVIVOS
-##Aplicación web SMCC <br/>
+## Aplicación web SMCC <br/>
 http://www.smcc.studio/ <br/>
 
 
@@ -10,7 +10,7 @@ b.	Monitoreo de pesticidas y fertilizantes agroquímicos: Calcula parámetros de
 La plataforma web, permite visualizar la información, consultar su historial y generar reportes sobre las mediciones del estado del cultivo (los niveles de uso pesticidas y fertilizantes agroquímicos) por periodos durante: “El ciclo de vida de un cultivo”.
 De esta manera, les permitirá a los agricultores tomar decisiones para mejorar su cultivo y obtener calidad aceptable de sus productos en la comercialización interna y externa.  <br/>
 <br/>
-##EQUIPO SMCC - 2022:<br/>
+## EQUIPO SMCC - 2022:<br/>
 ✔ LINETH ADELINA RAMIREZ ALAMO (Jefe del proyecto) <br/>
 ✔ ZULMA MAYO CHIPANA (Especialista en informática ambiental y telemática) <br/>
 ✔ VIVIANA JURADO DE LA CRUZ (Especialista en dispositivos móviles y tecnologías de la información) <br/>
